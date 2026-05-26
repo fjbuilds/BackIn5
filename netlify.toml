@@ -1,6 +1,9 @@
 [build]
-  command   = ""
-  publish   = "."
+  command = ""
+  publish = "."
+
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
 [[headers]]
   for = "/*"
