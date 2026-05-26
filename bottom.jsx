@@ -40,7 +40,8 @@ function Comparison() {
           </p>
         </div>
 
-        <div className="compare">
+        <div className="compare-scroll-wrap">
+          <div className="compare">
           <div className="compare-row">
             <div className="compare-cell head">Day-to-Day Reality </div>
             <div className="compare-cell head">Doing it Yourself</div>
@@ -55,6 +56,7 @@ function Comparison() {
               <div className="compare-cell brand-col">{cell(r.val[2], true)}</div>
             </div>
           )}
+          </div>
         </div>
 
         <div style={{ marginTop: 48, display: "none" }} className="compare-callouts">
