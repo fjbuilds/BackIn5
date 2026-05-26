@@ -6,7 +6,7 @@ function Contact() {
     <section className="canvas-light band" id="contact">
       <div className="container">
         <div className="sec-head center" style={{ alignItems: "center" }}>
-          <span className="eyebrow">Get in touch</span>
+          Get in touch to Talk to us.
           <h2 className="display" style={{ color: "rgb(14, 17, 22)" }}>
             Want to see How Your Business Could Benefit From <span style={{ color: "#1e3a97" }}>BackIn5?</span>
           </h2>
