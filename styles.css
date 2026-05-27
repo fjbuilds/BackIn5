@@ -3484,7 +3484,7 @@ section[id] { scroll-margin-top: 80px; }
   }
   /* 4-column compact grid: feature flexible, 3 icon cols fixed-width */
   .compare-row {
-    grid-template-columns: 1fr 54px 54px 54px;
+    grid-template-columns: 1fr 72px 60px 60px;
   }
   /* Un-hide previously hidden cols */
   .compare-cell:nth-child(2),
