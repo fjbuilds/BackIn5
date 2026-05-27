@@ -3425,43 +3425,48 @@ section[id] { scroll-margin-top: 80px; }
   }
 
   /* ──────────────────────────────────────────────────────────
-     6. Before vs After — stacked portrait layout (before above, after below)
+     6. Before vs After — drag reveal, pan-y for mobile scroll
      ────────────────────────────────────────────────────────── */
   .reveal-stage {
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    cursor: default;
-    touch-action: auto;
-    user-select: auto;
+    height: 400px;
+    display: block;
+    cursor: ew-resize;
+    touch-action: pan-y;
+    user-select: none;
     border-radius: 16px;
     overflow: hidden;
   }
   .reveal-scene {
-    position: relative;
-    inset: auto;
-    min-height: 340px;
+    position: absolute;
+    inset: 0;
+    min-height: unset;
     width: 100%;
     overflow: hidden;
   }
+  /* Restore clip-path from --reveal CSS variable so dragging works */
   .reveal-scene.before {
-    clip-path: none !important;
-    border-bottom: 2px solid rgba(255,255,255,0.10);
+    clip-path: inset(0 calc(100% - var(--reveal)) 0 0);
   }
   .reveal-scene.after {
-    clip-path: none !important;
+    clip-path: inset(0 0 0 var(--reveal));
   }
-  /* Clean-stack: fill the after section nicely */
+  /* Clean-stack: compact for mobile height */
   .reveal-scene.after .clean-stack {
     position: absolute;
     top: 50%;
-    left: 16px;
-    right: 16px;
+    left: 8%;
+    right: 8%;
     width: auto;
     transform: translateY(-50%);
+    padding: 16px;
   }
-  .reveal-handle { display: none; }
-  .reveal-foot { display: none; }
+  .reveal-scene.after .clean-row {
+    padding: 6px 0;
+    font-size: 12.5px;
+  }
+  .reveal-handle { display: flex; }
+  .reveal-handle-knob { width: 44px; height: 44px; }
+  .reveal-foot { display: flex; font-size: 11px; margin-top: 10px; }
 
   /* ──────────────────────────────────────────────────────────
      7. Comparison table — all 4 columns, compact layout
@@ -3531,21 +3536,16 @@ section[id] { scroll-margin-top: 80px; }
   }
 
   /* ──────────────────────────────────────────────────────────
-     9. FAQ trade selector — horizontally scrollable, hidden scrollbar
+     9. FAQ trade selector — wrap pills, visible overflow so dropdown shows
      ────────────────────────────────────────────────────────── */
   .trade-pills {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-bottom: 4px;
+    flex-wrap: wrap;
+    overflow: visible;
     gap: 6px;
   }
-  .trade-pills::-webkit-scrollbar {
-    display: none;
-  }
   .trade-pill {
-    flex-shrink: 0;
+    font-size: 13px;
+    padding: 8px 12px;
   }
 
   /* ──────────────────────────────────────────────────────────
