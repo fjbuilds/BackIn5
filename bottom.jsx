@@ -43,9 +43,9 @@ function Comparison() {
         <div className="compare-scroll-wrap">
           <div className="compare">
           <div className="compare-row">
-            <div className="compare-cell head">Day-to-Day Reality </div>
-            <div className="compare-cell head">Doing it Yourself</div>
-            <div className="compare-cell head">Human receptionist</div>
+            <div className="compare-cell head">Day-to-Day Reality</div>
+            <div className="compare-cell head"><span className="col-full">Doing it Yourself</span><span className="col-short">DIY</span></div>
+            <div className="compare-cell head"><span className="col-full">Human Receptionist</span><span className="col-short">Recept.</span></div>
             <div className="compare-cell head brand">BackIn5</div>
           </div>
           {rows.map((r, i) =>
@@ -427,12 +427,17 @@ function Faqs() {
   const active = ALL_TRADE_FAQS.find((t) => t.key === activeTrade) || MAIN_TRADE_FAQS[0];
   const activeInMore = MORE_TRADE_FAQS.find((t) => t.key === activeTrade);
 
-  // On mobile, scroll the questions panel into view when a trade is selected
+  // On mobile, scroll to the questions panel when a trade is tapped.
+  // Uses window.scrollTo instead of scrollIntoView — more reliable on iOS Safari.
   React.useEffect(() => {
-    if (tradePanelRef.current && window.innerWidth < 768) {
+    if (tradePanelRef.current && window.innerWidth < 900) {
       setTimeout(() => {
-        tradePanelRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 120);
+        var el = tradePanelRef.current;
+        if (!el) return;
+        var top = (window.pageYOffset || document.documentElement.scrollTop)
+                  + el.getBoundingClientRect().top - 80;
+        window.scrollTo(0, top);
+      }, 150);
     }
   }, [activeTrade]);
 
