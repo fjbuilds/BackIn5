@@ -2294,9 +2294,11 @@ html { scroll-behavior: smooth; }
 }
 
 @media (max-width: 720px) {
-  .reveal-stage { height: 540px; }
+  /* reveal-stage height intentionally NOT set here — the 768px block
+     already switches it to height:auto + flex column for mobile */
   .paper { font-size: 12.5px; max-width: 160px; min-width: 120px; padding: 12px 14px; }
   .paper-text { font-size: 12.5px; }
+  /* clean-stack: use percentage positioning so it centres in the after scene */
   .clean-stack { width: 84%; right: 8%; padding: 18px; }
   .clean-row { font-size: 13px; }
   .scene-label { font-size: 10.5px; padding: 6px 10px; }
@@ -3240,6 +3242,14 @@ section[id] { scroll-margin-top: 80px; }
   .band {
     padding-block: 56px;
   }
+
+  /* Trust strip — stack items vertically so space-between doesn't spread them */
+  .trust-row {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+  }
   .hero-inner {
     padding-top: 48px;
     padding-bottom: 56px;
@@ -3313,8 +3323,12 @@ section[id] { scroll-margin-top: 80px; }
   .panel-stage .panel {
     padding: 24px;
   }
+  /* Fix: override the desktop min-height so the card doesn't overflow the screen */
+  .panel-stage {
+    min-height: 180px;
+  }
   .panel-carousel {
-    min-height: 360px;
+    min-height: 0;
   }
   /* CTA band lead copy */
   .cta-lead-block {
@@ -3390,8 +3404,9 @@ section[id] { scroll-margin-top: 80px; }
   .reveal-scene {
     position: relative;
     inset: auto;
-    min-height: 300px;
+    min-height: 380px;
     width: 100%;
+    overflow: hidden;
   }
   .reveal-scene.before {
     clip-path: none !important;
