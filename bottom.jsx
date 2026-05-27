@@ -588,7 +588,6 @@ function Footer() {
         </div>
         <div className="footer-base">
           <span>© 2026 BackIn5 Ltd · Registered in England · Made for trades.</span>
-          <span>hello@backin5.com</span>
         </div>
       </div>
     </footer>);

@@ -26,10 +26,10 @@ function Contact() {
               </div>
             </div>
             <div className="contact-card-body">
-              <a href="tel:+447000000000" className="btn btn-dark btn-arrow contact-btn">
+              <a href="tel:+447948091506" className="btn btn-dark btn-arrow contact-btn">
                 Call now <IconArrowRight size={16} />
               </a>
-              <a href="sms:+447000000000" className="btn btn-ghost-light contact-btn">
+              <a href="sms:+447948091506" className="btn btn-ghost-light contact-btn">
                 Text us <IconMessage size={16} />
               </a>
             </div>
@@ -71,20 +71,16 @@ function Contact() {
               </div>
             </div>
             <div className="contact-card-body">
-              <a href="mailto:hello@backin5.com" className="btn btn-dark btn-arrow contact-btn">
+              <a href="mailto:fj@backin5.org" className="btn btn-dark btn-arrow contact-btn">
                 Email us <IconArrowRight size={16} />
               </a>
             </div>
             <div className="contact-card-foot">
-              hello@backin5.com · we reply within one working day.
+              fj@backin5.org · we reply within one working day.
             </div>
           </div>
         </div>
 
-        <div className="contact-reassure">
-          <span className="contact-reassure-dot" />
-          No hard sell. Just a quick chat to see if it makes sense for your business.
-        </div>
       </div>
     </section>);
 
