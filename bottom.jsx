@@ -44,8 +44,8 @@ function Comparison() {
           <div className="compare">
           <div className="compare-row">
             <div className="compare-cell head">Day-to-Day Reality</div>
-            <div className="compare-cell head"><span className="col-full">Doing it Yourself</span><span className="col-short">DIY</span></div>
-            <div className="compare-cell head"><span className="col-full">Human Receptionist</span><span className="col-short">Recept.</span></div>
+            <div className="compare-cell head"><span className="col-full">Doing it Yourself</span><span className="col-short">Owner</span></div>
+            <div className="compare-cell head"><span className="col-full">Human Receptionist</span><span className="col-short">Receptionist</span></div>
             <div className="compare-cell head brand">BackIn5</div>
           </div>
           {rows.map((r, i) =>

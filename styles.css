@@ -431,9 +431,13 @@ html { scroll-behavior: smooth; }
   .nav-burger { display: inline-flex; }
   .nav-cta-btn { display: none; }
 
-  /* Nav needs to sit above the drawer panel so the X button stays clickable */
+  /* Nav sits above the drawer. Remove backdrop-filter on mobile — iOS Safari
+     treats backdrop-filter as a containing block for position:fixed children,
+     which traps the nav-drawer inside the 68px nav bar and makes it invisible. */
   .nav {
     z-index: 100;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   /* Full-width drawer panel on mobile */
@@ -3536,7 +3540,7 @@ section[id] { scroll-margin-top: 80px; }
   }
 
   /* ──────────────────────────────────────────────────────────
-     9. FAQ trade selector — wrap pills, visible overflow so dropdown shows
+     9. FAQ trade selector — wrap pills, dropdown anchors to pills container
      ────────────────────────────────────────────────────────── */
   .trade-pills {
     flex-wrap: wrap;
@@ -3546,6 +3550,18 @@ section[id] { scroll-margin-top: 80px; }
   .trade-pill {
     font-size: 13px;
     padding: 8px 12px;
+  }
+  /* Make .trade-pill-more non-positioned so .trade-dropdown anchors to
+     .trade-pills (the wider container) instead of the narrow button.
+     This stops the dropdown from running off the left edge of the screen. */
+  .trade-pill-more {
+    position: static;
+  }
+  .trade-dropdown {
+    top: 8px;
+    left: 0;
+    right: auto;
+    min-width: 220px;
   }
 
   /* ──────────────────────────────────────────────────────────
