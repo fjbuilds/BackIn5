@@ -1062,12 +1062,14 @@ html { scroll-behavior: smooth; }
   margin-left: 4px;
 }
 @media (max-width: 800px) {
+  /* 800px: squeeze columns slightly, no hiding yet */
   .compare-row {
     grid-template-columns: 1.4fr 0.9fr 0.9fr 0.9fr;
   }
   .compare-cell { padding: 12px 8px; font-size: 12.5px; }
   .compare-cell.head { padding: 12px 8px; height: auto; min-height: 56px; }
 }
+/* 768px override handled in the main mobile block below — hides cols 2-3 */
 
 /* ============================================================
    Pricing
@@ -3384,56 +3386,99 @@ section[id] { scroll-margin-top: 80px; }
   .bf-motion {
     max-width: 100%;
     overflow: hidden;
-    min-height: 400px;
+    min-height: 500px;
   }
   .bf-chaos {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  /* Scale the core ring down so it doesn't clash with chips/order card */
+  .bf-core {
+    width: 130px;
+    height: 130px;
+  }
+  .bf-core-disc {
+    width: 68px;
+    height: 68px;
+  }
+  .bf-core-disc svg {
+    width: 28px;
+    height: 28px;
+  }
 
   /* ──────────────────────────────────────────────────────────
-     6. Before vs After — stack vertically, remove slider
+     6. Before vs After — side-by-side split (no slider)
      ────────────────────────────────────────────────────────── */
   .reveal-stage {
-    height: auto;
+    height: 400px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;   /* side by side */
     cursor: default;
     touch-action: auto;
     user-select: auto;
+    border-radius: 16px;
+    overflow: hidden;
   }
   .reveal-scene {
     position: relative;
     inset: auto;
-    min-height: 380px;
-    width: 100%;
+    width: 50%;
+    height: 100%;
     overflow: hidden;
+    flex-shrink: 0;
   }
   .reveal-scene.before {
     clip-path: none !important;
+    border-right: 2px solid rgba(255,255,255,0.12);
   }
   .reveal-scene.after {
     clip-path: none !important;
   }
-  .reveal-handle {
-    display: none;
+  /* Scale papers down so they fit the narrower 50% panel */
+  .reveal-scene.before .paper {
+    max-width: 120px;
+    min-width: 70px;
+    font-size: 10.5px;
+    padding: 9px 11px;
   }
-  .reveal-foot {
-    display: none;
+  .reveal-scene.before .paper-text {
+    font-size: 10.5px;
   }
+  /* Centre the clean-stack card in the after panel */
+  .reveal-scene.after .clean-stack {
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    right: 8px;
+    width: auto;
+    transform: translateY(-50%);
+    padding: 14px 14px 10px;
+  }
+  .reveal-scene.after .clean-row {
+    font-size: 12px;
+    gap: 8px;
+    padding: 7px 0;
+  }
+  .reveal-scene.after .clean-stack-title { font-size: 12px; }
+  .reveal-handle { display: none; }
+  .reveal-foot { display: none; }
 
   /* ──────────────────────────────────────────────────────────
-     7. Comparison table — horizontally scrollable wrapper
+     7. Comparison table — show only Feature + BackIn5 columns
      ────────────────────────────────────────────────────────── */
   .compare-scroll-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border-radius: var(--r-lg);
+    overflow-x: visible;
   }
   .compare-scroll-wrap .compare {
-    min-width: 520px;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
+    min-width: 0;
+    border-radius: var(--r-lg);
+  }
+  /* Hide "Doing it Yourself" and "Human receptionist" columns */
+  .compare-row {
+    grid-template-columns: 1.6fr 1fr;
+  }
+  .compare-cell:nth-child(2),
+  .compare-cell:nth-child(3) {
+    display: none;
   }
 
   /* ──────────────────────────────────────────────────────────

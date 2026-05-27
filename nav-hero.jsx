@@ -48,7 +48,7 @@ function Nav() {
       <div className={"nav-drawer " + (menuOpen ? "is-open" : "")} aria-hidden={!menuOpen}>
         <div className="nav-drawer-scrim" onClick={close} />
         <div className="nav-drawer-panel" role="dialog" aria-label="Site navigation">
-          <a className="nav-drawer-link" href="#built-for" onClick={close}>Who if this for?</a>
+          <a className="nav-drawer-link" href="#built-for" onClick={close}>Who is this for?</a>
           <a className="nav-drawer-link" href="#how" onClick={close}>How does it work?</a>
           <a className="nav-drawer-link" href="#pricing" onClick={close}>Pricing</a>
           <a className="nav-drawer-link" href="#faqs" onClick={close}>FAQs</a>

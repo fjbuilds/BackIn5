@@ -395,9 +395,9 @@ const MORE_TRADE_FAQS = [
 
 const ALL_TRADE_FAQS = [...MAIN_TRADE_FAQS, ...MORE_TRADE_FAQS];
 
-function FaqAccordion({ items, group = "" }) {
-  const [openIdx, setOpenIdx] = useStateB(-1);
-  React.useEffect(() => {setOpenIdx(-1);}, [group]);
+function FaqAccordion({ items, group = "", initialOpen = -1 }) {
+  const [openIdx, setOpenIdx] = useStateB(initialOpen);
+  React.useEffect(() => {setOpenIdx(initialOpen);}, [group]);
   return (
     <div className="faq-list" key={group}>
       {items.map((it, i) => {
@@ -530,7 +530,7 @@ function Faqs() {
             </div>
 
             <div className="faq-trade-panel" key={activeTrade}>
-              <FaqAccordion items={active.items} group={activeTrade} />
+              <FaqAccordion items={active.items} group={activeTrade} initialOpen={0} />
             </div>
           </div>
         </div>
