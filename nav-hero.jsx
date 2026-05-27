@@ -24,6 +24,7 @@ function Nav() {
       <div className="container nav-inner">
         <a href="#top" className="nav-brand" onClick={close}>
           <img src="assets/backin5-logo-v4.png" alt="BackIn5" className="brand-logo" style={{ width: "106px", height: "24px" }} />
+          <span className="nav-tagline">Built For Busy Trades</span>
         </a>
         <div className="nav-links">
           <a className="nav-link" href="#built-for">Who if this for?</a>
@@ -422,7 +423,7 @@ function Hero({ variant }) {
   const lead =
   <React.Fragment>
       24/7 Customer Handling | Automatic Text and Callbacks<br />
-      Website, Social Media and Trade-site Messages Handled
+      Website, Social Media and Trade-site Enquiries Handled
     </React.Fragment>;
 
   return (

@@ -325,6 +325,20 @@ html { scroll-behavior: smooth; }
   letter-spacing: -0.005em;
 }
 .nav-link:hover { color: #fff; }
+/* Subtle tagline beside the logo */
+.nav-tagline {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: rgba(234, 236, 241, 0.38);
+  padding-left: 14px;
+  margin-left: 10px;
+  border-left: 1px solid rgba(234, 236, 241, 0.12);
+  line-height: 1;
+  white-space: nowrap;
+}
+
 .nav-cta { display: flex; align-items: center; gap: 12px; }
 .nav-phone {
   display: flex;
@@ -430,6 +444,7 @@ html { scroll-behavior: smooth; }
   .nav-phone { display: none; }
   .nav-burger { display: inline-flex; }
   .nav-cta-btn { display: none; }
+  .nav-tagline { display: none; }
 
   /* Nav sits above the drawer. Remove backdrop-filter on mobile — iOS Safari
      treats backdrop-filter as a containing block for position:fixed children,
