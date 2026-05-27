@@ -430,6 +430,21 @@ html { scroll-behavior: smooth; }
   .nav-phone { display: none; }
   .nav-burger { display: inline-flex; }
   .nav-cta-btn { display: none; }
+
+  /* Nav needs to sit above the drawer panel so the X button stays clickable */
+  .nav {
+    z-index: 100;
+  }
+
+  /* Full-width drawer panel on mobile */
+  .nav-drawer-panel {
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--hairline-dark);
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 /* ============================================================
@@ -3406,12 +3421,12 @@ section[id] { scroll-margin-top: 80px; }
   }
 
   /* ──────────────────────────────────────────────────────────
-     6. Before vs After — side-by-side split (no slider)
+     6. Before vs After — stacked portrait layout (before above, after below)
      ────────────────────────────────────────────────────────── */
   .reveal-stage {
-    height: 400px;
+    height: auto;
     display: flex;
-    flex-direction: row;   /* side by side */
+    flex-direction: column;
     cursor: default;
     touch-action: auto;
     user-select: auto;
@@ -3421,44 +3436,26 @@ section[id] { scroll-margin-top: 80px; }
   .reveal-scene {
     position: relative;
     inset: auto;
-    width: 50%;
-    height: 100%;
+    min-height: 340px;
+    width: 100%;
     overflow: hidden;
-    flex-shrink: 0;
   }
   .reveal-scene.before {
     clip-path: none !important;
-    border-right: 2px solid rgba(255,255,255,0.12);
+    border-bottom: 2px solid rgba(255,255,255,0.10);
   }
   .reveal-scene.after {
     clip-path: none !important;
   }
-  /* Scale papers down so they fit the narrower 50% panel */
-  .reveal-scene.before .paper {
-    max-width: 120px;
-    min-width: 70px;
-    font-size: 10.5px;
-    padding: 9px 11px;
-  }
-  .reveal-scene.before .paper-text {
-    font-size: 10.5px;
-  }
-  /* Centre the clean-stack card in the after panel */
+  /* Clean-stack: fill the after section nicely */
   .reveal-scene.after .clean-stack {
     position: absolute;
     top: 50%;
-    left: 8px;
-    right: 8px;
+    left: 16px;
+    right: 16px;
     width: auto;
     transform: translateY(-50%);
-    padding: 14px 14px 10px;
   }
-  .reveal-scene.after .clean-row {
-    font-size: 12px;
-    gap: 8px;
-    padding: 7px 0;
-  }
-  .reveal-scene.after .clean-stack-title { font-size: 12px; }
   .reveal-handle { display: none; }
   .reveal-foot { display: none; }
 

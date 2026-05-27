@@ -423,8 +423,18 @@ function Faqs() {
   const [activeTrade, setActiveTrade] = useStateB(MAIN_TRADE_FAQS[0].key);
   const [dropdownOpen, setDropdownOpen] = useStateB(false);
   const dropdownRef = React.useRef(null);
+  const tradePanelRef = React.useRef(null);
   const active = ALL_TRADE_FAQS.find((t) => t.key === activeTrade) || MAIN_TRADE_FAQS[0];
   const activeInMore = MORE_TRADE_FAQS.find((t) => t.key === activeTrade);
+
+  // On mobile, scroll the questions panel into view when a trade is selected
+  React.useEffect(() => {
+    if (tradePanelRef.current && window.innerWidth < 768) {
+      setTimeout(() => {
+        tradePanelRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 120);
+    }
+  }, [activeTrade]);
 
   // Close the dropdown when clicking outside, or pressing Escape
   React.useEffect(() => {
@@ -529,7 +539,7 @@ function Faqs() {
               </div>
             </div>
 
-            <div className="faq-trade-panel" key={activeTrade}>
+            <div className="faq-trade-panel" key={activeTrade} ref={tradePanelRef}>
               <FaqAccordion items={active.items} group={activeTrade} initialOpen={0} />
             </div>
           </div>
