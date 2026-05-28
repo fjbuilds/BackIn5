@@ -27,7 +27,7 @@ function Nav() {
           <span className="nav-tagline">Built For Busy Trades</span>
         </a>
         <div className="nav-links">
-          <a className="nav-link" href="#built-for">Who if this for?</a>
+          <a className="nav-link" href="#built-for">Who is this for?</a>
           <a className="nav-link" href="#how">How does it work?</a>
           <a className="nav-link" href="#pricing">Pricing</a>
           <a className="nav-link" href="#faqs">FAQs</a>
