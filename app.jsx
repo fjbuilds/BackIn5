@@ -41,6 +41,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <ChatBubble />
 
       <TweaksPanel>
         <TweakSection label="Hero" />

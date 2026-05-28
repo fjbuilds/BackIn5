@@ -93,9 +93,9 @@ function Pricing() {
     feats: [
     "Everything in Smart Enquiry Handling",
     "24/7 missed call text backs",
-    "Enquiry quality control — photo & video collection",
+    "Enquiry quality control - photo & video collection",
     "Automatic customer follow-ups",
-    "Quote & site-visit booking — self-booked by customer, into your diary",
+    "Quote & site-visit booking - self-booked by customer, into your diary",
     "WhatsApp, text & email progression",
     "Website live quote assistant"],
 
@@ -428,7 +428,7 @@ function Faqs() {
   const activeInMore = MORE_TRADE_FAQS.find((t) => t.key === activeTrade);
 
   // On mobile, scroll to the questions panel when a trade is tapped.
-  // Uses window.scrollTo instead of scrollIntoView — more reliable on iOS Safari.
+  // Uses window.scrollTo instead of scrollIntoView - more reliable on iOS Safari.
   React.useEffect(() => {
     if (tradePanelRef.current && window.innerWidth < 900) {
       setTimeout(() => {
@@ -469,7 +469,7 @@ function Faqs() {
           </p>
         </div>
 
-        {/* GENERAL FAQS — always visible, open on the page */}
+        {/* GENERAL FAQS - always visible, open on the page */}
         <div className="faq-block faq-general-block">
           <div className="faq-block-head">
             <div className="faq-block-eyebrow">General</div>
@@ -478,7 +478,7 @@ function Faqs() {
           <FaqAccordion items={GENERAL_FAQS} group="general" />
         </div>
 
-        {/* TRADE-SPECIFIC FAQS — wrapped in an elevated tinted card for clear separation */}
+        {/* TRADE-SPECIFIC FAQS - wrapped in an elevated tinted card for clear separation */}
         <div className="faq-block faq-trade-block">
           <div className="faq-trade-card">
             <div className="faq-trade-head">
@@ -506,7 +506,7 @@ function Faqs() {
 
               })}
 
-              {/* "More trades ▾" dropdown trigger — last pill */}
+              {/* "More trades ▾" dropdown trigger - last pill */}
               <div className="trade-pill-more" ref={dropdownRef}>
                 <button
                   className={"trade-pill trade-pill-trigger " + (activeInMore ? "active" : "")}

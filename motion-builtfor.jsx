@@ -12,10 +12,10 @@ const CHAOS_CHIPS = [
 ];
 
 const ORDERED_ROWS = [
-  { text: "Sarah K. — Leak repair · BS6",         tag: "Qualified", delay: "0s" },
-  { text: "Mark D. — Boiler service · BS3",       tag: "Booked",    delay: "1.6s" },
-  { text: "J. Patel — Bathroom refit · BS7",      tag: "Qualified", delay: "3.2s" },
-  { text: "Tom R. — Drain unblock · BS4",         tag: "Booked",    delay: "4.8s" },
+  { text: "Sarah K. - Leak repair · BS6",         tag: "Qualified", delay: "0s" },
+  { text: "Mark D. - Boiler service · BS3",       tag: "Booked",    delay: "1.6s" },
+  { text: "J. Patel - Bathroom refit · BS7",      tag: "Qualified", delay: "3.2s" },
+  { text: "Tom R. - Drain unblock · BS4",         tag: "Booked",    delay: "4.8s" },
 ];
 
 const ORBIT_TOOLS = [

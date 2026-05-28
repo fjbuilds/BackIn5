@@ -46,7 +46,7 @@ function BuiltFor({ singleTradeMode, focusTradeKey, setFocus }) {
                 <h3 className="ttl">Built for {focus.name.toLowerCase()}</h3>
                 <p className="desc">{focus.desc}</p>
                 <p className="desc" style={{ marginTop: -8 }}>
-                  We know your callers. They want a fast answer, a fair quote and a slot in the diary —
+                  We know your callers. They want a fast answer, a fair quote and a slot in the diary -
                   not a voicemail and a callback tomorrow.
                 </p>
                 <div className="stat-row">
@@ -59,7 +59,7 @@ function BuiltFor({ singleTradeMode, focusTradeKey, setFocus }) {
               <div className="trade-side">
                 <div className="quote">
                   "We used to lose two or three jobs a week to voicemail.
-                  Now my phone barely rings — I just walk in to a clean list of qualified jobs each morning."
+                  Now my phone barely rings - I just walk in to a clean list of qualified jobs each morning."
                   <div className="qm">Dave, Bristol-based plumber · 14 yrs</div>
                 </div>
                 <div className="stats-tile">
@@ -121,7 +121,7 @@ function BuiltFor({ singleTradeMode, focusTradeKey, setFocus }) {
 
 }
 
-// ----------------- Before / After — reveal slider -----------------
+// ----------------- Before / After - reveal slider -----------------
 const BEFORE_ITEMS = [
   { kind: "phone",  text: "Missed calls turning into lost jobs",                   top: "6%",  left: "3%",  rot: -4 },
   { kind: "ruled",  tag: "Notebook · page 3",  text: "Customers going elsewhere whilst waiting for replies",  top: "26%", left: "21%", rot:  3 },
@@ -181,7 +181,7 @@ function BeforeAfter() {
     };
   }, []);
 
-  // Attention wiggle — JS-lerped so dragging always wins immediately
+  // Attention wiggle - JS-lerped so dragging always wins immediately
   React.useEffect(() => {
     let cancelled = false;
 
@@ -238,7 +238,7 @@ function BeforeAfter() {
               </p>
             </div>
             <p className="ba-promise">
-              BackIn5 helps businesses respond faster, stay organised, and stop work slipping through the cracks — without adding more to the owner’s plate.
+              BackIn5 helps businesses respond faster, stay organised, and stop work slipping through the cracks - without adding more to the owner’s plate.
             </p>
           </div>
         </div>
@@ -399,7 +399,7 @@ const HOW_SCENARIOS = [
   "Instant response sent 24/7",
   "Enquiry details collected automatically",
   "Customer books suitable callback / site visit time",
-  "You wake up to new jobs — no enquiries left waiting until morning"]
+  "You wake up to new jobs - no enquiries left waiting until morning"]
 
 },
 {

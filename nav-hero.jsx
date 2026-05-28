@@ -1,5 +1,5 @@
 /* eslint-disable */
-// Nav + Hero with 4 variants — exposed on window for app.jsx to consume.
+// Nav + Hero with 4 variants - exposed on window for app.jsx to consume.
 
 const { useState, useEffect } = React;
 
@@ -154,7 +154,7 @@ function TranscriptCard() {
           <div className="ts">14:02</div>
           <div className="body-cell">
             <span className="tag">Missed call</span>
-            <div className="msg">Caller rang while you were on the job — voicemail not left.</div>
+            <div className="msg">Caller rang while you were on the job - voicemail not left.</div>
           </div>
         </div>
 
@@ -163,7 +163,7 @@ function TranscriptCard() {
           <div className="body-cell">
             <span className="tag">BackIn5 · Text-back</span>
             <div className="msg">
-              "Hi Sarah — sorry I missed your call, I'm on a job. I can get back to you within 5 minutes.
+              "Hi Sarah - sorry I missed your call, I'm on a job. I can get back to you within 5 minutes.
               Quick question: what do you need help with?"
             </div>
           </div>
@@ -173,7 +173,7 @@ function TranscriptCard() {
           <div className="ts">14:03</div>
           <div className="body-cell">
             <span className="tag">Sarah</span>
-            <div className="msg">Kitchen tap is leaking under the sink. Bit urgent — got a dinner party Friday.</div>
+            <div className="msg">Kitchen tap is leaking under the sink. Bit urgent - got a dinner party Friday.</div>
           </div>
         </div>
 
@@ -349,7 +349,7 @@ function HeroV1({ headline, lead }) {
 }
 
 function HeroV2({ headline, lead }) {
-  // Editorial — centered massive type
+  // Editorial - centered massive type
   return (
     <div className="hero-editorial">
       <span className="hero-eyebrow"><span className="pulse" />Built for busy trades firms</span>
@@ -413,8 +413,8 @@ function HeroV4({ headline, lead }) {
 
 }
 
-// ----------------- Hero backdrop — 9 technical-drawing tool SVGs -----------------
-// 1px strokes, butt caps, miter joins — workshop catalog plate style, not icon-library style.
+// ----------------- Hero backdrop - 9 technical-drawing tool SVGs -----------------
+// 1px strokes, butt caps, miter joins - workshop catalog plate style, not icon-library style.
 const ToolSpanner = ({ size = 100 }) => (
   <svg width={size} height={size} viewBox="0 0 100 100" fill="none"
        stroke="currentColor" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter">

@@ -1,89 +1,84 @@
 /* eslint-disable */
-// Contact section — 3-card layout with call/text, Calendly booking, email.
+// Contact - compact single-row layout.
+// Calendly tile opens an inline popup widget over the site
+// (loaded via window.Calendly from the script in index.html).
+
+const CALENDLY_URL = "https://calendly.com/backin5/intro";
 
 function Contact() {
+  const tiles = [
+    {
+      Ic: IconPhone,
+      label: "Call or text",
+      value: "07948 091506",
+      href: "tel:+447948091506",
+    },
+    {
+      Ic: IconMail,
+      label: "Email",
+      value: "fj@backin5.org",
+      href: "mailto:fj@backin5.org",
+    },
+    {
+      Ic: IconCalendar,
+      label: "Book a chat",
+      value: "15-min intro",
+      href: CALENDLY_URL,
+      calendly: true,
+      featured: true,
+    },
+  ];
+
+  const openCalendly = (e) => {
+    if (window.Calendly && typeof window.Calendly.initPopupWidget === "function") {
+      e.preventDefault();
+      window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+      return false;
+    }
+    // Fallback (script not yet loaded): let the link follow through to Calendly
+  };
+
   return (
-    <section className="canvas-light band" id="contact">
-      <div className="container">
-        <div className="sec-head center" style={{ alignItems: "center" }}>
-          Get in touch to Talk to us.
-          <h2 className="display" style={{ color: "rgb(14, 17, 22)" }}>
-            Want to see How Your Business Could Benefit From <span style={{ color: "#1e3a97" }}>BackIn5?</span>
-          </h2>
-          <p className="lead">Call, text, email or book a quick chat - whatever is easiest.
-
-          </p>
-        </div>
-
-        <div className="contact-grid">
-          {/* Card 1: Call or text */}
-          <div className="contact-card">
-            <div className="contact-card-head">
-              <div className="contact-ic"><IconPhone /></div>
-              <div>
-                <div className="contact-card-title">Call or text</div>
-                <div className="contact-card-sub">For quick questions or a straight answer.</div>
-              </div>
-            </div>
-            <div className="contact-card-body">
-              <a href="tel:+447948091506" className="btn btn-dark btn-arrow contact-btn">
-                Call now <IconArrowRight size={16} />
-              </a>
-              <a href="sms:+447948091506" className="btn btn-ghost-light contact-btn">
-                Text us <IconMessage size={16} />
-              </a>
-            </div>
-            <div className="contact-card-foot">
-              Mon–Fri, 8am–6pm. We answer fast or text you back.
-            </div>
+    <section className="canvas-light band-tight" id="contact">
+      <div className="container narrow">
+        <div className="contact-compact">
+          <div className="contact-compact-head">
+            <span className="eyebrow">Get in touch</span>
+            <h2 className="h2" style={{ marginTop: 10 }}>
+              See how it could work for your business.
+            </h2>
+            <p className="contact-compact-lead">
+              Call, email or book a quick chat - whatever's easiest.
+            </p>
           </div>
 
-          {/* Card 2: Book a chat (Calendly) — featured / taller */}
-          <div className="contact-card contact-card-featured">
-            <div className="contact-card-head">
-              <div className="contact-ic contact-ic-accent"><IconCalendar /></div>
-              <div>
-                <div className="contact-card-title">Book a quick chat</div>
-                <div className="contact-card-sub">For a proper walkthrough of how it would work for your business.</div>
-              </div>
-            </div>
-            <div className="calendly-wrap">
-              <iframe
-                src="https://calendly.com/backin5/intro?embed_domain=&embed_type=Inline&hide_event_type_details=0&hide_gdpr_banner=1&primary_color=3450b3"
-                title="Book a chat with BackIn5"
-                frameBorder="0"
-                allow="camera; microphone; autoplay; encrypted-media; fullscreen"
-                style={{ width: "100%", height: "100%", border: 0 }}>
-              </iframe>
-            </div>
-            <div className="contact-card-foot">
-              15-minute intro · 100% no obligation.
-            </div>
-          </div>
-
-          {/* Card 3: Email */}
-          <div className="contact-card">
-            <div className="contact-card-head">
-              <div className="contact-ic"><IconMail /></div>
-              <div>
-                <div className="contact-card-title">Email</div>
-                <div className="contact-card-sub">For questions, setup details or anything you want to send over.</div>
-              </div>
-            </div>
-            <div className="contact-card-body">
-              <a href="mailto:fj@backin5.org" className="btn btn-dark btn-arrow contact-btn">
-                Email us <IconArrowRight size={16} />
+          <div className="contact-tiles">
+            {tiles.map(({ Ic, label, value, href, calendly, featured }, i) => (
+              <a
+                key={i}
+                href={href}
+                onClick={calendly ? openCalendly : undefined}
+                target={calendly ? "_blank" : undefined}
+                rel={calendly ? "noopener noreferrer" : undefined}
+                className={"contact-tile" + (featured ? " is-featured" : "")}
+              >
+                <div className="contact-tile-ic">
+                  <Ic size={18} />
+                </div>
+                <div className="contact-tile-body">
+                  <div className="contact-tile-label">{label}</div>
+                  <div className="contact-tile-value">{value}</div>
+                </div>
+                <div className="contact-tile-arrow">
+                  <IconArrowUpRight size={16} />
+                </div>
               </a>
-            </div>
-            <div className="contact-card-foot">
-              fj@backin5.org · we reply within one working day.
-            </div>
+            ))}
           </div>
         </div>
-
       </div>
-    </section>);
-
+    </section>
+  );
 }
 
 Object.assign(window, { Contact });
