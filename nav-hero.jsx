@@ -413,6 +413,128 @@ function HeroV4({ headline, lead }) {
 
 }
 
+// ----------------- Hero backdrop — 9 technical-drawing tool SVGs -----------------
+// 1px strokes, butt caps, miter joins — workshop catalog plate style, not icon-library style.
+const ToolSpanner = ({ size = 100 }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none"
+       stroke="currentColor" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter">
+    <path d="M22 18 L30 10 A12 12 0 1 1 18 22 L10 30 L22 42 L66 86 A8 8 0 0 0 78 86 L86 78 A8 8 0 0 0 86 66 L42 22 Z" />
+    <circle cx="22.5" cy="17.5" r="3" />
+  </svg>
+);
+const ToolHammer = ({ size = 100 }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none"
+       stroke="currentColor" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter">
+    <path d="M14 18 L46 18 L52 12 L70 12 L70 36 L52 36 L46 30 L14 30 Z" />
+    <line x1="14" y1="24" x2="46" y2="24" />
+    <path d="M14 22 L20 22 L20 18 M14 26 L20 26 L20 30" />
+    <path d="M28 30 L34 30 L78 84 L72 90 Z" />
+  </svg>
+);
+const ToolScrewdriver = ({ size = 100 }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none"
+       stroke="currentColor" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter">
+    <path d="M10 88 L18 80 L34 64 L42 72 L26 88 L18 90 Z" />
+    <line x1="34" y1="64" x2="62" y2="36" />
+    <line x1="42" y1="72" x2="70" y2="44" />
+    <path d="M58 32 L70 44 L66 48 L54 36 Z" />
+    <path d="M62 28 L86 4 L94 12 L70 36 Z" />
+    <line x1="68" y1="22" x2="80" y2="34" />
+    <line x1="74" y1="16" x2="86" y2="28" />
+  </svg>
+);
+const ToolPipe = ({ size = 100 }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none"
+       stroke="currentColor" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter">
+    <path d="M10 40 L60 40 L60 90 L40 90 L40 60 L10 60 Z" />
+    <path d="M14 44 L40 44 M14 56 L40 56" />
+    <path d="M44 60 L44 86 M56 60 L56 86" />
+    <circle cx="50" cy="50" r="6" />
+  </svg>
+);
+const ToolPlane = ({ size = 100 }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none"
+       stroke="currentColor" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter">
+    <rect x="6" y="42" width="88" height="16" />
+    <circle cx="50" cy="50" r="5" />
+    <line x1="45" y1="50" x2="55" y2="50" />
+    <line x1="20" y1="42" x2="20" y2="58" />
+    <line x1="80" y1="42" x2="80" y2="58" />
+  </svg>
+);
+const ToolDrill = ({ size = 100 }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none"
+       stroke="currentColor" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter">
+    <path d="M22 28 L62 28 L62 50 L22 50 Z" />
+    <path d="M62 32 L72 32 L72 46 L62 46 Z" />
+    <line x1="72" y1="39" x2="92" y2="39" />
+    <path d="M86 36 L92 39 L86 42" />
+    <path d="M32 50 L52 50 L48 84 L36 84 Z" />
+    <path d="M40 54 L46 54 L46 60 L40 60 Z" />
+  </svg>
+);
+const ToolBlueprint = ({ size = 100 }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none"
+       stroke="currentColor" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter">
+    <rect x="10" y="14" width="80" height="60" />
+    <path d="M18 22 L40 22 L40 38 L58 38 L58 22 L82 22" />
+    <path d="M18 50 L82 50" />
+    <path d="M18 60 L60 60" />
+    <line x1="18" y1="68" x2="18" y2="72" />
+    <line x1="82" y1="68" x2="82" y2="72" />
+    <line x1="18" y1="70" x2="82" y2="70" />
+  </svg>
+);
+const ToolTape = ({ size = 100 }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none"
+       stroke="currentColor" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter">
+    <path d="M14 30 L70 30 A20 20 0 0 1 70 70 L34 70 A20 20 0 0 1 14 50 Z" />
+    <circle cx="42" cy="50" r="14" />
+    <circle cx="42" cy="50" r="4" />
+    <path d="M70 46 L92 46 L92 54 L70 54" />
+    <line x1="76" y1="46" x2="76" y2="54" />
+    <line x1="82" y1="46" x2="82" y2="54" />
+    <line x1="88" y1="46" x2="88" y2="54" />
+  </svg>
+);
+const ToolSaw = ({ size = 100 }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none"
+       stroke="currentColor" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter">
+    <path d="M10 56 L82 56 L82 64 L10 64 Z" />
+    <path d="M10 64 L14 70 L18 64 L22 70 L26 64 L30 70 L34 64 L38 70 L42 64 L46 70 L50 64 L54 70 L58 64 L62 70 L66 64 L70 70 L74 64 L78 70 L82 64" />
+    <path d="M82 50 L94 50 L94 74 L82 74 Z M82 60 Q88 56 92 60 M82 62 Q88 66 92 62" />
+  </svg>
+);
+
+function HeroBackdrop() {
+  const items = [
+    { I: ToolSpanner,     top: "10%", left: "6%",  size: 130, rot: -18, op: 0.060 },
+    { I: ToolPipe,        top: "70%", left: "5%",  size: 140, rot:  12, op: 0.050 },
+    { I: ToolPlane,       top: "40%", left: "12%", size: 110, rot:  -4, op: 0.050 },
+    { I: ToolBlueprint,   top: "8%",  left: "44%", size: 150, rot:  -3, op: 0.045 },
+    { I: ToolHammer,      top: "86%", left: "32%", size: 120, rot:  22, op: 0.055 },
+    { I: ToolScrewdriver, top: "12%", left: "82%", size: 130, rot:  26, op: 0.055 },
+    { I: ToolTape,        top: "44%", left: "92%", size: 110, rot: -10, op: 0.050 },
+    { I: ToolDrill,       top: "76%", left: "82%", size: 130, rot: -16, op: 0.055 },
+    { I: ToolSaw,         top: "82%", left: "62%", size: 130, rot:   6, op: 0.050 },
+  ];
+  return (
+    <div className="hero-backdrop" aria-hidden="true">
+      <div className="hero-backdrop-grid" />
+      <div className="hero-backdrop-tics">
+        <span className="tic tl" /><span className="tic tr" />
+        <span className="tic bl" /><span className="tic br" />
+      </div>
+      {items.map(({ I, top, left, size, rot, op }, i) => (
+        <span key={i} className="hero-backdrop-ic"
+          style={{ top, left, transform: `translate(-50%,-50%) rotate(${rot}deg)`, opacity: op }}>
+          <I size={size} />
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function Hero({ variant }) {
   const headline =
   <React.Fragment>
@@ -428,6 +550,7 @@ function Hero({ variant }) {
 
   return (
     <section className="hero" id="top">
+      <HeroBackdrop />
       <div className="container hero-inner">
         {variant === "transcript" && <HeroV1 headline={headline} lead={lead} />}
         {variant === "editorial" && <HeroV2 headline={

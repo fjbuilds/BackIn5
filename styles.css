@@ -477,7 +477,55 @@ html { scroll-behavior: smooth; }
 }
 .hero-inner {
   padding-block: clamp(64px, 9vw, 128px);
+  position: relative;
+  z-index: 1;
 }
+/* ── Subtle trade-icon backdrop — workshop blueprint feel ── */
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(ellipse 110% 85% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.9) 55%, rgba(0,0,0,0.4) 100%);
+          mask-image: radial-gradient(ellipse 110% 85% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.9) 55%, rgba(0,0,0,0.4) 100%);
+}
+.hero-backdrop-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: 0 0;
+  opacity: 0.55;
+}
+.hero-backdrop-tics { position: absolute; inset: 0; }
+.hero-backdrop-tics .tic {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-color: rgba(255,255,255,0.18);
+  border-style: solid;
+  border-width: 0;
+}
+.hero-backdrop-tics .tic.tl { top: 24px; left: 24px; border-top-width: 1px; border-left-width: 1px; }
+.hero-backdrop-tics .tic.tr { top: 24px; right: 24px; border-top-width: 1px; border-right-width: 1px; }
+.hero-backdrop-tics .tic.bl { bottom: 24px; left: 24px; border-bottom-width: 1px; border-left-width: 1px; }
+.hero-backdrop-tics .tic.br { bottom: 24px; right: 24px; border-bottom-width: 1px; border-right-width: 1px; }
+.hero-backdrop-ic {
+  position: absolute;
+  display: block;
+  color: #EAECF1;
+  line-height: 0;
+}
+@media (max-width: 800px) {
+  .hero-backdrop-ic { display: none; }
+  .hero-backdrop-ic:nth-of-type(1),
+  .hero-backdrop-ic:nth-of-type(4),
+  .hero-backdrop-ic:nth-of-type(7),
+  .hero-backdrop-ic:nth-of-type(9) { display: block; }
+  .hero-backdrop-grid { background-size: 22px 22px; }
+}
+
 .hero-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -575,6 +623,8 @@ html { scroll-behavior: smooth; }
   border-top: 1px solid var(--hairline-dark);
   background: var(--ink);
   padding: 22px 0;
+  position: relative;
+  z-index: 1;
 }
 .trust-row {
   display: flex;
