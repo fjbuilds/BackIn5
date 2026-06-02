@@ -1,10 +1,37 @@
 /* eslint-disable */
-// Contact section - 3-card layout with call/text, Calendly booking, email.
+// Contact section
 
-function HowItWorksPopup({ onClose }) {
-  // Close on backdrop click
+// Calendly popup overlay
+function CalendlyPopup({ onClose }) {
   const handleBackdrop = (e) => { if (e.target === e.currentTarget) onClose(); };
-  // Close on Escape
+  React.useEffect(() => {
+    const fn = (e) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', fn);
+    return () => document.removeEventListener('keydown', fn);
+  }, []);
+  return (
+    <div className="hiw-popup-backdrop" onClick={handleBackdrop} style={{ zIndex: 9999 }}>
+      <div className="hiw-popup-card" style={{ maxWidth: 700, width: '95vw', padding: '24px 20px 20px', position: 'relative' }}>
+        <button className="hiw-popup-close" onClick={onClose} aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M2 2l14 14M16 2L2 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+        </button>
+        <iframe
+          src="https://calendly.com/backin5/intro?embed_domain=&embed_type=Inline&hide_event_type_details=0&hide_gdpr_banner=1&primary_color=3450b3"
+          title="Book a chat with BackIn5"
+          frameBorder="0"
+          allow="camera; microphone; autoplay; encrypted-media; fullscreen"
+          style={{ width: '100%', height: 580, border: 0, borderRadius: 8 }}>
+        </iframe>
+      </div>
+    </div>
+  );
+}
+
+// How it works auto-popup (fires after 30s if not yet dismissed)
+function HowItWorksPopup({ onClose }) {
+  const handleBackdrop = (e) => { if (e.target === e.currentTarget) onClose(); };
   React.useEffect(() => {
     const fn = (e) => { if (e.key === 'Escape') onClose(); };
     document.addEventListener('keydown', fn);
@@ -39,7 +66,23 @@ function HowItWorksPopup({ onClose }) {
 }
 
 function Contact() {
+  const [showCalendly, setShowCalendly] = React.useState(false);
   const [showHiw, setShowHiw] = React.useState(false);
+
+  // Auto-popup after 30s, only once per session
+  React.useEffect(() => {
+    if (localStorage.getItem('hiw_dismissed')) return;
+    const t = setTimeout(() => {
+      setShowHiw(true);
+    }, 30000);
+    return () => clearTimeout(t);
+  }, []);
+
+  const dismissHiw = () => {
+    setShowHiw(false);
+    localStorage.setItem('hiw_dismissed', '1');
+  };
+
   return (
     <section className="canvas-light band" id="contact">
       <div className="container">
@@ -60,29 +103,21 @@ function Contact() {
             <IconMail size={18} />
             <span>Email us</span>
           </a>
-          <a href="https://calendly.com/backin5/intro" target="_blank" rel="noopener noreferrer" className="contact-pill">
+          <button className="contact-pill" onClick={() => setShowCalendly(true)}>
             <IconCalendar size={18} />
             <span>Book a chat</span>
-          </a>
-          <button className="contact-pill contact-pill-ghost" onClick={() => setShowHiw(true)}>
+          </button>
+          <a href="see-the-system.html" className="contact-pill contact-pill-ghost">
             <IconArrowRight size={18} />
             <span>How it works</span>
-          </button>
-        </div>
-
-        <div className="calendly-wrap" style={{ marginTop: 32 }}>
-          <iframe
-            src="https://calendly.com/backin5/intro?embed_domain=&embed_type=Inline&hide_event_type_details=0&hide_gdpr_banner=1&primary_color=3450b3"
-            title="Book a chat with BackIn5"
-            frameBorder="0"
-            allow="camera; microphone; autoplay; encrypted-media; fullscreen"
-            style={{ width: "100%", height: "100%", border: 0 }}>
-          </iframe>
+          </a>
         </div>
       </div>
-      {showHiw && <HowItWorksPopup onClose={() => setShowHiw(false)} />}
-    </section>);
 
+      {showCalendly && <CalendlyPopup onClose={() => setShowCalendly(false)} />}
+      {showHiw && <HowItWorksPopup onClose={dismissHiw} />}
+    </section>
+  );
 }
 
 Object.assign(window, { Contact });
