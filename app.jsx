@@ -33,7 +33,6 @@ function App() {
           setFocus={(k) => { setFocusTrade(k); setTweak('trade', k); }}
         />
         <BeforeAfter />
-        <HowItWorks />
         <Comparison />
         <Pricing />
         <CtaBand />

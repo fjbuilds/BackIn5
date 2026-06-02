@@ -112,7 +112,7 @@ function BuiltFor({ singleTradeMode, focusTradeKey, setFocus }) {
         }
 
         <div style={{ marginTop: 56, display: "flex", justifyContent: "center" }}>
-          <a href="#how" className="btn btn-dark btn-lg btn-arrow">
+          <a href="see-the-system.html" className="btn btn-dark btn-lg btn-arrow">
             See How It Works... <IconArrowRight size={16} />
           </a>
         </div>

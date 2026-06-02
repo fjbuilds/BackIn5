@@ -16,7 +16,8 @@ function Comparison() {
   { feat: "Follows up every enquiry consistently", val: ["no", "partial", "yes"] },
   { feat: "Reduces evening / weekend admin catch-up", val: ["no", "partial", "yes"] },
   { feat: "Helps stop decent jobs slipping through cracks", val: ["no", "partial", "yes"] },
-  { feat: "Additional salary cost (£20K–£30K)", val: ["no", "yes", "no"] }];
+  { feat: "Live enquiry dashboard - every lead, one place", val: ["no", "no", "yes"] },
+  { feat: "Additional salary cost (£20K-£30K)", val: ["no", "yes", "no"] }];
 
 
   const cell = (kind, isBrand) => {
@@ -32,12 +33,9 @@ function Comparison() {
           <span className="eyebrow">WHY TRADES SWITCH</span>
           <h2 className="display" style={{ width: "800px" }}>
             You Do The Work.<br />
-            <span style={{ color: "var(--accent)" }}>BackIn5 Handles Admin.</span>
+            <span style={{ color: "var(--accent)" }}>BackIn5 Handles Everything Else.</span>
           </h2>
-          <p className="lead">Website & Trade-site leads, missed calls, quote requests and customer messages - All handled automatically in the background as you work.  
-
-
-          </p>
+          <p className="lead">Website & Trade-site leads, missed calls, quote requests and customer messages - All handled automatically and delivered to you on one dashboard.</p>
         </div>
 
         <div className="compare-scroll-wrap">
@@ -71,34 +69,40 @@ function Pricing() {
   const tiers = [
   {
     name: "Smart Enquiry Handling",
-    tagline: "Small businesses that need faster replies & better organisation.",
+    tagline: "For trades who miss calls & messages while working and need every enquiry answered, captured and organised.",
     price: 199,
-    foot: "£99 setup fee | Min 3-month term, rolling thereafter\nSetup fee waived on 6+ month agreements.",
+    foot: "£99 setup fee · Min 3-month term, rolling thereafter\nSetup fee waived on 6+ month agreements.",
+    bottomLine: "Best for smaller trade businesses that need faster replies and better enquiry organisation, but do not need full quote or booking automation yet.",
     feats: [
-    "Instant replies to new enquiries",
-    "Stops jobs from being missed whilst on-site",
-    "Enquiries organised and ready to quote",
-    "Customer details collected automatically",
-    "Works with website, Facebook & trade-sites (Checkatrade, Trust a Trader, MyJobQuote + more)",
-    "Simple setup. No apps or office staff needed."],
-
+      "Instant replies to new enquiries",
+      "Missed calls and messages followed up automatically",
+      "Customer name, number, postcode and job details captured",
+      "Enquiries from your website, Facebook and trade sites kept in one place",
+      "Leads sent to you by text and email",
+      "Live enquiry dashboard - every lead and what needs action, in one place",
+      "Helps stop jobs being missed while you're on-site",
+      "Simple setup - no app, no office staff, no new software to learn",
+    ],
     cta: "Get Started",
     featured: false
   },
   {
-    name: "Full Enquiry & Admin Desk",
-    tagline: "A complete inbound enquiry & booking system without office staff.",
-    price: 399,
-    foot: "£149 setup fee | Min 3-month term, rolling thereafter\nSetup fee waived on 6+ month agreements.",
+    name: "Full Inbound Desk",
+    tagline: "A complete inbound enquiry and booking system. Without office staff.",
+    price: 349,
+    foot: "£149 setup fee · Min 3-month term, rolling thereafter\nSetup fee waived on 6+ month agreements.",
+    bottomLine: "Best for busy firms that want enquiries handled properly from first message through to callback, quote or booked visit. Without lifting a finger.",
     feats: [
-    "Everything in Smart Enquiry Handling",
-    "24/7 missed call text backs",
-    "Enquiry quality control - photo & video collection",
-    "Automatic customer follow-ups",
-    "Quote & site-visit booking - self-booked by customer, into your diary",
-    "WhatsApp, text & email progression",
-    "Website live quote assistant"],
-
+      "Everything in Smart Enquiry Handling",
+      "Website quote assistant built around your trade",
+      "Smart job qualification questions",
+      "Photo and video collection",
+      "Live enquiry dashboard - every lead, job detail and next action",
+      "24/7 missed-call text backs",
+      "Automated customer follow-ups",
+      "Quote, callback or site-visit booking",
+      "WhatsApp, text and email progression",
+    ],
     cta: "Get Started",
     featured: true
   }];
@@ -110,11 +114,9 @@ function Pricing() {
         <div className="sec-head center" style={{ alignItems: "center" }}>
           <span className="eyebrow">Pricing</span>
           <h2 className="display">
-            Cheaper than hiring office staff.<br />Handles Enquiries 24/7.
+            Cheaper than hiring office staff.<br />Handles enquiries 24/7.
           </h2>
-          <p className="lead" style={{ textAlign: "center" }}>Fixed monthly pricing - Cancel anytime
-
-          </p>
+          <p className="lead" style={{ textAlign: "center" }}>Fixed monthly pricing · Cancel anytime · Includes your live enquiry dashboard</p>
         </div>
 
         <div className="pricing-grid">
@@ -132,6 +134,9 @@ function Pricing() {
                   </div>
               )}
               </div>
+              {t.bottomLine && (
+                <div className="price-bottom-line">{t.bottomLine}</div>
+              )}
               <a href="#contact" className={"btn " + (t.featured ? "btn-light" : "btn-dark") + " btn-arrow"} style={{ width: "100%", justifyContent: "center" }}>
                 {t.cta} <IconArrowRight size={16} />
               </a>
@@ -166,7 +171,7 @@ function CtaBand() {
             Calls get missed, quotes get delayed and decent jobs slip through the cracks whilst trying to stay on top of messages, follow-ups and work on-site.
           </span>
           <span className="cta-lead-block">
-            <span className="cta-lead-brand">BackIn5</span> keeps customers engaged, enquiries organised and jobs moving whilst you focus on the work.
+            <span className="cta-lead-brand">BackIn5</span> keeps customers engaged, enquiries organised and jobs moving whilst you focus on the work. Every customer gets their own live dashboard - a real-time view of every open job, quote and callback, updated automatically each day.
           </span>
           <span className="cta-lead-fine">
             No complicated software. No office staff. No evenings spent catching up on admin.
@@ -176,7 +181,7 @@ function CtaBand() {
           <a href="#contact" className="btn btn-primary btn-lg btn-arrow">
             Get Started <IconArrowRight size={16} />
           </a>
-          <a href="#how" className="btn btn-ghost-dark btn-lg">See how it works</a>
+          <a href="see-the-system.html" className="btn btn-ghost-dark btn-lg">See how it works</a>
         </div>
       </div>
     </section>);}
@@ -204,7 +209,7 @@ const GENERAL_FAQS = [
   },
   {
     q: "How long does it take to get set up?",
-    a: "Most businesses are up and running within 24–48 hours, depending on the type of enquiries you handle and how tailored you want the workflow to be."
+    a: "Most businesses are up and running within 24-48 hours, depending on the type of enquiries you handle and how tailored you want the workflow to be."
   },
 ];
 const MAIN_TRADE_FAQS = [
@@ -588,6 +593,7 @@ function Footer() {
         </div>
         <div className="footer-base">
           <span>© 2026 BackIn5 Ltd · Registered in England · Made for trades.</span>
+          <span><a href="/terms" className="footer-terms-link">Terms</a> · hello@backin5.com</span>
         </div>
       </div>
     </footer>);

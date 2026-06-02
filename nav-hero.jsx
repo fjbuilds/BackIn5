@@ -28,13 +28,13 @@ function Nav() {
         </a>
         <div className="nav-links">
           <a className="nav-link" href="#built-for">Who is this for?</a>
-          <a className="nav-link" href="#how">How does it work?</a>
+          <a className="nav-link" href="see-the-system.html">How does it work?</a>
           <a className="nav-link" href="#pricing">Pricing</a>
           <a className="nav-link" href="#faqs">FAQs</a>
           <a className="nav-link" href="#contact">Contact</a>
         </div>
         <div className="nav-cta">
-          <a href="#contact" className="btn btn-primary btn-sm nav-cta-btn">Get Started</a>
+          <a href="see-the-system.html#sts-packages" className="btn btn-primary btn-sm nav-cta-btn">Get Started</a>
           <button
             className={"nav-burger " + (menuOpen ? "is-open" : "")}
             onClick={() => setMenuOpen((o) => !o)}
@@ -50,11 +50,11 @@ function Nav() {
         <div className="nav-drawer-scrim" onClick={close} />
         <div className="nav-drawer-panel" role="dialog" aria-label="Site navigation">
           <a className="nav-drawer-link" href="#built-for" onClick={close}>Who is this for?</a>
-          <a className="nav-drawer-link" href="#how" onClick={close}>How does it work?</a>
+          <a className="nav-drawer-link" href="see-the-system.html" onClick={close}>How does it work?</a>
           <a className="nav-drawer-link" href="#pricing" onClick={close}>Pricing</a>
           <a className="nav-drawer-link" href="#faqs" onClick={close}>FAQs</a>
           <a className="nav-drawer-link" href="#contact" onClick={close}>Contact</a>
-          <a href="#contact" className="btn btn-primary btn-lg nav-drawer-cta" onClick={close}>
+          <a href="see-the-system.html#sts-packages" className="btn btn-primary btn-lg nav-drawer-cta" onClick={close}>
             Get Started <IconArrowRight size={16} />
           </a>
         </div>
@@ -336,7 +336,7 @@ function HeroV1({ headline, lead }) {
         </p>
         <div style={{ height: 32 }} />
         <div className="hero-cta-row">
-          <a href="#how" className="btn btn-primary btn-lg btn-arrow">
+          <a href="see-the-system.html" className="btn btn-primary btn-lg btn-arrow">
             How does it work? <IconArrowRight size={16} />
           </a>
           <a href="#pricing" className="btn btn-ghost-dark btn-lg">How much does it cost?</a>
@@ -363,7 +363,7 @@ function HeroV2({ headline, lead }) {
         <a href="#pricing" className="btn btn-primary btn-lg btn-arrow">
           Start free trial <IconArrowRight size={16} />
         </a>
-        <a href="#how" className="btn btn-ghost-dark btn-lg">See how it works</a>
+        <a href="see-the-system.html" className="btn btn-ghost-dark btn-lg">See how it works</a>
       </div>
     </div>);
 
@@ -383,7 +383,7 @@ function HeroV3({ headline, lead }) {
           <a href="#pricing" className="btn btn-primary btn-lg btn-arrow">
             Start free trial <IconArrowRight size={16} />
           </a>
-          <a href="#how" className="btn btn-ghost-dark btn-lg">See how it works</a>
+          <a href="see-the-system.html" className="btn btn-ghost-dark btn-lg">See how it works</a>
         </div>
       </div>
       <MiniDashboard />
@@ -405,7 +405,7 @@ function HeroV4({ headline, lead }) {
           <a href="#pricing" className="btn btn-primary btn-lg btn-arrow">
             Start free trial <IconArrowRight size={16} />
           </a>
-          <a href="#how" className="btn btn-ghost-dark btn-lg">See how it works</a>
+          <a href="see-the-system.html" className="btn btn-ghost-dark btn-lg">See how it works</a>
         </div>
       </div>
       <PhoneFeed />
@@ -565,7 +565,7 @@ function Hero({ variant }) {
           <span className="item">TRUSTED BY INDEPENDENTS AND FIRMS</span>
           <span className="item">BUILT FOR BUSY TRADES</span>
           <span className="item" style={{ color: "rgb(255, 255, 255)" }}>ENQUIRIES HANDLED 24/7</span>
-          <span className="item">NO CHASING. NO ADMIN.</span>
+          <span className="item">LIVE DASHBOARD INCLUDED</span>
         </div>
       </div>
     </section>);
