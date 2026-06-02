@@ -29,6 +29,10 @@
   display: flex; flex-direction: column; gap: var(--s-5);
   padding-block: var(--s-11);
 }
+@media (max-width: 700px) {
+  .sts-hero { min-height: auto; padding-top: 80px; padding-bottom: 48px; }
+  .sts-hero-inner { padding-block: 0; gap: 16px; }
+}
 .sts-hero-scroll {
   display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-2);
   margin-top: var(--s-6);
@@ -108,6 +112,11 @@
 
 /* Laptop shell */
 .sts-laptop { width: calc(100% - 160px); max-width: 700px; margin: 0 auto; position: relative; padding-bottom: 80px; }
+@media (max-width: 700px) {
+  .sts-laptop { width: 100%; padding-bottom: 16px; }
+  .sts-laptop-wrap { padding-inline: 0; }
+  .sts-fake-browser { height: 280px; }
+}
 
 .sts-laptop-screen {
   background: #1a1f2a; border-radius: 14px 14px 0 0;
@@ -741,3 +750,67 @@
 .sts-pkg-choice-desc  { font-size: 13px; color: rgba(234,236,241,0.55); line-height: 1.5; }
 .sts-pkg-choice svg   { flex-shrink: 0; color: rgba(234,236,241,0.3); transition: color 0.2s, transform 0.2s; }
 .sts-pkg-choice:hover svg { color: var(--accent); transform: translateX(3px); }
+
+/* ============================================================
+   STS PAGE - MOBILE OPTIMISATION (max-width: 700px)
+   ============================================================ */
+@media (max-width: 700px) {
+
+  /* Section headings */
+  .sts-section-title,
+  .sts-scenarios-title { font-size: 22px !important; }
+
+  /* How It Works - scenario list */
+  .sts-scenario-item {
+    padding: 14px 12px;
+    gap: 10px;
+  }
+  .sts-scenario-icon {
+    width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+  }
+  .sts-scenario-title { font-size: 15px; }
+  .sts-scenario-sub   { font-size: 12px; }
+  .sts-scenario-num   { font-size: 11px; width: 22px; }
+
+  /* Scenario detail card */
+  .sts-scenario-panel { padding: 20px 16px; }
+  .sts-scenario-panel-title { font-size: 20px; }
+
+  /* Step list */
+  .sts-step-row { gap: 12px; padding: 12px 0; }
+  .sts-step-num {
+    width: 32px; height: 32px; font-size: 11px; flex-shrink: 0;
+  }
+  .sts-step-text { font-size: 14px; }
+
+  /* Channels section - single col already, reduce card padding */
+  .sts-channels-row { grid-template-columns: 1fr; gap: 10px; }
+  .sts-channel-card { padding: 16px; }
+  .sts-channel-icon { width: 40px; height: 40px; margin-bottom: 8px; }
+  .sts-channel-label { font-size: 14px; }
+  .sts-channel-desc  { font-size: 12.5px; }
+
+  /* Quote card / lead card */
+  .sts-lead-card { padding: 16px; font-size: 14px; }
+  .sts-lead-card-row { font-size: 13px; }
+  .sts-lead-btns { gap: 8px; flex-wrap: wrap; }
+
+  /* Dashboard / board section */
+  .sts-board-inner { padding: 20px 16px; }
+  .sts-board-item  { padding: 12px 14px; font-size: 13px; }
+  .sts-board-table { font-size: 12px; }
+  .sts-board-col   { padding: 8px; }
+
+  /* Packages section */
+  .sts-packages-grid { grid-template-columns: 1fr; gap: 16px; }
+  .sts-pkg-card { padding: 20px 16px; }
+  .sts-pkg-price { font-size: 40px; }
+  .sts-pkg-feat-list { font-size: 13.5px; gap: 8px; }
+  .sts-pkg-choices { gap: 10px; }
+  .sts-pkg-choice { padding: 14px; }
+  .sts-pkg-choice-title { font-size: 15px; }
+  .sts-pkg-choice-icon  { font-size: 24px; }
+
+  /* Section band padding */
+  .sts-section { padding-block: 48px; }
+}

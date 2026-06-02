@@ -3402,13 +3402,20 @@ section[id] { scroll-margin-top: 80px; }
     padding-block: 56px;
   }
 
-  /* Trust strip - stack items vertically so space-between doesn't spread them */
+  /* Trust strip - horizontal scroll so items stay on one line */
   .trust-row {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    align-items: center;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 20px;
+    padding-bottom: 2px;
   }
+  .trust-row::-webkit-scrollbar { display: none; }
+  .trust-row .item { flex-shrink: 0; font-size: 11px; gap: 6px; }
   .hero-inner {
     padding-top: 48px;
     padding-bottom: 56px;
@@ -3423,14 +3430,14 @@ section[id] { scroll-margin-top: 80px; }
     margin-bottom: 32px;
   }
 
-  /* ── 2. H2 + display headings → 28px ── */
+  /* ── 2. H2 + display headings → 24px ── */
   .h2 {
-    font-size: 28px;
+    font-size: 24px;
     line-height: 1.2;
   }
   .display {
-    font-size: 28px !important;
-    line-height: 1.2;
+    font-size: 24px !important;
+    line-height: 1.25;
     width: auto !important;
     max-width: 100%;
   }
@@ -3442,14 +3449,14 @@ section[id] { scroll-margin-top: 80px; }
   /* ──────────────────────────────────────────────────────────
      3. Hero
      ────────────────────────────────────────────────────────── */
-  /* Heading capped at 32px - !important overrides inline style fontSize */
+  /* Heading capped at 28px on mobile */
   .display-hero,
   .hero h1 {
-    font-size: 32px !important;
+    font-size: 28px !important;
     line-height: 1.1;
   }
   .hero h1 em {
-    font-size: 32px !important;
+    font-size: 28px !important;
   }
   /* Subtitle lines */
   .hero-lead {
@@ -3670,7 +3677,30 @@ section[id] { scroll-margin-top: 80px; }
     gap: 24px;
   }
   .price-card {
-    padding: 24px;
+    padding: 20px;
+  }
+  .price-card .price-num {
+    font-size: 42px;
+  }
+  .price-card .price-feats {
+    font-size: 13.5px;
+    gap: 8px;
+  }
+  .price-bottom-line {
+    font-size: 13px;
+  }
+
+  /* ──────────────────────────────────────────────────────────
+     8b. Contact pills - wrap nicely on mobile
+     ────────────────────────────────────────────────────────── */
+  .contact-row {
+    gap: 8px;
+    justify-content: center;
+  }
+  .contact-pill {
+    padding: 10px 14px;
+    font-size: 14px;
+    gap: 7px;
   }
 
   /* ──────────────────────────────────────────────────────────
@@ -3708,10 +3738,22 @@ section[id] { scroll-margin-top: 80px; }
   .contact-card {
     padding: 16px;
   }
-  .calendly-wrap {
-    height: 500px;
-    max-height: 500px;
-    min-height: unset;
+  /* Trade cards: no bottom gap, tighter icon */
+  .trade-card {
+    gap: 10px;
+    padding: 16px;
+  }
+  .trade-card .ic {
+    width: 32px; height: 32px;
+  }
+  .trade-card .ic svg {
+    width: 16px; height: 16px;
+  }
+  .trade-card .ttl {
+    font-size: 15px;
+  }
+  .trade-card .desc {
+    font-size: 13px;
   }
 }
 
