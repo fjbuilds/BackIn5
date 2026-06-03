@@ -377,44 +377,49 @@ function StsQuoteAssistant() {
                     <span style={{ background: '#FEBC2E' }} />
                     <span style={{ background: '#28C840' }} />
                   </div>
-                  <div className="sts-fake-url">premiertrades.co.uk</div>
+                  <div className="sts-fake-url">yourlocaltrades.co.uk</div>
                 </div>
                 <div className="sts-fake-site">
+                  {/* Top utility bar */}
+                  <div className="sts-fake-topbar">
+                    <span>Mon–Fri: 8am – 6pm</span>
+                    <span className="sts-fake-topbar-phone">Call: 0800 000 0000</span>
+                  </div>
                   {/* Site nav */}
                   <div className="sts-fake-site-nav">
                     <div className="sts-fake-logo-wrap">
-                      <div className="sts-fake-logo-mark">PT</div>
-                      <span className="sts-fake-logo">Premier Trades Co.</span>
+                      <div className="sts-fake-logo-mark">YT</div>
+                      <span className="sts-fake-logo">Your Local Trades Ltd</span>
                     </div>
-                    <div className="sts-fake-nav-links">Home · Services · Gallery · Contact</div>
-                  </div>
-                  {/* Hero */}
-                  <div className="sts-fake-site-hero">
-                    <div className="sts-fake-hero-badge">⭐ Trusted across London &amp; the South East</div>
-                    <div className="sts-fake-hero-text">Your Local Trades Experts</div>
-                    <div className="sts-fake-hero-sub">Boilers · Roofing · Electrical · Extensions</div>
-                    <div className="sts-fake-hero-btns">
-                      <div className="sts-fake-hero-cta">Get a Free Quote</div>
-                      <div className="sts-fake-hero-cta sts-hero-cta-ghost">Call Us</div>
+                    <div className="sts-fake-nav-links">
+                      <span className="sts-fake-nav-link sts-fake-nav-active">Home</span>
+                      <span className="sts-fake-nav-link">Services</span>
+                      <span className="sts-fake-nav-link">Gallery</span>
+                      <span className="sts-fake-nav-link">Contact</span>
                     </div>
                   </div>
-                  {/* Services strip */}
-                  <div className="sts-fake-services">
-                    <div className="sts-fake-service"><span>🔧</span> Plumbing</div>
-                    <div className="sts-fake-service"><span>⚡</span> Electrical</div>
-                    <div className="sts-fake-service"><span>🏠</span> Roofing</div>
-                    <div className="sts-fake-service"><span>🧱</span> Building</div>
+                  {/* Photo hero */}
+                  <div className="sts-fake-photohero">
+                    <div className="sts-fake-photohero-overlay" />
+                    <div className="sts-fake-photohero-content">
+                      <div className="sts-fake-member">Proud member of <strong>Checkatrade</strong></div>
+                      <div className="sts-fake-hero-text">RELIABLE LOCAL TRADESPEOPLE<br/>YOU CAN TRUST</div>
+                      <div className="sts-fake-hero-sub">Building · Plumbing · Electrical · Repairs &amp; Maintenance</div>
+                      <div className="sts-fake-phonebox">
+                        Call <strong>0800 000 0000</strong> for a free no-obligation quote
+                      </div>
+                    </div>
+                    <div className="sts-fake-experience-badge">
+                      <span className="sts-fake-exp-num">25</span>
+                      <span className="sts-fake-exp-label">YEARS</span>
+                    </div>
                   </div>
-                  {/* Body content */}
-                  <div className="sts-fake-site-body">
-                    <div className="sts-fake-review">
-                      <span className="sts-fake-stars">★★★★★</span>
-                      <span>"Brilliant service, very professional and tidy" - James, SE22</span>
-                    </div>
-                    <div className="sts-fake-content-row">
-                      <div className="sts-fake-block" />
-                      <div className="sts-fake-block sts-fb-wide" />
-                    </div>
+                  {/* Trust badge strip */}
+                  <div className="sts-fake-trustbar">
+                    <span className="sts-fake-trust-item">City &amp; Guilds</span>
+                    <span className="sts-fake-trust-item">Google ★★★★★</span>
+                    <span className="sts-fake-trust-item">Trustpilot</span>
+                    <span className="sts-fake-trust-item">MyBuilder</span>
                   </div>
                   {/* Embedded BackIn5 widget */}
                   <div className="sts-widget">
@@ -925,7 +930,6 @@ const PACKAGES = [
     note: 'per month · £99 setup fee',
     features: [
       'Instant replies to new enquiries',
-      'Missed calls and messages followed up automatically',
       'Customer name, number, postcode and job details captured',
       'Enquiries from your website, trade sites and via phone organised in one place',
       'Receive leads via text, email and on your live enquiry dashboard',
@@ -952,7 +956,6 @@ const PACKAGES = [
       'Photo and video collection',
       'Live enquiry dashboard - every lead, job detail and next action',
       '24/7 missed-call text backs',
-      'Automated customer follow-ups',
       'Quote, callback or site-visit booking',
     ],
     extra: [
