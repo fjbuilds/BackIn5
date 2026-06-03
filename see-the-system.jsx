@@ -366,6 +366,7 @@ function StsQuoteAssistant() {
         </div>
 
         <div ref={laptopRef} className="sts-reveal sts-reveal-d1 sts-laptop-wrap">
+         <div className="sts-devices">
           {/* Laptop mockup */}
           <div className="sts-laptop">
             <div className="sts-laptop-screen">
@@ -457,8 +458,9 @@ function StsQuoteAssistant() {
               <div className="sts-laptop-hinge" />
               <div className="sts-laptop-foot" />
             </div>
+          </div>{/* end .sts-laptop */}
 
-            {/* Mobile - overlapping bottom-right of laptop */}
+            {/* Phone - sibling beside laptop */}
             <div className="sts-mobile-badge">
             <div className="sts-mobile-phone">
               <div className="sts-mobile-notch" />
@@ -500,7 +502,7 @@ function StsQuoteAssistant() {
             </div>
             <div className="sts-mobile-label">Mobile view</div>
           </div>
-          </div>{/* end .sts-laptop */}
+         </div>{/* end .sts-devices */}
 
           <p className="sts-phone-caption">
             Your customers see this on your website - desktop and mobile. You set the questions.
