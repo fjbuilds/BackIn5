@@ -3854,3 +3854,123 @@ section[id] { scroll-margin-top: 80px; }
   .hiw-popup-card { padding: 32px 24px 24px; }
   .hiw-popup-title { font-size: 19px; }
 }
+
+/* ============================================================
+   Chat Bubble Widget
+   ============================================================ */
+.chatbub {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9000;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+}
+
+/* Panel */
+.chatbub-panel {
+  width: 320px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transform: scale(0.92) translateY(16px);
+  transform-origin: bottom right;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease, transform 220ms cubic-bezier(0.22,1,0.36,1);
+}
+.chatbub.is-open .chatbub-panel {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+.chatbub-panel-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px;
+  background: var(--accent);
+  color: #fff;
+}
+.chatbub-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; flex-shrink: 0;
+}
+.chatbub-avatar-dot {
+  position: absolute; bottom: 1px; right: 1px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #25d366; border: 2px solid var(--accent);
+}
+.chatbub-avatar-mark {
+  font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: #fff;
+}
+.chatbub-panel-titles { flex: 1; min-width: 0; }
+.chatbub-panel-title  { font-size: 15px; font-weight: 700; color: #fff; line-height: 1.2; }
+.chatbub-panel-sub    { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+.chatbub-close {
+  background: none; border: none; color: rgba(255,255,255,0.7);
+  cursor: pointer; padding: 4px; line-height: 0; border-radius: 6px;
+  transition: color 150ms ease;
+}
+.chatbub-close:hover { color: #fff; }
+
+.chatbub-panel-body {
+  padding: 16px; background: #f5f7fb;
+}
+.chatbub-msg-bubble {
+  background: #fff; border-radius: 12px 12px 12px 2px;
+  padding: 12px 14px; font-size: 14px; color: var(--ink); line-height: 1.5;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+}
+.chatbub-msg-time {
+  font-size: 11px; color: var(--mute); margin-top: 6px; padding-left: 2px;
+}
+
+.chatbub-panel-form {
+  padding: 14px 16px 16px;
+  display: flex; flex-direction: column; gap: 8px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+.chatbub-input, .chatbub-textarea {
+  width: 100%; box-sizing: border-box;
+  border: 1px solid rgba(0,0,0,0.12); border-radius: 10px;
+  padding: 10px 12px; font-size: 14px; font-family: var(--font-body);
+  color: var(--ink); background: #fff; resize: none;
+  outline: none; transition: border-color 150ms ease;
+}
+.chatbub-input:focus, .chatbub-textarea:focus { border-color: var(--accent); }
+.chatbub-textarea { min-height: 80px; }
+.chatbub-send {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: #25d366; color: #fff; border: none; border-radius: 10px;
+  padding: 12px 16px; font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: background 150ms ease, opacity 150ms ease;
+}
+.chatbub-send:hover { background: #1ebe5d; }
+.chatbub-send:disabled { opacity: 0.45; cursor: default; }
+.chatbub-foot {
+  font-size: 11px; color: var(--mute); text-align: center;
+}
+
+/* FAB (floating action button) */
+.chatbub-fab {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--accent); color: #fff; border: none; border-radius: 999px;
+  padding: 14px 20px 14px 16px;
+  cursor: pointer; font-size: 15px; font-weight: 600; font-family: var(--font-body);
+  box-shadow: 0 4px 20px rgba(35,65,168,0.35);
+  transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+  line-height: 1;
+}
+.chatbub-fab:hover {
+  background: #1c2f8a;
+  box-shadow: 0 6px 28px rgba(35,65,168,0.45);
+  transform: translateY(-2px);
+}
+.chatbub-fab-ic-open, .chatbub-fab-ic-close { display: flex; line-height: 0; }
+.chatbub-fab-ic-close { display: none; }
+.chatbub.is-open .chatbub-fab-ic-open  { display: none; }
+.chatbub.is-open .chatbub-fab-ic-close { display: flex; }
+
+@media (max-width: 600px) {
+  .chatbub { bottom: 16px; right: 16px; }
+  .chatbub-panel { width: calc(100vw - 32px); }
+}
