@@ -893,7 +893,7 @@ function StsSetup() {
         <div ref={headRef} className="sec-head center sts-reveal">
           <span className="eyebrow on-dark">Getting Started</span>
           <h2 className="display">Up and running in 48 hours</h2>
-          <p className="lead">Three steps. We handle everything. You just confirm a few details and answer the jobs.</p>
+          <p className="lead">Three steps. We handle everything. You just confirm a few details and continue to work as normal.</p>
         </div>
         <div className="sts-setup-grid-new">
           {SETUP_STEPS.map((s, i) => <SetupStep key={s.num} step={s} delay={i * 0.12} />)}
