@@ -159,7 +159,7 @@ function CtaBand() {
       <div className="cta-watermark" aria-hidden="true">5</div>
       <div className="container cta-inner" style={{ position: "relative" }}>
         <span className="eyebrow on-dark">Less hassle. Fewer missed jobs.</span>
-        <h2 className="display" style={{ fontSize: "40px", width: "700px" }}>
+        <h2 className="display" style={{ fontSize: "40px", maxWidth: "700px" }}>
           Stop Doing Admin.<br />
           <em>Start Winning More Jobs.</em>
         </h2>
