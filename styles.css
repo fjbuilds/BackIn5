@@ -1774,6 +1774,7 @@ html { scroll-behavior: smooth; }
   transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
   font-family: var(--font-body);
   color: var(--ink);
+  position: relative;
 }
 .how-row:hover {
   background: rgba(255, 255, 255, 0.7);
@@ -1783,6 +1784,17 @@ html { scroll-behavior: smooth; }
   background: #fff;
   border-color: var(--hairline-light);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+}
+.how-row.active::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  height: 2px; background: var(--accent);
+  animation: how-row-progress 5s linear forwards;
+}
+@keyframes how-row-progress {
+  from { width: 0; }
+  to   { width: 100%; }
 }
 .how-row-num {
   font-family: var(--font-mono);
@@ -1847,11 +1859,11 @@ html { scroll-behavior: smooth; }
   padding: clamp(28px, 3vw, 40px);
   position: relative;
   min-height: 480px;
-  animation: flow-card-in 320ms ease;
+  animation: flow-card-in 380ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 @keyframes flow-card-in {
-  from { opacity: 0.6; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateX(18px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 .how-flow-head {
   display: flex;

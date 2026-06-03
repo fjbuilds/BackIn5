@@ -83,22 +83,26 @@
   color: var(--soft); margin-bottom: 28px;
 }
 
-.sts-qa-benefits {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+.sts-qa-strip {
+  display: flex; gap: 0; margin-top: 8px;
 }
-@media (max-width: 600px) { .sts-qa-benefits { grid-template-columns: 1fr; } }
-
-.sts-qa-benefit {
-  display: flex; align-items: flex-start; gap: 12px;
-  background: rgba(255,255,255,0.04); border: 1px solid var(--hairline-dark);
-  border-radius: var(--r-md); padding: 14px;
+.sts-qa-strip-item {
+  flex: 1; padding: 20px 24px;
+  border-right: 1px solid rgba(255,255,255,0.08);
 }
-.sts-qa-benefit-icon { font-size: 20px; line-height: 1; flex-shrink: 0; }
-.sts-qa-benefit strong {
-  display: block; color: var(--soft); font-size: 14px; font-weight: 700;
-  margin-bottom: 3px;
+.sts-qa-strip-item:last-child { border-right: none; }
+.sts-qa-strip-label {
+  font-size: 14px; font-weight: 700; color: var(--soft);
+  margin-bottom: 6px; letter-spacing: -0.01em;
 }
-.sts-qa-benefit span { font-size: 13px; color: rgba(234,236,241,0.55); line-height: 1.5; }
+.sts-qa-strip-desc {
+  font-size: 13px; color: rgba(234,236,241,0.5); line-height: 1.55;
+}
+@media (max-width: 600px) {
+  .sts-qa-strip { flex-direction: column; }
+  .sts-qa-strip-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 16px 0; }
+  .sts-qa-strip-item:last-child { border-bottom: none; }
+}
 
 /* ============================================================
    Laptop + phone mockup
@@ -213,7 +217,7 @@
 
 /* BackIn5 widget */
 .sts-widget {
-  position: absolute; bottom: 12px; left: 10px;
+  position: absolute; bottom: 12px; right: 8px;
   width: 170px; background: #fff;
   border-radius: 12px; box-shadow: 0 8px 40px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.06);
   overflow: hidden;

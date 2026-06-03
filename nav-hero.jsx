@@ -538,8 +538,8 @@ function HeroBackdrop() {
 function Hero({ variant }) {
   const headline =
   <React.Fragment>
-      The Modern Way For Trades Businesses to <br />
-      <em style={{ color: "rgb(52, 80, 179)", fontSize: "60px" }}>Handle Admin</em>.
+      Trades Admin,<br />
+      <em style={{ color: "rgb(52, 80, 179)" }}>Handled For You.</em>
     </React.Fragment>;
 
   const lead =

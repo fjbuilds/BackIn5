@@ -29,8 +29,8 @@ function BuiltFor({ singleTradeMode, focusTradeKey, setFocus }) {
       <div className="container">
         <div className="sec-head center">
           <span className="eyebrow">Built for</span>
-          <h2 className="display" style={{ fontSize: "65px" }}>
-            Built For Busy Trades Where Missed Enquiries Mean Lost Work
+          <h2 className="display">
+            Built For Busy Trades
           </h2>
           <p className="lead" style={{ marginTop: 8 }}>
 
@@ -427,7 +427,7 @@ function HowItWorks() {
         <div className="sec-head">
           <span className="eyebrow" style={{ fontSize: "18px" }}>HOW BACKIN5 WORKS</span>
           <h2 className="display">
-            See how different enquiries are handled from start to finish
+Every enquiry type, handled from start to finish
           </h2>
           <p className="lead" style={{ color: "rgb(14, 17, 22)", fontSize: "18px", fontFamily: "Inter" }}>From missed calls to Checkatrade leads, Backin5 captures, qualifies and organises enquiries whilst your team’s busy.
 

@@ -160,8 +160,8 @@ function CtaBand() {
       <div className="container cta-inner" style={{ position: "relative" }}>
         <span className="eyebrow on-dark">Less hassle. Fewer missed jobs.</span>
         <h2 className="display" style={{ fontSize: "40px", width: "700px" }}>
-          Just Because You've Always Done Admin Yourself,<br />
-          <em>Doesn't Mean You Still Should</em>
+          Stop Doing Admin.<br />
+          <em>Start Winning More Jobs.</em>
         </h2>
         <p className="lead cta-lead" style={{ textAlign: "center" }}>
           <span className="cta-lead-block">

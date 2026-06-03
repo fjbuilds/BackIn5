@@ -134,9 +134,6 @@ function StsHero() {
           when a customer{' '}
           <span style={{ color: 'var(--accent)' }}>contacts&nbsp;you</span>
         </h1>
-        <p ref={r3} className="lead sts-reveal sts-reveal-d2" style={{ maxWidth: '54ch' }}>
-          No guessing. No fluff. Just the full picture - from first contact to job won.
-        </p>
         <div className="sts-hero-scroll">
           <span className="caption" style={{ color: 'rgba(234,236,241,0.45)', letterSpacing: '0.06em' }}>
             Scroll to explore
@@ -246,7 +243,7 @@ function StsHowItWorks() {
         <div ref={headRef} className="sts-reveal sec-head">
           <span className="eyebrow">How BackIn5 Works</span>
           <h2 className="display">
-            See how different enquiries are handled,<br />start to finish
+Every enquiry type, handled.
           </h2>
           <p className="lead">
             From missed calls to Checkatrade leads - BackIn5 captures, qualifies and organises
@@ -352,34 +349,18 @@ function StsQuoteAssistant() {
             Captures quotes for you.<br />
             <span style={{ color: 'var(--accent)' }}>Around the clock.</span>
           </h2>
-          <div className="sts-qa-benefits">
-            <div className="sts-qa-benefit">
-              <div className="sts-qa-benefit-icon">⏰</div>
-              <div>
-                <strong>24/7 availability</strong>
-                <span>Evenings, weekends, bank holidays - never offline</span>
-              </div>
+          <div className="sts-qa-strip">
+            <div className="sts-qa-strip-item">
+              <div className="sts-qa-strip-label">Always on</div>
+              <div className="sts-qa-strip-desc">Evenings, weekends, bank holidays — never misses an enquiry</div>
             </div>
-            <div className="sts-qa-benefit">
-              <div className="sts-qa-benefit-icon">⚡</div>
-              <div>
-                <strong>Replies instantly</strong>
-                <span>Customers get a response in seconds, not hours</span>
-              </div>
+            <div className="sts-qa-strip-item">
+              <div className="sts-qa-strip-label">Your questions</div>
+              <div className="sts-qa-strip-desc">You set what gets asked — every lead arrives with the detail you need to quote</div>
             </div>
-            <div className="sts-qa-benefit">
-              <div className="sts-qa-benefit-icon">📋</div>
-              <div>
-                <strong>Questions set by you</strong>
-                <span>Preset questions ensure accurate, quotable details every time</span>
-              </div>
-            </div>
-            <div className="sts-qa-benefit">
-              <div className="sts-qa-benefit-icon">🔧</div>
-              <div>
-                <strong>We embed it for you</strong>
-                <span>One line of code - or we handle the install entirely</span>
-              </div>
+            <div className="sts-qa-strip-item">
+              <div className="sts-qa-strip-label">We set it up</div>
+              <div className="sts-qa-strip-desc">Embedded on your site within 48 hours — no technical effort required from you</div>
             </div>
           </div>
         </div>
@@ -862,7 +843,7 @@ const SETUP_STEPS = [
   {
     num: '03',
     title: 'Go live within 48 hours',
-    desc: 'We embed the widget on your site or send you one line of code. First enquiry lands - you will see exactly how it works.',
+    desc: 'We embed the enquiry system into your website and provide you with your live dashboard. First enquiry lands - you will see exactly how it works.',
     visual: 'live',
   },
 ];
@@ -922,9 +903,6 @@ function StsSetup() {
             <a href="index.html#contact" className="btn btn-primary btn-lg btn-arrow">
               Start Setup <IconArrowRight size={16} />
             </a>
-            <span className="caption" style={{ color: 'rgba(234,236,241,0.5)' }}>
-              No call required · Live within 48 hrs
-            </span>
           </div>
         </div>
       </div>

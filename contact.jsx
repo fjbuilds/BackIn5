@@ -69,29 +69,26 @@ function Contact() {
   const [showCalendly, setShowCalendly] = React.useState(false);
   const [showHiw, setShowHiw] = React.useState(false);
 
-  // Auto-popup after 30s, only once per session
+  // Auto-popup after 30s, once per browser session (resets on page reload)
   React.useEffect(() => {
-    if (localStorage.getItem('hiw_dismissed')) return;
+    if (sessionStorage.getItem('hiw_shown')) return;
     const t = setTimeout(() => {
       setShowHiw(true);
+      sessionStorage.setItem('hiw_shown', '1');
     }, 30000);
     return () => clearTimeout(t);
   }, []);
 
   const dismissHiw = () => {
     setShowHiw(false);
-    localStorage.setItem('hiw_dismissed', '1');
   };
 
   return (
     <section className="canvas-light band" id="contact">
       <div className="container">
         <div className="sec-head center" style={{ alignItems: "center" }}>
-          Get in touch to Talk to us.
-          <h2 className="display" style={{ color: "rgb(14, 17, 22)" }}>
-            Want to see How Your Business Could Benefit From <span style={{ color: "#1e3a97" }}>BackIn5?</span>
-          </h2>
-          <p className="lead">Call, email, book in a chat or see how it works for yourself.</p>
+          <span className="eyebrow">Get in touch</span>
+          <p className="lead" style={{ maxWidth: '48ch', margin: '0 auto' }}>Call, email, book a quick chat, or see how it works for yourself.</p>
         </div>
 
         <div className="contact-row">
