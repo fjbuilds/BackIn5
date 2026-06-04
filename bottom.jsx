@@ -75,6 +75,7 @@ function Pricing() {
     bottomLine: "Best for smaller trade businesses that need faster replies and better enquiry organisation, but do not need full quote or booking automation yet.",
     feats: [
       "Instant replies to new enquiries",
+      "Missed-call text reply",
       "Customer name, number, postcode and job details captured",
       "Enquiries from your website, trade sites and via phone organised in one place",
       "Receive leads via text, email and on your live enquiry dashboard",
@@ -96,7 +97,7 @@ function Pricing() {
       "Smart job qualification questions",
       "Photo and video collection",
       "Live enquiry dashboard - every lead, job detail and next action",
-      "24/7 missed-call text backs",
+      "Missed-call quote taker",
       "Quote, callback or site-visit booking",
     ],
     cta: "Get Started",

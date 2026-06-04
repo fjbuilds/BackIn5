@@ -930,6 +930,7 @@ const PACKAGES = [
     note: 'per month · £99 setup fee',
     features: [
       'Instant replies to new enquiries',
+      'Missed-call text reply',
       'Customer name, number, postcode and job details captured',
       'Enquiries from your website, trade sites and via phone organised in one place',
       'Receive leads via text, email and on your live enquiry dashboard',
@@ -955,7 +956,7 @@ const PACKAGES = [
       'Smart job qualification questions',
       'Photo and video collection',
       'Live enquiry dashboard - every lead, job detail and next action',
-      '24/7 missed-call text backs',
+      'Missed-call quote taker',
       'Quote, callback or site-visit booking',
     ],
     extra: [
