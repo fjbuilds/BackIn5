@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terms &amp; Conditions | BackIn5</title>
+  <meta name="description" content="BackIn5 Terms and Conditions — the agreement between BackIn5 Ltd and our customers." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="styles.css?v=19" />
+  <link rel="stylesheet" href="terms.css?v=19" />
+</head>
+<body>
+  <nav class="nav" style="background-color: rgb(27, 33, 43);">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/backin5-logo-v4.png" alt="BackIn5" class="brand-logo" style="width: 106px; height: 24px;" />
+      </a>
+      <div class="nav-cta">
+        <a href="index.html" class="btn btn-ghost-light btn-sm nav-cta-btn">Back to home</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="terms-hero">
+    <div class="container">
+      <span class="eyebrow on-dark">Legal</span>
+      <h1 class="terms-h1">Terms &amp; Conditions</h1>
+      <p class="terms-meta">Last updated: <span>[INSERT DATE]</span></p>
+    </div>
+  </header>
+
+  <main class="terms-main">
+    <div class="container terms-shell">
+
+      <!-- Table of contents -->
+      <aside class="terms-toc">
+        <div class="terms-toc-ttl">On this page</div>
+        <nav>
+          <a href="#about">1. About these terms</a>
+          <a href="#service">2. The service</a>
+          <a href="#account">3. Your account</a>
+          <a href="#fees">4. Fees &amp; payment</a>
+          <a href="#term">5. Term &amp; cancellation</a>
+          <a href="#data">6. Your data</a>
+          <a href="#availability">7. Service availability</a>
+          <a href="#liability">8. Liability</a>
+          <a href="#changes">9. Changes to these terms</a>
+          <a href="#contact">10. Contact</a>
+        </nav>
+      </aside>
+
+      <article class="terms-article">
+
+        <section id="about" class="terms-section">
+          <h2>1. About these terms</h2>
+          <p>[PASTE YOUR INTRO HERE — who this agreement is between, what it covers.]</p>
+        </section>
+
+        <section id="service" class="terms-section">
+          <h2>2. The service</h2>
+          <p>[PASTE YOUR DESCRIPTION OF THE BACKIN5 SERVICE HERE.]</p>
+        </section>
+
+        <section id="account" class="terms-section">
+          <h2>3. Your account</h2>
+          <p>[PASTE ACCOUNT TERMS — sign-up, access, your responsibilities.]</p>
+        </section>
+
+        <section id="fees" class="terms-section">
+          <h2>4. Fees &amp; payment</h2>
+          <p>[PASTE PRICING, SETUP FEES, BILLING CYCLE, REFUND POLICY.]</p>
+        </section>
+
+        <section id="term" class="terms-section">
+          <h2>5. Term &amp; cancellation</h2>
+          <p>[PASTE MIN TERM, NOTICE PERIOD, HOW TO CANCEL.]</p>
+        </section>
+
+        <section id="data" class="terms-section">
+          <h2>6. Your data</h2>
+          <p>[PASTE DATA HANDLING, GDPR / UK DATA PROTECTION, OWNERSHIP.]</p>
+        </section>
+
+        <section id="availability" class="terms-section">
+          <h2>7. Service availability</h2>
+          <p>[PASTE UPTIME, MAINTENANCE, INTERRUPTIONS POLICY.]</p>
+        </section>
+
+        <section id="liability" class="terms-section">
+          <h2>8. Liability</h2>
+          <p>[PASTE LIABILITY LIMITS / WARRANTIES / DISCLAIMERS.]</p>
+        </section>
+
+        <section id="changes" class="terms-section">
+          <h2>9. Changes to these terms</h2>
+          <p>[PASTE HOW YOU NOTIFY CUSTOMERS OF UPDATES.]</p>
+        </section>
+
+        <section id="contact" class="terms-section">
+          <h2>10. Contact</h2>
+          <p>
+            Questions about these terms? Email
+            <a href="mailto:hello@backin5.org">hello@backin5.org</a>
+            or write to:
+          </p>
+          <address class="terms-address">
+            BackIn5 Ltd<br />
+            Twickenham, TW2<br />
+            United Kingdom
+          </address>
+        </section>
+
+        <div class="terms-back">
+          <a href="index.html" class="btn btn-ghost-dark btn-sm">← Back to home</a>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="terms-foot">
+    <div class="container">
+      <span>© 2026 BackIn5 Ltd · Registered in England · Made for trades.</span>
+      <span><a href="terms.html">Terms</a> · hello@backin5.org</span>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for TOC links + active highlight
+    document.querySelectorAll('.terms-toc a').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    const links = document.querySelectorAll('.terms-toc a');
+    const sections = [...document.querySelectorAll('.terms-section')];
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY + 120;
+      let cur = sections[0]?.id;
+      for (const s of sections) if (s.offsetTop <= y) cur = s.id;
+      links.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === '#' + cur));
+    });
+  </script>
+</body>
+</html>
