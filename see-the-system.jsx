@@ -352,15 +352,15 @@ function StsQuoteAssistant() {
           <div className="sts-qa-strip">
             <div className="sts-qa-strip-item">
               <div className="sts-qa-strip-label">Always on</div>
-              <div className="sts-qa-strip-desc">Evenings, weekends, bank holidays — never misses an enquiry</div>
+              <div className="sts-qa-strip-desc">Evenings, weekends, bank holidays - never misses an enquiry</div>
             </div>
             <div className="sts-qa-strip-item">
               <div className="sts-qa-strip-label">Your questions</div>
-              <div className="sts-qa-strip-desc">You set what gets asked — every lead arrives with the detail you need to quote</div>
+              <div className="sts-qa-strip-desc">You set what gets asked - every lead arrives with the detail you need to quote</div>
             </div>
             <div className="sts-qa-strip-item">
               <div className="sts-qa-strip-label">We set it up</div>
-              <div className="sts-qa-strip-desc">Embedded on your site within 48 hours — no technical effort required from you</div>
+              <div className="sts-qa-strip-desc">Embedded on your site within 48 hours - no technical effort required from you</div>
             </div>
           </div>
         </div>
