@@ -110,7 +110,7 @@ function StsFooter() {
         </div>
         <div className="footer-base">
           <span>© 2026 BackIn5 Ltd · Registered in England · Made for trades.</span>
-          <span><a href="/terms" className="footer-terms-link">Terms</a> · hello@backin5.com</span>
+          <span><a href="/terms" className="footer-terms-link">Terms</a> · hello@backin5.org</span>
         </div>
       </div>
     </footer>
@@ -1048,7 +1048,7 @@ function StsPackages() {
                 <p className="sts-pkg-reveal-sub">Both options get you live within 48 hours.</p>
               </div>
               <div className="sts-pkg-reveal-choices">
-                <a href="index.html#contact" className="sts-pkg-choice">
+                <a href={"thanks-call.html?plan=" + selectedPkg.id} className="sts-pkg-choice">
                   <div className="sts-pkg-choice-icon">📅</div>
                   <div className="sts-pkg-choice-body">
                     <div className="sts-pkg-choice-title">Book a Call</div>
@@ -1056,7 +1056,7 @@ function StsPackages() {
                   </div>
                   <IconArrowRight size={20} />
                 </a>
-                <a href="index.html#contact" className="sts-pkg-choice">
+                <a href={"welcome.html?plan=" + selectedPkg.id} className="sts-pkg-choice">
                   <div className="sts-pkg-choice-icon">⚡</div>
                   <div className="sts-pkg-choice-body">
                     <div className="sts-pkg-choice-title">Self Setup</div>

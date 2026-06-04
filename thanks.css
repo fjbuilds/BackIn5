@@ -1,0 +1,177 @@
+/* Thanks / Welcome landing pages — uses tokens from styles.css */
+
+body {
+  background: linear-gradient(180deg, #0e1116 0%, #161c28 100%);
+  min-height: 100vh;
+}
+
+.ty-main {
+  padding: 56px 0 80px;
+}
+
+.ty-card {
+  max-width: 760px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 20px;
+  padding: 56px 56px 48px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+
+/* Success badge */
+.ty-badge {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: #e6f7ec; color: #15803d;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px;
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 1px rgba(21, 128, 61, 0.15), 0 8px 24px rgba(21, 128, 61, 0.18);
+}
+.ty-badge-blue {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(35, 65, 168, 0.2), 0 8px 24px rgba(35, 65, 168, 0.3);
+}
+.ty-badge-five {
+  font-family: var(--font-mono);
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* Title */
+.ty-eyebrow { display: block; text-align: center; margin-bottom: 10px; }
+.ty-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 38px);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-align: center;
+  color: var(--ink);
+  margin: 0 0 16px;
+  font-weight: 700;
+}
+.ty-lead {
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--mute-strong);
+  max-width: 56ch;
+  margin: 0 auto 40px;
+}
+.ty-lead em { color: var(--accent); font-style: italic; font-weight: 600; }
+
+/* What happens next */
+.ty-next {
+  background: #f7f9fc;
+  border-radius: 14px;
+  padding: 28px 28px 24px;
+  margin-bottom: 32px;
+  border: 1px solid #eaeef5;
+}
+.ty-next-ttl, .ty-res-ttl {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+.ty-next-grid {
+  display: flex; flex-direction: column; gap: 14px;
+}
+.ty-step {
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.ty-step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; flex-shrink: 0;
+  font-family: var(--font-mono);
+}
+.ty-step-body { display: flex; flex-direction: column; gap: 2px; }
+.ty-step-body strong {
+  font-size: 15px; color: var(--ink); font-weight: 700;
+}
+.ty-step-body span {
+  font-size: 14px; color: var(--mute-strong); line-height: 1.5;
+}
+
+/* Resources grid */
+.ty-resources { margin-bottom: 32px; }
+.ty-res-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+}
+.ty-res-card {
+  display: flex; flex-direction: column; gap: 6px;
+  background: #fff; border: 1px solid #e6eaf2;
+  border-radius: 12px; padding: 18px 16px;
+  text-decoration: none; color: inherit;
+  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.ty-res-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(35, 65, 168, 0.1);
+}
+.ty-res-icon { font-size: 22px; line-height: 1; margin-bottom: 4px; }
+.ty-res-card-ttl {
+  font-size: 14px; font-weight: 700; color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.ty-res-card-sub {
+  font-size: 12.5px; color: var(--mute-strong); line-height: 1.4;
+}
+
+/* Our promise (welcome only) */
+.ty-promise {
+  background: linear-gradient(135deg, rgba(35,65,168,0.06), rgba(35,65,168,0.02));
+  border: 1px solid rgba(35,65,168,0.18);
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin-bottom: 28px;
+}
+.ty-promise-ttl {
+  font-size: 13px; font-weight: 700; color: var(--accent);
+  letter-spacing: 0.04em; text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.ty-promise p {
+  font-size: 14px; color: var(--ink); line-height: 1.55; margin: 0;
+}
+
+/* Contact note */
+.ty-contact {
+  text-align: center; font-size: 13.5px;
+  color: var(--mute-strong); line-height: 1.55;
+  padding-top: 8px;
+}
+.ty-contact a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.ty-contact a:hover { text-decoration: underline; }
+
+/* Footer */
+.ty-foot {
+  padding: 24px 0 32px;
+  color: rgba(234, 236, 241, 0.5);
+  font-size: 13px;
+}
+.ty-foot .container {
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.ty-foot a { color: rgba(234, 236, 241, 0.7); text-decoration: none; }
+.ty-foot a:hover { color: #fff; }
+
+/* Mobile */
+@media (max-width: 720px) {
+  .ty-main { padding: 32px 0 56px; }
+  .ty-card { padding: 36px 22px 32px; border-radius: 16px; }
+  .ty-badge { width: 60px; height: 60px; margin-bottom: 18px; }
+  .ty-badge-five { font-size: 26px; }
+  .ty-next { padding: 22px 18px 18px; }
+  .ty-res-grid { grid-template-columns: 1fr; gap: 10px; }
+  .ty-res-card { padding: 16px 14px; }
+  .ty-foot .container { flex-direction: column; gap: 4px; text-align: center; }
+}

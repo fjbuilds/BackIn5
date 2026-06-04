@@ -96,7 +96,7 @@ function Contact() {
             <IconPhone size={18} />
             <span>Call or text</span>
           </a>
-          <a href="mailto:hello@backin5.com" className="contact-pill">
+          <a href="mailto:hello@backin5.org" className="contact-pill">
             <IconMail size={18} />
             <span>Email us</span>
           </a>
