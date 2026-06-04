@@ -1,0 +1,612 @@
+/* ============================================================
+   BackIn5 Widget Styles — all classes prefixed bi5-
+   ============================================================ */
+
+/* Root wrapper — positioned by main.tsx as fixed bottom-right */
+.bi5-root {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.bi5-root *,
+.bi5-root *::before,
+.bi5-root *::after {
+  box-sizing: inherit;
+}
+
+/* ── Utilities ──────────────────────────────────────────────── */
+
+.bi5-flex { display: flex; }
+.bi5-mb-3 { margin-bottom: 12px; }
+.bi5-justify-start { justify-content: flex-start; }
+.bi5-justify-end   { justify-content: flex-end; }
+
+/* ── Bubble ─────────────────────────────────────────────────── */
+
+.bi5-bubble {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.bi5-bubble:hover {
+  transform: scale(1.07);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.28);
+}
+
+.bi5-bubble:active {
+  transform: scale(0.97);
+}
+
+.bi5-bubble-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+  background: #111827;
+  color: #fff;
+  font-size: 12px;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.bi5-bubble:hover .bi5-bubble-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Panel ──────────────────────────────────────────────────── */
+
+.bi5-panel {
+  width: 380px;
+  height: 560px;
+  border-radius: 16px;
+  box-shadow:
+    0 8px 40px rgba(35, 65, 168, 0.14),
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(35, 65, 168, 0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fafbff;
+  animation: bi5-slide-up 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes bi5-slide-up {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Full-screen on mobile */
+@media (max-width: 480px) {
+  #backin5-widget-root {
+    bottom: 0 !important;
+    right: 0 !important;
+  }
+
+  .bi5-panel {
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+  }
+
+  .bi5-bubble {
+    margin: 0 16px 16px 0;
+  }
+}
+
+/* ── Panel header ───────────────────────────────────────────── */
+
+.bi5-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.bi5-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bi5-header-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.3);
+}
+
+.bi5-header-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.bi5-close-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.bi5-close-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* ── Messages ───────────────────────────────────────────────── */
+
+.bi5-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  scroll-behavior: smooth;
+  background:
+    radial-gradient(ellipse at 10% 20%, rgba(35, 65, 168, 0.03) 0%, transparent 60%),
+    #fafbff;
+}
+
+.bi5-messages::-webkit-scrollbar { width: 4px; }
+.bi5-messages::-webkit-scrollbar-thumb { background: #c7d0e8; border-radius: 2px; }
+
+.bi5-msg-bubble {
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 82%;
+  word-break: break-word;
+}
+
+/* ── Typing indicator ───────────────────────────────────────── */
+
+.bi5-typing-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px;
+  background: #eef1fb;
+  border-radius: 12px;
+}
+
+.bi5-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #9ca3af;
+  animation: bi5-bounce 1.1s infinite ease-in-out;
+}
+
+.bi5-dot:nth-child(1) { animation-delay: 0s; }
+.bi5-dot:nth-child(2) { animation-delay: 0.18s; }
+.bi5-dot:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes bi5-bounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30%           { transform: translateY(-5px); }
+}
+
+/* ── Fade-in for latest message ─────────────────────────────── */
+
+.bi5-animate-fadein {
+  animation: bi5-fadein 0.2s ease both;
+}
+
+@keyframes bi5-fadein {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Input outer ────────────────────────────────────────────── */
+
+.bi5-input-outer {
+  flex-shrink: 0;
+  border-top: 1px solid #e8edf8;
+  background: #fff;
+}
+
+.bi5-input-area {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Option buttons ─────────────────────────────────────────── */
+
+.bi5-options-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bi5-option-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1.5px solid;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.13s, color 0.13s;
+  white-space: nowrap;
+}
+
+.bi5-option-btn:hover:not(:disabled) {
+  filter: brightness(0.92);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.bi5-option-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── Text row (input + send) ────────────────────────────────── */
+
+.bi5-text-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.bi5-text-input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1.5px solid #dde3f5;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  background: #fff;
+  color: #111827;
+  font-family: inherit;
+}
+
+.bi5-text-input:focus {
+  border-color: #2341A8;
+  box-shadow: 0 0 0 3px rgba(35, 65, 168, 0.1);
+}
+
+.bi5-text-input:disabled {
+  background: #f5f7fe;
+  color: #9ca3af;
+}
+
+.bi5-send-btn {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: filter 0.13s, opacity 0.13s;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.bi5-send-btn.bi5-w-full {
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.bi5-send-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.bi5-send-btn:hover:not(:disabled) {
+  filter: brightness(0.88);
+}
+
+/* ── Yes/No ─────────────────────────────────────────────────── */
+
+.bi5-yesno-wrap {
+  display: flex;
+  gap: 10px;
+}
+
+.bi5-yesno-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1.5px solid;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.13s, opacity 0.13s;
+  font-family: inherit;
+  background: #fff;
+}
+
+.bi5-yesno-btn:hover:not(:disabled) {
+  filter: brightness(0.9);
+}
+
+.bi5-yesno-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── Multi-choice ───────────────────────────────────────────── */
+
+.bi5-multi-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bi5-multi-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.bi5-multi-check {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ── Dropdown ───────────────────────────────────────────────── */
+
+.bi5-select {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  color: #111827;
+  outline: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.bi5-select:disabled {
+  background: #f9fafb;
+  color: #9ca3af;
+}
+
+/* ── Skip button ────────────────────────────────────────────── */
+
+.bi5-skip-btn {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+  align-self: flex-start;
+  text-decoration: underline;
+  font-family: inherit;
+  transition: color 0.13s;
+}
+
+.bi5-skip-btn:hover:not(:disabled) {
+  color: #6b7280;
+}
+
+/* ── Inline error ───────────────────────────────────────────── */
+
+.bi5-error-msg {
+  margin: 0;
+  color: #ef4444;
+  font-size: 12px;
+}
+
+/* ── Branding ───────────────────────────────────────────────── */
+
+.bi5-branding {
+  text-align: center;
+  font-size: 11px;
+  color: #9ca3af;
+  padding: 6px 0 8px;
+  flex-shrink: 0;
+}
+
+.bi5-branding strong {
+  color: #6b7280;
+}
+
+/* ── Unavailable state ──────────────────────────────────────── */
+
+.bi5-unavailable {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 13px;
+  color: #6b7280;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Name row ───────────────────────────────────────────────── */
+
+.bi5-name-row {
+  display: flex;
+  gap: 8px;
+}
+
+.bi5-name-row .bi5-text-input {
+  min-width: 0;
+}
+
+/* ── File input (hidden) ────────────────────────────────────── */
+
+.bi5-file-input {
+  display: none;
+}
+
+/* ── Calendar ───────────────────────────────────────────────── */
+
+.bi5-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.bi5-cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bi5-cal-month {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.bi5-cal-nav {
+  background: none;
+  border: 1.5px solid #dde3f5;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  color: #2341A8;
+  transition: background 0.13s;
+}
+
+.bi5-cal-nav:hover:not(:disabled) {
+  background: #eef1fb;
+}
+
+.bi5-cal-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.bi5-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.bi5-cal-day-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #8b94a7;
+  text-align: center;
+  padding: 2px 0;
+  letter-spacing: 0.03em;
+}
+
+.bi5-cal-day {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 6px;
+  background: #eef1fb;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  color: #111827;
+  font-family: inherit;
+}
+
+.bi5-cal-day:hover:not(:disabled):not(.bi5-cal-day--selected) {
+  background: #d9e0f5;
+}
+
+.bi5-cal-day--off {
+  background: transparent;
+  color: #c4cadb;
+}
+
+.bi5-cal-day--selected {
+  font-weight: 700;
+}
+
+.bi5-cal-times {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bi5-cal-times-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.bi5-cal-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.bi5-cal-slot {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1.5px solid #dde3f5;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+  font-family: inherit;
+  color: #374151;
+}
+
+.bi5-cal-slot:hover:not(:disabled):not(.bi5-cal-slot--selected) {
+  border-color: #2341A8;
+  color: #2341A8;
+}
+
+.bi5-cal-slot--selected {
+  font-weight: 700;
+}
+
+.bi5-cal-slot:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.bi5-cal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
