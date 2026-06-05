@@ -313,8 +313,9 @@ export function useChat(config: BusinessConfig) {
       console.error('Photo upload failed:', error)
       appendMessage(userMsg("Couldn't upload - continuing without photo"))
     } else {
-      const { data: urlData } = dashboardSupabase.storage.from('enquiry-media').getPublicUrl(data.path)
-      answersRef.current.media_url = urlData.publicUrl
+      const publicUrl = `https://vhslczshkcjjkzzfccge.supabase.co/storage/v1/object/public/enquiry-media/${data.path}`
+      answersRef.current.media_url = publicUrl
+      console.log('Photo URL stored:', publicUrl)
       appendMessage(userMsg('Photo uploaded ✓'))
     }
     await advanceTo(firstCustomStep())
