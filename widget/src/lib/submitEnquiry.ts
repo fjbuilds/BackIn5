@@ -30,10 +30,14 @@ export async function submitEnquiry(payload: EnquiryPayload): Promise<{ enquiry_
 async function saveToDashboard(payload: EnquiryPayload): Promise<void> {
   if (!payload.dashboard_trade_id) return
 
+  // If they picked a specific date/time via the calendar -> Booked.
+  // If they clicked 'book directly' but skipped the calendar -> Needs Action.
+  const status = payload.appointment_datetime ? 'Booked' : 'Needs Action'
+
   const row: Record<string, unknown> = {
     trade_id: payload.dashboard_trade_id,
     source: 'Website Widget',
-    status: 'Needs Action',
+    status,
   }
 
   if (payload.customer_name)       row.customer_name = payload.customer_name
