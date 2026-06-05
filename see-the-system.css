@@ -1005,7 +1005,7 @@
 
 .canvas-light .sts-demo-note { color: #4A5366; opacity: 0.75; }
 
-/* Tablet and below */
+/* Tablet — keep 3 across when there's room, drop the optional 3rd shot otherwise */
 @media (max-width: 860px) {
   .sts-shots-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1013,9 +1013,10 @@
     max-width: 540px;
   }
   .sts-shot-wide { grid-column: 1 / -1; }
+  .sts-shot-hide-mobile { display: none; }
 }
 
-/* Mobile */
+/* Mobile — single column */
 @media (max-width: 560px) {
   .sts-shots-grid {
     grid-template-columns: 1fr;
@@ -1030,4 +1031,5 @@
   .sts-shot-sub   { font-size: 13.5px; }
   .sts-demo-cta   { margin-top: 28px; flex-direction: column; gap: 8px; }
   .sts-demo-cta .btn { width: 100%; max-width: 320px; justify-content: center; }
+  .sts-shot-hide-mobile { display: none; }
 }

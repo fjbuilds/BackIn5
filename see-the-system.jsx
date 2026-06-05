@@ -790,7 +790,7 @@ function StsEnquiryDetail() {
             </div>
           </div>
 
-          <div ref={ph3Ref} className="sts-shot-card sts-reveal sts-reveal-d2 sts-shot-wide">
+          <div ref={ph3Ref} className="sts-shot-card sts-reveal sts-reveal-d2 sts-shot-hide-mobile">
             <div className="sts-phone-frame">
               <img src="assets/dashboard/07-expanded-with-media.png" alt="Enquiry detail with customer photo and specialist questions" loading="lazy" />
             </div>
