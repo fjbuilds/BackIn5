@@ -421,37 +421,37 @@ function StsQuoteAssistant() {
                     <span className="sts-fake-trust-item">Trustpilot</span>
                     <span className="sts-fake-trust-item">MyBuilder</span>
                   </div>
-                  {/* Embedded BackIn5 widget */}
+                  {/* Embedded BackIn5 widget — mirrors the live widget at backin5.org/demo.html */}
                   <div className="sts-widget">
                     <div className="sts-widget-header">
-                      <div className="sts-widget-avatar">
-                        <span className="sts-b5-mark">5</span>
+                      <div className="sts-widget-headleft">
+                        <span className="sts-widget-dot" />
+                        <span className="sts-widget-name">Get a Quote</span>
                       </div>
-                      <div className="sts-widget-meta">
-                        <div className="sts-widget-name">Get a Quote</div>
-                        <div className="sts-widget-online"><span className="sts-status-dot" />Online 24/7</div>
-                      </div>
+                      <span className="sts-widget-close" aria-hidden="true">×</span>
                     </div>
                     <div className="sts-widget-body">
-                      <div className="sts-wm sts-wm-bot">Hi - what type of job do you need a quote for?</div>
+                      <div className="sts-wm sts-wm-bot">Hi, thanks for getting in touch with Tradesman Ltd. I'll ask a few quick questions so we can get the right details over to the team.</div>
+                      <div className="sts-wm sts-wm-bot">What do you need help with?</div>
+                      <div className="sts-wm sts-wm-user">General repair</div>
+                      <div className="sts-wm sts-wm-bot">What is the postcode for the job?</div>
+                      <div className="sts-wm sts-wm-user">SW1A 1AA</div>
+                      <div className="sts-wm sts-wm-bot">How urgent is it?</div>
+                      <div className="sts-wm sts-wm-user">As soon as possible</div>
+                      <div className="sts-wm sts-wm-bot">What would you like to happen next?</div>
                       <div className="sts-widget-presets sts-presets-used">
-                        <span className="sts-preset-btn">Boiler repair</span>
-                        <span className="sts-preset-btn">Roof repair</span>
-                        <span className="sts-preset-btn">Rewire</span>
-                        <span className="sts-preset-btn">Extension</span>
+                        <span className="sts-preset-btn">Call me back</span>
+                        <span className="sts-preset-btn">Get a quote</span>
+                        <span className="sts-preset-btn">Request a visit</span>
+                        <span className="sts-preset-btn sts-preset-active">Book directly</span>
                       </div>
-                      <div className="sts-wm sts-wm-user">Boiler repair</div>
-                      <div className="sts-wm sts-wm-bot">Whereabouts are you based?</div>
-                      <div className="sts-wm sts-wm-user">Sheffield, S10</div>
-                      <div className="sts-wm sts-wm-bot">How old is the boiler?</div>
-                      <div className="sts-wm sts-wm-user">About 12 yrs, Worcester</div>
-                      <div className="sts-wm sts-wm-done">Got it - we will be back in touch within 5 mins ✅</div>
                     </div>
                     <div className="sts-widget-inputbar">
-                      <span className="sts-widget-input-placeholder">Type a message…</span>
+                      <span className="sts-widget-input-placeholder">Type here…</span>
                       <div className="sts-widget-send">
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                          <path d="M1 5h8M6 2l3 3-3 3" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="22" y1="2" x2="11" y2="13" />
+                          <polygon points="22 2 15 22 11 13 2 9 22 2" />
                         </svg>
                       </div>
                     </div>
@@ -465,47 +465,61 @@ function StsQuoteAssistant() {
             </div>
           </div>{/* end .sts-laptop */}
 
-            {/* Phone - sibling beside laptop */}
+            {/* Phone — calendar booking step, the moment a customer reserves a slot */}
             <div className="sts-mobile-badge">
             <div className="sts-mobile-phone">
               <div className="sts-mobile-notch" />
               <div className="sts-mobile-content">
                 <div className="sts-mobile-widget-header">
-                  <div className="sts-widget-avatar" style={{ width: '28px', height: '28px', flexShrink: 0 }}>
-                    <span className="sts-b5-mark">5</span>
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: '10px', fontWeight: 700, color: '#fff' }}>Get a Quote</div>
-                    <div style={{ fontSize: '9px', color: 'rgba(255,255,255,0.5)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <span className="sts-status-dot" style={{ width: '6px', height: '6px' }} />Online 24/7
+                  <span className="sts-widget-dot" />
+                  <div className="sts-mobile-widget-title">Get a Quote</div>
+                  <span className="sts-widget-close" aria-hidden="true">×</span>
+                </div>
+
+                <div className="sts-mobile-chat sts-mobile-chat-cal">
+                  <div className="sts-wm sts-wm-bot">Great - please choose an available time below.</div>
+
+                  <div className="sts-mini-cal">
+                    <div className="sts-mini-cal-head">
+                      <span className="sts-mini-cal-nav">‹</span>
+                      <span className="sts-mini-cal-month">June 2026</span>
+                      <span className="sts-mini-cal-nav">›</span>
+                    </div>
+                    <div className="sts-mini-cal-grid">
+                      {['M','T','W','T','F','S','S'].map((d, i) => (
+                        <span key={'h'+i} className="sts-mini-cal-dh">{d}</span>
+                      ))}
+                      {/* June 2026 starts on Monday — no padding cells */}
+                      {Array.from({length: 30}, (_, i) => {
+                        const day = i + 1
+                        const dow = i % 7 // 0=Mon
+                        const isPast = day < 22
+                        const isWeekend = dow >= 5
+                        const isSelected = day === 23
+                        let cls = 'sts-mini-cal-day'
+                        if (isSelected) cls += ' sel'
+                        else if (isPast || isWeekend) cls += ' off'
+                        return <span key={day} className={cls}>{day}</span>
+                      })}
                     </div>
                   </div>
-                </div>
-                <div className="sts-mobile-chat">
-                  <div className="sts-wm sts-wm-bot" style={{ fontSize: '9px' }}>Hi - what type of job?</div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', margin: '3px 0' }}>
-                    <span className="sts-preset-btn" style={{ fontSize: '8px' }}>Boiler repair</span>
-                    <span className="sts-preset-btn" style={{ fontSize: '8px' }}>Roof repair</span>
-                    <span className="sts-preset-btn" style={{ fontSize: '8px' }}>Rewire</span>
+
+                  <div className="sts-mini-cal-times-label">Choose a time:</div>
+                  <div className="sts-mini-cal-slots">
+                    <span className="sts-mini-cal-slot">9:00am</span>
+                    <span className="sts-mini-cal-slot">10:00am</span>
+                    <span className="sts-mini-cal-slot sel">11:00am</span>
+                    <span className="sts-mini-cal-slot">1:00pm</span>
+                    <span className="sts-mini-cal-slot">2:00pm</span>
+                    <span className="sts-mini-cal-slot">3:00pm</span>
                   </div>
-                  <div className="sts-wm sts-wm-user" style={{ fontSize: '9px' }}>Boiler repair</div>
-                  <div className="sts-wm sts-wm-bot" style={{ fontSize: '9px' }}>Where are you based?</div>
-                  <div className="sts-wm sts-wm-user" style={{ fontSize: '9px' }}>Sheffield, S10</div>
-                  <div className="sts-wm sts-wm-bot" style={{ fontSize: '9px' }}>How old is the boiler?</div>
-                  <div className="sts-wm sts-wm-user" style={{ fontSize: '9px' }}>12 yrs, Worcester</div>
-                  <div className="sts-wm sts-wm-done" style={{ fontSize: '8px' }}>Got it - back in 5 mins ✅</div>
-                </div>
-                <div className="sts-mobile-inputbar">
-                  <span style={{ fontSize: '9px', color: '#8b94a7', flex: 1 }}>Type a message…</span>
-                  <div className="sts-widget-send" style={{ width: '20px', height: '20px' }}>
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                      <path d="M1 5h8M6 2l3 3-3 3" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
+
+                  <div className="sts-mini-cal-confirm">Confirm - 23/06 at 11:00am</div>
+                  <div className="sts-mini-cal-skip">Skip for now - team will arrange</div>
                 </div>
               </div>
             </div>
-            <div className="sts-mobile-label">Mobile view</div>
+            <div className="sts-mobile-label">Calendar booking</div>
           </div>
          </div>{/* end .sts-devices */}
 

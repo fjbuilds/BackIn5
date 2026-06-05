@@ -1074,3 +1074,154 @@
   .sts-demo-cta .btn { width: 100%; max-width: 320px; justify-content: center; }
   .sts-shot-hide-mobile { display: none; }
 }
+
+/* ============================================================
+   Refined widget chrome — matches the real widget at backin5.org/demo.html
+   ============================================================ */
+.sts-widget-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 9px;
+  background: var(--accent);
+  padding: 10px 12px;
+}
+.sts-widget-headleft {
+  display: flex; align-items: center; gap: 8px;
+}
+.sts-widget-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.3);
+}
+.sts-widget-name { font-size: 12px; font-weight: 700; color: #fff; letter-spacing: -0.01em; }
+.sts-widget-close {
+  font-size: 16px;
+  color: rgba(255,255,255,0.85);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.sts-mobile-widget-header {
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 11px;
+  gap: 8px;
+}
+.sts-mobile-widget-title {
+  font-size: 11px; font-weight: 700; color: #fff;
+  flex: 1;
+}
+
+/* Bot bubble — soft blue to match the live widget */
+.sts-wm-bot { background: #eef1fb; color: #111827; }
+
+.sts-preset-active {
+  background: #2341A8 !important; color: #fff !important; border-color: #2341A8 !important;
+  opacity: 1 !important;
+}
+
+/* ─── Mini calendar (phone) ─── */
+.sts-mobile-chat-cal {
+  padding: 8px 10px 10px;
+  max-height: 360px;
+  overflow: visible;
+}
+
+.sts-mini-cal {
+  margin: 4px 0;
+  background: #fafbff;
+  border: 1px solid #e8edf8;
+  border-radius: 8px;
+  padding: 6px 6px 7px;
+}
+
+.sts-mini-cal-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 4px;
+  padding: 0 4px;
+}
+.sts-mini-cal-month {
+  font-size: 10px; font-weight: 700; color: #111827;
+}
+.sts-mini-cal-nav {
+  font-size: 13px; color: #2341A8;
+  width: 16px; height: 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 4px;
+  background: #eef1fb;
+  line-height: 1;
+}
+
+.sts-mini-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.sts-mini-cal-dh {
+  font-size: 7px;
+  font-weight: 700;
+  color: #8b94a7;
+  text-align: center;
+  padding: 1px 0 3px;
+  letter-spacing: 0.04em;
+}
+.sts-mini-cal-day {
+  aspect-ratio: 1;
+  display: flex; align-items: center; justify-content: center;
+  background: #eef1fb;
+  color: #111827;
+  font-size: 8px;
+  font-weight: 600;
+  border-radius: 3px;
+}
+.sts-mini-cal-day.off {
+  background: transparent;
+  color: #c4cadb;
+}
+.sts-mini-cal-day.sel {
+  background: #2341A8;
+  color: #fff;
+  font-weight: 800;
+}
+
+.sts-mini-cal-times-label {
+  font-size: 9px;
+  color: #6b7280;
+  font-weight: 600;
+  margin: 6px 2px 3px;
+}
+
+.sts-mini-cal-slots {
+  display: flex; flex-wrap: wrap; gap: 3px;
+}
+.sts-mini-cal-slot {
+  background: #fff;
+  border: 1px solid #dde3f5;
+  color: #374151;
+  border-radius: 4px;
+  font-size: 8px;
+  font-weight: 600;
+  padding: 2px 6px;
+}
+.sts-mini-cal-slot.sel {
+  background: #2341A8;
+  color: #fff;
+  border-color: #2341A8;
+}
+
+.sts-mini-cal-confirm {
+  margin-top: 7px;
+  background: #2341A8;
+  color: #fff;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 5px;
+  padding: 6px;
+}
+.sts-mini-cal-skip {
+  text-align: center;
+  font-size: 8px;
+  color: #8b94a7;
+  margin-top: 4px;
+  text-decoration: underline;
+}
