@@ -40,21 +40,22 @@ async function saveToDashboard(payload: EnquiryPayload): Promise<void> {
   if (payload.phone)               row.phone = payload.phone
   if (payload.email)               row.email = payload.email
   if (payload.postcode)            row.postcode = payload.postcode
-  if (payload.town)                row.area = payload.town
   if (payload.service_requested)   row.service_requested = payload.service_requested
   if (payload.action_tag)          row.action_tag = payload.action_tag
-  if (payload.preferred_contact_time) row.next_action = payload.preferred_contact_time
   if (payload.appointment_datetime) row.appointment_datetime = payload.appointment_datetime
 
-  const parts: string[] = []
-  if (payload.urgency)         parts.push(`Urgency: ${payload.urgency}`)
-  if (payload.booking_type)    parts.push(`Booking type: ${payload.booking_type}`)
-  if (payload.appointment_datetime) parts.push(`Requested appointment: ${payload.appointment_datetime}`)
-  if (payload.job_description) parts.push(payload.job_description)
+  // NEW — separate columns instead of stuffing into job_description
+  if (payload.town)                    row.town = payload.town
+  if (payload.urgency)                 row.urgency = payload.urgency
+  if (payload.preferred_contact_time)  row.preferred_contact_time = payload.preferred_contact_time
+  if (payload.enquiry_intent)          row.enquiry_intent = payload.enquiry_intent
+  if (payload.booking_requested !== undefined) row.booking_requested = payload.booking_requested
+  if (payload.booking_type)            row.booking_type = payload.booking_type
   if (payload.custom_answers && payload.custom_answers.length > 0) {
-    payload.custom_answers.forEach(a => parts.push(`${a.question_text}: ${a.answer}`))
+    row.custom_answers = payload.custom_answers
   }
-  if (parts.length > 0) row.job_description = parts.join('\n')
+
+  if (payload.job_description) row.job_description = payload.job_description
 
   // Store full payload for reference
   row.raw_payload = payload
