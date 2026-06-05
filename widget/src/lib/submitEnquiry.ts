@@ -44,8 +44,6 @@ async function saveToDashboard(payload: EnquiryPayload): Promise<void> {
   if (payload.service_requested)   row.service_requested = payload.service_requested
   if (payload.action_tag)          row.action_tag = payload.action_tag
   if (payload.preferred_contact_time) row.next_action = payload.preferred_contact_time
-  console.log('saveToDashboard media_url:', payload.media_url)
-  if (payload.media_url)           row.media_url = payload.media_url
   if (payload.appointment_datetime) row.appointment_datetime = payload.appointment_datetime
 
   const parts: string[] = []
@@ -61,9 +59,19 @@ async function saveToDashboard(payload: EnquiryPayload): Promise<void> {
   // Store full payload for reference
   row.raw_payload = payload
 
-  const { error } = await dashboardSupabase.from('enquiries').insert(row)
+  const { data: inserted, error } = await dashboardSupabase.from('enquiries').insert(row).select('id').single()
 
   if (error) {
     console.error('Dashboard Supabase insert failed:', error)
+    return
+  }
+
+  // Update media_url separately — avoids any trigger that clears it on insert
+  if (payload.media_url && inserted?.id) {
+    const { error: mediaError } = await dashboardSupabase
+      .from('enquiries')
+      .update({ media_url: payload.media_url })
+      .eq('id', inserted.id)
+    if (mediaError) console.error('media_url update failed:', mediaError)
   }
 }
