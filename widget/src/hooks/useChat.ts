@@ -63,6 +63,7 @@ export function useChat(config: BusinessConfig) {
     if (s === 'town')          return { type: 'text', placeholder: 'e.g. Manchester' }
     if (s === 'urgency')       return { type: 'options', options: URGENCY_OPTIONS }
     if (s === 'enquiry_intent') return { type: 'options', options: INTENT_OPTIONS }
+    if (s === 'booking_type')  return { type: 'options', options: ['Quote', 'Site visit', 'Callback'] }
     if (s === 'calendar')      return { type: 'calendar' }
     if (s === 'photo')         return { type: 'photo_choice' }
     if (s === 'photo_upload')  return { type: 'file_upload' }
@@ -107,6 +108,7 @@ export function useChat(config: BusinessConfig) {
     if (s === 'town')           return 'What town or city is the job in?'
     if (s === 'urgency')        return 'How urgent is it?'
     if (s === 'enquiry_intent') return 'What would you like to happen next?'
+    if (s === 'booking_type')    return 'What would you like to book?'
     if (s === 'calendar')       return 'Great - please choose an available time below.'
     if (s === 'photo')          return 'Would you like to upload any photos or videos?'
     if (s === 'photo_upload')   return 'Please select a photo or video to upload.'
@@ -132,8 +134,9 @@ export function useChat(config: BusinessConfig) {
     if (current === 'town')           return 'urgency'
     if (current === 'urgency')        return 'enquiry_intent'
     if (current === 'enquiry_intent') {
-      return answersRef.current.booking_requested ? 'calendar' : 'photo'
+      return answersRef.current.booking_requested ? 'booking_type' : 'photo'
     }
+    if (current === 'booking_type')   return 'calendar'
     if (current === 'calendar')       return 'photo'
     if (current === 'photo')          return firstCustomStep()
     if (current === 'photo_upload')   return firstCustomStep()
@@ -175,6 +178,7 @@ export function useChat(config: BusinessConfig) {
         enquiry_intent: a.enquiry_intent,
         action_tag: a.action_tag,
         booking_requested: a.booking_requested,
+        booking_type: a.booking_type,
         appointment_datetime: a.appointment_datetime,
         preferred_contact_time: a.preferred_contact_time,
         media_url: a.media_url,
@@ -245,6 +249,8 @@ export function useChat(config: BusinessConfig) {
       a.enquiry_intent = rawValue
       a.action_tag = intentToActionTag(rawValue)
       a.booking_requested = rawValue === "I'd like to book directly if available"
+    } else if (step === 'booking_type') {
+      a.booking_type = rawValue
     } else if (step.startsWith('custom_')) {
       const idx = parseInt(step.split('_')[1], 10)
       const q = customQuestions[idx]

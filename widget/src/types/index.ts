@@ -74,6 +74,7 @@ export interface EnquiryPayload {
   enquiry_intent?: string
   action_tag?: string
   booking_requested?: boolean
+  booking_type?: string
   appointment_datetime?: string
   job_description?: string
   preferred_contact_time?: string
@@ -98,6 +99,7 @@ export type FlowStepId =
   | 'town'
   | 'urgency'
   | 'enquiry_intent'
+  | 'booking_type'
   | 'calendar'
   | 'photo'
   | 'photo_upload'
@@ -118,6 +120,7 @@ export interface FlowAnswers {
   enquiry_intent?: string
   action_tag?: string
   booking_requested?: boolean
+  booking_type?: string
   appointment_datetime?: string
   first_name?: string
   last_name?: string

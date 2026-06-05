@@ -49,6 +49,7 @@ async function saveToDashboard(payload: EnquiryPayload): Promise<void> {
 
   const parts: string[] = []
   if (payload.urgency)         parts.push(`Urgency: ${payload.urgency}`)
+  if (payload.booking_type)    parts.push(`Booking type: ${payload.booking_type}`)
   if (payload.appointment_datetime) parts.push(`Requested appointment: ${payload.appointment_datetime}`)
   if (payload.job_description) parts.push(payload.job_description)
   if (payload.custom_answers && payload.custom_answers.length > 0) {
