@@ -59,19 +59,32 @@ async function saveToDashboard(payload: EnquiryPayload): Promise<void> {
   // Store full payload for reference
   row.raw_payload = payload
 
-  const { data: inserted, error } = await dashboardSupabase.from('enquiries').insert(row).select('id').single()
+  const { error } = await dashboardSupabase.from('enquiries').insert(row)
 
   if (error) {
     console.error('Dashboard Supabase insert failed:', error)
     return
   }
 
-  // Update media_url separately — avoids any trigger that clears it on insert
-  if (payload.media_url && inserted?.id) {
-    const { error: mediaError } = await dashboardSupabase
+  // Update media_url separately on the most recently inserted row for this trade
+  if (payload.media_url) {
+    const { data: latest, error: fetchError } = await dashboardSupabase
       .from('enquiries')
-      .update({ media_url: payload.media_url })
-      .eq('id', inserted.id)
-    if (mediaError) console.error('media_url update failed:', mediaError)
+      .select('id')
+      .eq('trade_id', payload.dashboard_trade_id)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single()
+
+    console.log('media_url update — latest row:', latest, fetchError)
+
+    if (latest?.id) {
+      const { error: mediaError } = await dashboardSupabase
+        .from('enquiries')
+        .update({ media_url: payload.media_url })
+        .eq('id', latest.id)
+      if (mediaError) console.error('media_url update failed:', mediaError)
+      else console.log('media_url updated successfully')
+    }
   }
 }
