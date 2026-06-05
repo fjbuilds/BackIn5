@@ -979,11 +979,52 @@
 
 .canvas-dark .sts-shot-sub { color: #C7CDD9; opacity: 1; }
 
-/* Channels result: centred small phone */
+/* Channels result: centred text summary (replaces the redundant small phone) */
 .sts-channels-shot {
   display: flex;
   justify-content: center;
   margin-bottom: 16px;
+}
+
+.sts-channels-text {
+  max-width: 560px;
+  margin: 0 auto 14px;
+  text-align: center;
+  padding: 22px 22px 20px;
+  background: linear-gradient(180deg, rgba(35, 65, 168, 0.10), rgba(35, 65, 168, 0.04));
+  border: 1px solid rgba(35, 65, 168, 0.20);
+  border-radius: 16px;
+}
+
+.sts-channels-headline {
+  font-size: 18px;
+  font-weight: 800;
+  color: #F5F7FA;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.canvas-light .sts-channels-headline { color: #0E1116; }
+
+.sts-channels-bullets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 8px;
+  font-size: 13.5px;
+  color: #C7CDD9;
+  line-height: 1.5;
+}
+
+.canvas-light .sts-channels-bullets { color: #4A5366; }
+
+.sts-bullet-sep { opacity: 0.4; }
+
+@media (max-width: 520px) {
+  .sts-channels-text { padding: 18px 16px; }
+  .sts-channels-headline { font-size: 16px; }
+  .sts-channels-bullets { font-size: 12.5px; gap: 4px 6px; }
 }
 
 /* Try the demo CTA */

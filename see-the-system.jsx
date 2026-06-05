@@ -581,11 +581,20 @@ function StsChannels() {
             <div className="sts-funnel-line" />
           </div>
 
-          {/* Result — real dashboard screenshot in a phone frame */}
+          {/* Result — clean text summary, the dashboard is showcased in the next band */}
           <div className="sts-channels-result">
-            <div className="sts-channels-shot">
-              <div className="sts-phone-frame sts-phone-frame-sm">
-                <img src="assets/dashboard/01-main-overview.png" alt="Every enquiry arrives organised on your BackIn5 dashboard" loading="lazy" />
+            <div className="sts-channels-text">
+              <div className="sts-channels-headline">
+                One organised enquiry in your dashboard
+              </div>
+              <div className="sts-channels-bullets">
+                <span>Name &amp; contact</span>
+                <span className="sts-bullet-sep">·</span>
+                <span>Postcode</span>
+                <span className="sts-bullet-sep">·</span>
+                <span>Photos</span>
+                <span className="sts-bullet-sep">·</span>
+                <span>Your specialist questions answered</span>
               </div>
             </div>
             <div className="sts-result-note">
@@ -757,7 +766,7 @@ function StsBoard() {
 // SECTION: Full Detail View
 // ============================================================
 function StsEnquiryDetail() {
-  const headRef = useReveal(), ph1Ref = useReveal(), ph2Ref = useReveal(), ph3Ref = useReveal();
+  const headRef = useReveal(), ph1Ref = useReveal(), ph2Ref = useReveal();
   return (
     <section className="canvas-light band" id="sts-enquiry-card">
       <div className="container">
@@ -769,7 +778,7 @@ function StsEnquiryDetail() {
           </p>
         </div>
 
-        <div className="sts-shots-grid">
+        <div className="sts-shots-grid sts-shots-grid-2">
           <div ref={ph1Ref} className="sts-shot-card sts-reveal">
             <div className="sts-phone-frame">
               <img src="assets/dashboard/02-expanded-card.png" alt="Expanded enquiry card with call, SMS, WhatsApp, voice note buttons" loading="lazy" />
@@ -787,16 +796,6 @@ function StsEnquiryDetail() {
             <div className="sts-shot-copy">
               <h3 className="sts-shot-title">Stop losing jobs to silence</h3>
               <p className="sts-shot-sub">The dashboard chases for you. Quotes to follow up. Bookings to confirm. Customers to ask for a review.</p>
-            </div>
-          </div>
-
-          <div ref={ph3Ref} className="sts-shot-card sts-reveal sts-reveal-d2 sts-shot-hide-mobile">
-            <div className="sts-phone-frame">
-              <img src="assets/dashboard/07-expanded-with-media.png" alt="Enquiry detail with customer photo and specialist questions" loading="lazy" />
-            </div>
-            <div className="sts-shot-copy">
-              <h3 className="sts-shot-title">Your questions, their answers</h3>
-              <p className="sts-shot-sub">Custom questions you set on the widget show up in amber - so you know which answers came from you asking.</p>
             </div>
           </div>
         </div>
