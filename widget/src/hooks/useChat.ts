@@ -163,6 +163,7 @@ export function useChat(config: BusinessConfig) {
   async function doSubmit() {
     await queueBotMessage('Sending your enquiry…', 300)
     const a = answersRef.current
+    console.log('doSubmit media_url:', a.media_url)
     const fullName = [a.first_name, a.last_name].filter(Boolean).join(' ')
     try {
       await submitEnquiry({

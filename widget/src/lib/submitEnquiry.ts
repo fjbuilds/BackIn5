@@ -44,6 +44,7 @@ async function saveToDashboard(payload: EnquiryPayload): Promise<void> {
   if (payload.service_requested)   row.service_requested = payload.service_requested
   if (payload.action_tag)          row.action_tag = payload.action_tag
   if (payload.preferred_contact_time) row.next_action = payload.preferred_contact_time
+  console.log('saveToDashboard media_url:', payload.media_url)
   if (payload.media_url)           row.media_url = payload.media_url
   if (payload.appointment_datetime) row.appointment_datetime = payload.appointment_datetime
 
