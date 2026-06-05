@@ -719,7 +719,7 @@ function BoardCol({ col, delay }) {
 }
 
 function StsBoard() {
-  const headRef = useReveal();
+  const headRef = useReveal(), ph1Ref = useReveal(), ph2Ref = useReveal(), ctaRef = useReveal();
   return (
     <section className="canvas-dark band" id="sts-enquiry-board">
       <div className="container">
@@ -727,11 +727,37 @@ function StsBoard() {
           <span className="eyebrow on-dark">Your Live Dashboard</span>
           <h2 className="display">Every job, in one place</h2>
           <p className="lead">
-            Every customer gets a bespoke live dashboard - a real-time view of every enquiry, where it stands, and what needs action next. Built around your business, updated automatically.
+            A real-time view of every enquiry - colour-coded by what needs doing next, and ready to act on with one tap.
           </p>
         </div>
-        <div className="sts-board-grid">
-          {BOARD_COLS.map((col, i) => <BoardCol key={col.id} col={col} delay={i * 0.1} />)}
+
+        <div className="sts-shots-grid">
+          <div ref={ph1Ref} className="sts-shot-card sts-reveal">
+            <div className="sts-phone-frame">
+              <img src="assets/dashboard/01-main-overview.png" alt="BackIn5 dashboard - enquiry list grouped by action tag" loading="lazy" />
+            </div>
+            <div className="sts-shot-copy">
+              <h3 className="sts-shot-title">Every enquiry, already sorted</h3>
+              <p className="sts-shot-sub">Grouped by what needs doing - calls back, quotes, visits, booked jobs. Urgency badge top-right of every card.</p>
+            </div>
+          </div>
+
+          <div ref={ph2Ref} className="sts-shot-card sts-reveal sts-reveal-d1">
+            <div className="sts-phone-frame">
+              <img src="assets/dashboard/04-map-view.png" alt="BackIn5 dashboard - map view with colour-coded job pins" loading="lazy" />
+            </div>
+            <div className="sts-shot-copy">
+              <h3 className="sts-shot-title">Plan your day by area</h3>
+              <p className="sts-shot-sub">Every job pinned on the map. Cluster jobs in the same area into one efficient run. Less driving, more billable hours.</p>
+            </div>
+          </div>
+        </div>
+
+        <div ref={ctaRef} className="sts-demo-cta sts-reveal">
+          <a href="https://fjbuilds.github.io/backin5-pwa/?demo" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-arrow">
+            See the dashboard yourself <IconArrowRight size={16} />
+          </a>
+          <span className="sts-demo-note">Live demo. No signup. Have a click around.</span>
         </div>
       </div>
     </section>
@@ -743,9 +769,62 @@ function StsBoard() {
 // SECTION: Full Detail View
 // ============================================================
 function StsEnquiryDetail() {
-  const headRef = useReveal(), cardRef = useReveal();
+  const headRef = useReveal(), ph1Ref = useReveal(), ph2Ref = useReveal(), ph3Ref = useReveal();
   return (
     <section className="canvas-light band" id="sts-enquiry-card">
+      <div className="container">
+        <div ref={headRef} className="sec-head center sts-reveal">
+          <span className="eyebrow">One-tap Actions</span>
+          <h2 className="display">Everything you need - one tap from action</h2>
+          <p className="lead">
+            Tap any enquiry to open it inline. Call, message, book and chase straight from the card. Auto follow-ups make sure nothing slips.
+          </p>
+        </div>
+
+        <div className="sts-shots-grid">
+          <div ref={ph1Ref} className="sts-shot-card sts-reveal">
+            <div className="sts-phone-frame">
+              <img src="assets/dashboard/02-expanded-card.png" alt="Expanded enquiry card with call, SMS, WhatsApp, voice note buttons" loading="lazy" />
+            </div>
+            <div className="sts-shot-copy">
+              <h3 className="sts-shot-title">Call, message, book - inline</h3>
+              <p className="sts-shot-sub">No screen jumping. Open the enquiry, see the whole picture, act on it - all from the same place.</p>
+            </div>
+          </div>
+
+          <div ref={ph2Ref} className="sts-shot-card sts-reveal sts-reveal-d1">
+            <div className="sts-phone-frame">
+              <img src="assets/dashboard/03-followups.png" alt="Follow-ups tab with overdue and today reminders" loading="lazy" />
+            </div>
+            <div className="sts-shot-copy">
+              <h3 className="sts-shot-title">Stop losing jobs to silence</h3>
+              <p className="sts-shot-sub">The dashboard chases for you. Quotes to follow up. Bookings to confirm. Customers to ask for a review.</p>
+            </div>
+          </div>
+
+          <div ref={ph3Ref} className="sts-shot-card sts-reveal sts-reveal-d2 sts-shot-wide">
+            <div className="sts-phone-frame">
+              <img src="assets/dashboard/07-expanded-with-media.png" alt="Enquiry detail with customer photo and specialist questions" loading="lazy" />
+            </div>
+            <div className="sts-shot-copy">
+              <h3 className="sts-shot-title">Your questions, their answers</h3>
+              <p className="sts-shot-sub">Custom questions you set on the widget show up in amber - so you know which answers came from you asking.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
+// OLD: fake detail-card mockup — kept for easy revert if preferred
+// (no longer rendered)
+// ============================================================
+function StsEnquiryDetailLegacy() {
+  const headRef = useReveal(), cardRef = useReveal();
+  return (
+    <section className="canvas-light band" id="sts-enquiry-card-legacy">
       <div className="container">
         <div ref={headRef} className="sec-head center sts-reveal">
           <span className="eyebrow">Full Detail View</span>
