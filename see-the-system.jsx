@@ -581,28 +581,16 @@ function StsChannels() {
             <div className="sts-funnel-line" />
           </div>
 
-          {/* Result */}
+          {/* Result — real dashboard screenshot in a phone frame */}
           <div className="sts-channels-result">
-            <div className="sts-result-card">
-              <div className="sts-result-header">
-                <span className="sts-status-dot" style={{ background: 'var(--ok)' }} />
-                <span className="sts-result-title">New Quote - Dashboard</span>
-                <span className="sts-result-time">Just now</span>
-              </div>
-              <div className="sts-result-body">
-                <div className="sts-result-row"><strong>Customer:</strong> Mike T, SE London</div>
-                <div className="sts-result-row"><strong>Job:</strong> Flat roof replacement, 6x4m garage</div>
-                <div className="sts-result-row"><strong>Contact:</strong> 07XXX XXX XXX</div>
-                <div className="sts-result-row"><strong>Source:</strong> Website enquiry</div>
-              </div>
-              <div className="sts-result-actions">
-                <span className="btn btn-primary btn-sm">View Quote</span>
-                <span className="btn btn-ghost-light btn-sm">Call Back</span>
+            <div className="sts-channels-shot">
+              <div className="sts-phone-frame sts-phone-frame-sm">
+                <img src="assets/dashboard/01-main-overview.png" alt="Every enquiry arrives organised on your BackIn5 dashboard" loading="lazy" />
               </div>
             </div>
             <div className="sts-result-note">
               <IconCheck size={14} />
-              <span>If a customer does not know an answer, they can skip - you will not lose the enquiry</span>
+              <span>Every enquiry lands in one place - already sorted by what needs doing next</span>
             </div>
           </div>
         </div>
@@ -731,7 +719,7 @@ function StsBoard() {
           </p>
         </div>
 
-        <div className="sts-shots-grid">
+        <div className="sts-shots-grid sts-shots-grid-2">
           <div ref={ph1Ref} className="sts-shot-card sts-reveal">
             <div className="sts-phone-frame">
               <img src="assets/dashboard/01-main-overview.png" alt="BackIn5 dashboard - enquiry list grouped by action tag" loading="lazy" />
