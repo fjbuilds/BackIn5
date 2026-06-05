@@ -251,6 +251,9 @@ export function useChat(config: BusinessConfig) {
       a.booking_requested = rawValue === "I'd like to book directly if available"
     } else if (step === 'booking_type') {
       a.booking_type = rawValue
+      if (rawValue === 'Quote')      a.action_tag = 'Quote Required'
+      else if (rawValue === 'Site visit') a.action_tag = 'Visit Required'
+      else if (rawValue === 'Callback')   a.action_tag = 'Call Back'
     } else if (step.startsWith('custom_')) {
       const idx = parseInt(step.split('_')[1], 10)
       const q = customQuestions[idx]
