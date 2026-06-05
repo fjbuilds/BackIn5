@@ -307,7 +307,7 @@ export function useChat(config: BusinessConfig) {
     const path = `enquiries/${Date.now()}.${ext}`
     const { data, error } = await dashboardSupabase.storage
       .from('enquiry-media')
-      .upload(path, file, { upsert: true })
+      .upload(path, file)
 
     if (error) {
       console.error('Photo upload failed:', error)
