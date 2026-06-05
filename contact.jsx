@@ -4,14 +4,29 @@
 // Calendly popup overlay
 function CalendlyPopup({ onClose }) {
   const handleBackdrop = (e) => { if (e.target === e.currentTarget) onClose(); };
+  // Match the iframe height to the available viewport on small phones
+  const [iframeH, setIframeH] = React.useState(580);
   React.useEffect(() => {
     const fn = (e) => { if (e.key === 'Escape') onClose(); };
-    document.addEventListener('keydown', fn);
-    return () => document.removeEventListener('keydown', fn);
+    const resize = () => {
+      const vh = window.innerHeight;
+      // Reserve room for close button + safe areas; iframe fills the rest
+      setIframeH(Math.max(420, Math.min(vh - 110, 720)));
+    };
+    resize();
+    window.addEventListener('keydown', fn);
+    window.addEventListener('resize', resize);
+    return () => {
+      window.removeEventListener('keydown', fn);
+      window.removeEventListener('resize', resize);
+    };
   }, []);
   return (
-    <div className="hiw-popup-backdrop" onClick={handleBackdrop} style={{ zIndex: 9999 }}>
-      <div className="hiw-popup-card" style={{ maxWidth: 700, width: '95vw', padding: '24px 20px 20px', position: 'relative' }}>
+    <div className="hiw-popup-backdrop" onClick={handleBackdrop} style={{ zIndex: 9999, padding: 0 }}>
+      <div
+        className="hiw-popup-card calendly-card"
+        style={{ maxWidth: 700, width: '100%', padding: '20px 14px 14px', position: 'relative', borderRadius: 16 }}
+      >
         <button className="hiw-popup-close" onClick={onClose} aria-label="Close">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
             <path d="M2 2l14 14M16 2L2 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -22,7 +37,7 @@ function CalendlyPopup({ onClose }) {
           title="Book a chat with BackIn5"
           frameBorder="0"
           allow="camera; microphone; autoplay; encrypted-media; fullscreen"
-          style={{ width: '100%', height: 580, border: 0, borderRadius: 8 }}>
+          style={{ width: '100%', height: iframeH, border: 0, borderRadius: 8 }}>
         </iframe>
       </div>
     </div>
@@ -56,7 +71,20 @@ function HowItWorksPopup({ onClose }) {
           <div className="hiw-popup-point"><span>→</span> Every enquiry lands in your live dashboard</div>
           <div className="hiw-popup-point"><span>→</span> Pick the right plan and get set up in 48 hrs</div>
         </div>
-        <a href="see-the-system.html" className="btn btn-primary btn-arrow hiw-popup-cta">
+        <a
+          href="see-the-system.html"
+          className="btn btn-primary btn-arrow hiw-popup-cta"
+          onClick={(e) => {
+            // Stop bubbling to the backdrop so its click handler can't
+            // intercept on iOS Safari, and force-navigate as a safety net
+            // (anchor tags sometimes fail to fire inside fixed overlays
+            // with backdrop-filter on older iOS versions).
+            e.stopPropagation();
+            if (typeof window !== 'undefined') {
+              setTimeout(() => { window.location.href = 'see-the-system.html'; }, 0);
+            }
+          }}
+        >
           See the full walkthrough <IconArrowRight size={16} />
         </a>
         <button onClick={onClose} className="hiw-popup-dismiss">No thanks, I'll look later</button>

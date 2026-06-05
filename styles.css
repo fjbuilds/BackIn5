@@ -1414,8 +1414,19 @@ html { scroll-behavior: smooth; }
   color: rgba(234,236,241,0.45);
   text-decoration: underline;
   text-underline-offset: 2px;
+  /* Larger tap target on mobile without changing typographic weight */
+  padding: 8px 4px;
+  display: inline-block;
 }
 .footer-terms-link:hover { color: rgba(234,236,241,0.75); }
+
+/* Footer column links - more generous tap target on mobile */
+@media (max-width: 768px) {
+  .footer-col a {
+    display: inline-block;
+    padding: 6px 0;
+  }
+}
 
 .footer-base {
   margin-top: 56px;
@@ -3367,6 +3378,13 @@ section[id] { scroll-margin-top: 80px; }
   cursor: pointer;
   transition: background 200ms ease, width 200ms ease;
   padding: 0;
+  /* Expand the hit area to 44px tall on mobile without growing the visual dot */
+  position: relative;
+}
+.panel-dot::before {
+  content: '';
+  position: absolute;
+  inset: -20px -6px;
 }
 .panel-dot:hover { background: rgba(255,255,255,0.25); }
 .panel-dot.active { background: rgb(52, 80, 179); width: 32px; }
