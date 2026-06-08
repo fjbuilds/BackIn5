@@ -626,7 +626,7 @@ function Footer() {
             <div className="footer-col-ttl">Explore</div>
             <ul>
               <li><a href="#built-for">Built for</a></li>
-              <li><a href="#how">How it works</a></li>
+              <li><a href="see-the-system.html">How it works</a></li>
               <li><a href="#compare">Comparison</a></li>
               <li><a href="#pricing">Pricing</a></li>
               <li><a href="#faqs">FAQs</a></li>
@@ -636,7 +636,7 @@ function Footer() {
         </div>
         <div className="footer-base">
           <span>© 2026 BackIn5 Ltd · Registered in England · Made for trades.</span>
-          <span><a href="terms.html" className="footer-terms-link">Terms</a> · hello@backin5.org</span>
+          <span><a href="terms.html" target="_blank" rel="noopener" className="footer-terms-link">Terms</a> · hello@backin5.org</span>
         </div>
       </div>
     </footer>);

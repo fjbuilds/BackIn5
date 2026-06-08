@@ -4009,7 +4009,13 @@ section[id] { scroll-margin-top: 80px; }
 .chatbub {
   position: fixed; bottom: 24px; right: 24px; z-index: 9000;
   display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+  /* Wrapper itself is transparent to clicks - only the launcher button + an
+     open panel should catch taps. Without this, the invisible closed panel
+     (which still occupies 320x470px) blocks taps on whatever sits below it
+     in the page (e.g. the Get Started buttons on mobile). */
+  pointer-events: none;
 }
+.chatbub > * { pointer-events: auto; }
 
 /* Panel */
 .chatbub-panel {

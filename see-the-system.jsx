@@ -110,7 +110,7 @@ function StsFooter() {
         </div>
         <div className="footer-base">
           <span>© 2026 BackIn5 Ltd · Registered in England · Made for trades.</span>
-          <span><a href="terms.html" className="footer-terms-link">Terms</a> · hello@backin5.org</span>
+          <span><a href="terms.html" target="_blank" rel="noopener" className="footer-terms-link">Terms</a> · hello@backin5.org</span>
         </div>
       </div>
     </footer>
