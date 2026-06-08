@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Payment - BackIn5</title>
-  <meta name="description" content="Complete your BackIn5 setup with a quick payment - we'll have you live within 48 hours." />
+  <meta name="description" content="Complete your BackIn5 setup - we'll have you live within 48 hours." />
   <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; }
@@ -40,7 +40,7 @@
     .pay-wrap {
       max-width: 560px;
       margin: 0 auto;
-      padding: 48px 24px 80px;
+      padding: 40px 24px 64px;
     }
     .pay-eyebrow {
       font-size: 12px;
@@ -50,58 +50,103 @@
       margin-bottom: 12px;
     }
     h1 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 600;
-      font-size: clamp(28px, 5vw, 38px);
+      font-weight: 700;
+      font-size: clamp(26px, 5vw, 34px);
       line-height: 1.15;
       letter-spacing: -0.02em;
-      margin: 0 0 16px;
+      margin: 0 0 12px;
       color: #fff;
     }
     .pay-lead {
       font-size: 16px;
       line-height: 1.55;
       color: rgba(234,236,241,0.7);
-      margin: 0 0 32px;
+      margin: 0 0 28px;
     }
 
-    /* Stripe slot — replace the inner contents with your Stripe Payment Link
-       iframe / Buy Button / Checkout redirect once configured. */
-    .stripe-slot {
+    .summary {
       background: #171B22;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 14px;
-      padding: 32px 24px;
-      text-align: center;
+      padding: 22px;
+      margin-bottom: 24px;
     }
-    .stripe-slot p {
-      color: rgba(234,236,241,0.6);
-      font-size: 14px;
-      line-height: 1.6;
-      margin: 0 0 20px;
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .stripe-slot .btn {
+    .summary-row:last-child { border-bottom: 0; }
+    .summary-row .label {
+      font-size: 13px;
+      color: rgba(234,236,241,0.55);
+      letter-spacing: 0.02em;
+    }
+    .summary-row .value {
+      font-size: 15px;
+      color: #fff;
+      font-weight: 600;
+      text-align: right;
+    }
+    .summary-row.total .label { color: rgba(234,236,241,0.85); font-size: 14px; }
+    .summary-row.total .value { font-size: 22px; color: #fff; letter-spacing: -0.01em; }
+
+    .cta {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
+      width: 100%;
       background: #2341A8;
       color: #fff;
       text-decoration: none;
       font-weight: 600;
-      font-size: 15px;
-      padding: 14px 28px;
+      font-size: 16px;
+      padding: 16px 28px;
       border-radius: 100px;
       border: 0;
       cursor: pointer;
       transition: background 140ms ease;
     }
-    .stripe-slot .btn:hover { background: #1c378f; }
+    .cta:hover { background: #1c378f; }
+    .cta-note {
+      margin: 14px 0 0;
+      text-align: center;
+      font-size: 12.5px;
+      color: rgba(234,236,241,0.5);
+    }
+
+    .next-steps {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .next-steps h3 {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(234,236,241,0.55);
+      margin: 0 0 14px;
+      font-weight: 600;
+    }
+    .next-steps ol {
+      margin: 0;
+      padding-left: 20px;
+      color: rgba(234,236,241,0.78);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .next-steps ol li { margin-bottom: 6px; }
+    .next-steps strong { color: #fff; }
 
     .pay-meta {
       margin-top: 32px;
       display: flex;
       flex-wrap: wrap;
-      gap: 16px 24px;
+      gap: 12px 20px;
       justify-content: center;
       font-size: 12.5px;
       color: rgba(234,236,241,0.5);
@@ -111,6 +156,9 @@
       text-decoration: underline;
     }
     .pay-meta a:hover { color: #fff; }
+
+    .fallback h1 { color: #fff; }
+    .fallback .summary { display: none; }
   </style>
 </head>
 <body>
@@ -119,36 +167,167 @@
     <a href="index.html">← Back to site</a>
   </div>
 
-  <main class="pay-wrap">
-    <div class="pay-eyebrow">Step 2 of 2 · Payment</div>
-    <h1>Almost there — secure your setup.</h1>
-    <p class="pay-lead">
-      Your details have been received. Pay your setup fee below and we'll have you
-      live within 48 hours. You'll get a receipt by email straight after.
-    </p>
+  <main class="pay-wrap" id="pay-wrap">
+    <!-- Filled by JS based on ?plan= -->
+  </main>
 
-    <!--
-      ▼▼▼ STRIPE GOES HERE ▼▼▼
-      Replace the contents of .stripe-slot with one of:
-        - Stripe Payment Link button (<a class="btn" href="https://buy.stripe.com/...">)
-        - Stripe Buy Button (<stripe-buy-button buy-button-id="..." publishable-key="...">)
-        - Stripe Checkout redirect via JS
-      In Stripe, set the success_url / after_payment URL to:
-        https://backin5.org/welcome.html
-      so the user lands on the existing thank-you page after paying.
-    -->
-    <div class="stripe-slot">
-      <p>Payment is being set up. For now, please email <a href="mailto:hello@backin5.org" style="color:#fff">hello@backin5.org</a> and we'll send your invoice.</p>
-      <a class="btn" href="welcome.html">Continue →</a>
-    </div>
+  <script>
+    // ─── Plan config ──────────────────────────────────────────────
+    // Update these URLs when you go live (copy each link in Stripe
+    // via ··· → Copy to live mode, then paste the new URLs here).
+    const PLANS = {
+      smart_3mo: {
+        tier: 'Smart Enquiry Handling',
+        monthly: '£199 / month',
+        term: 'Monthly rolling (3+ months)',
+        dueNow: '£99 setup fee',
+        dueNowAmount: 99,
+        payLink: 'https://buy.stripe.com/4gM9AT7bb4D308Fa9Z08g02',
+      },
+      smart_6mo: {
+        tier: 'Smart Enquiry Handling',
+        monthly: '£199 / month',
+        term: '6-month commitment',
+        dueNow: '£0 — setup fee waived',
+        dueNowAmount: 0,
+        payLink: null, // no payment needed
+      },
+      full_3mo: {
+        tier: 'Full Inbound Desk',
+        monthly: '£349 / month',
+        term: 'Monthly rolling (3+ months)',
+        dueNow: '£149 setup fee',
+        dueNowAmount: 149,
+        payLink: 'https://buy.stripe.com/fZubJ16774D31cJ3LB08g03',
+      },
+      full_6mo: {
+        tier: 'Full Inbound Desk',
+        monthly: '£349 / month',
+        term: '6-month commitment',
+        dueNow: '£0 — setup fee waived',
+        dueNowAmount: 0,
+        payLink: null,
+      },
+    };
 
-    <div class="pay-meta">
+    // ─── Render ───────────────────────────────────────────────────
+    const params = new URLSearchParams(window.location.search);
+    const planKey = (params.get('plan') || '').toLowerCase();
+    const plan = PLANS[planKey];
+    const wrap = document.getElementById('pay-wrap');
+
+    if (!plan) {
+      // Fallback when the URL is missing or wrong
+      wrap.classList.add('fallback');
+      wrap.innerHTML = `
+        <div class="pay-eyebrow">Almost there</div>
+        <h1>We've received your details.</h1>
+        <p class="pay-lead">
+          We couldn't read your selected plan from the link, but no problem —
+          email <a href="mailto:hello@backin5.org" style="color:#fff">hello@backin5.org</a>
+          and we'll send you a tailored invoice and get your setup started.
+        </p>
+        <a class="cta" href="welcome.html">Continue →</a>
+      `;
+    } else if (plan.dueNowAmount === 0) {
+      // 6-month commitment — no setup fee, go straight to welcome
+      wrap.innerHTML = `
+        <div class="pay-eyebrow">Step 2 of 2 · You're all set</div>
+        <h1>Nothing to pay today.</h1>
+        <p class="pay-lead">
+          You've chosen the <strong>6-month commitment</strong> on
+          <strong>${plan.tier}</strong> — your setup fee is waived. We'll
+          have you live within 48 hours, and monthly billing starts only once
+          your dashboard is fully set up and you've signed off.
+        </p>
+
+        <div class="summary">
+          <div class="summary-row">
+            <span class="label">Plan</span>
+            <span class="value">${plan.tier}</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Term</span>
+            <span class="value">${plan.term}</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Monthly</span>
+            <span class="value">${plan.monthly}</span>
+          </div>
+          <div class="summary-row total">
+            <span class="label">Due now</span>
+            <span class="value">£0</span>
+          </div>
+        </div>
+
+        <a class="cta" href="welcome.html?plan=${planKey}">Continue →</a>
+        <p class="cta-note">No card needed today.</p>
+
+        <div class="next-steps">
+          <h3>What happens next</h3>
+          <ol>
+            <li>We'll <strong>configure your dashboard</strong> and embed the Quote Assistant on your site within 48 hours.</li>
+            <li>You'll get a <strong>walkthrough call</strong> to confirm everything is set up exactly how you want it.</li>
+            <li>Once you sign off, your <strong>first monthly payment</strong> is collected and your dashboard goes live.</li>
+          </ol>
+        </div>
+      `;
+    } else {
+      // Monthly rolling — pay setup fee now via Stripe
+      wrap.innerHTML = `
+        <div class="pay-eyebrow">Step 2 of 2 · Setup fee</div>
+        <h1>One-off setup fee, then you're done.</h1>
+        <p class="pay-lead">
+          Pay your setup fee below and we'll get your dashboard built within
+          48 hours. Monthly billing starts only once your setup is complete
+          and you've signed off — not today.
+        </p>
+
+        <div class="summary">
+          <div class="summary-row">
+            <span class="label">Plan</span>
+            <span class="value">${plan.tier}</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Term</span>
+            <span class="value">${plan.term}</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Monthly (starts after onboarding)</span>
+            <span class="value">${plan.monthly}</span>
+          </div>
+          <div class="summary-row total">
+            <span class="label">Due now</span>
+            <span class="value">£${plan.dueNowAmount}</span>
+          </div>
+        </div>
+
+        <a class="cta" href="${plan.payLink}">Pay £${plan.dueNowAmount} setup fee →</a>
+        <p class="cta-note">Secured by Stripe. You'll get a receipt by email.</p>
+
+        <div class="next-steps">
+          <h3>What happens next</h3>
+          <ol>
+            <li>Pay the setup fee — takes about 30 seconds.</li>
+            <li>We <strong>configure your dashboard</strong> and embed the Quote Assistant on your site within 48 hours.</li>
+            <li>You'll get a <strong>walkthrough call</strong> to confirm everything is set up exactly how you want it.</li>
+            <li>Once you sign off, your <strong>${plan.monthly}</strong> billing starts.</li>
+          </ol>
+        </div>
+      `;
+    }
+
+    // Footer meta (always shown)
+    const meta = document.createElement('div');
+    meta.className = 'pay-meta';
+    meta.innerHTML = `
       <span>Secured by Stripe</span>
       <span>•</span>
       <a href="terms.html" target="_blank" rel="noopener">Terms</a>
       <a href="privacy.html" target="_blank" rel="noopener">Privacy</a>
       <a href="mailto:hello@backin5.org">Contact</a>
-    </div>
-  </main>
+    `;
+    wrap.appendChild(meta);
+  </script>
 </body>
 </html>
