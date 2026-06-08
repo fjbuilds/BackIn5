@@ -61,8 +61,19 @@
       font-size: 16px;
       line-height: 1.55;
       color: rgba(234,236,241,0.7);
+      margin: 0 0 16px;
+    }
+    .pay-note {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: rgba(234,236,241,0.6);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 12px 14px;
       margin: 0 0 28px;
     }
+    .pay-note strong { color: #fff; }
 
     .summary {
       background: #171B22;
@@ -389,6 +400,12 @@
           for the 6-month minimum term. We capture your card now but don't
           charge it today. Billing only starts once your dashboard is set up
           and you've signed off.
+        </p>
+        <p class="pay-note">
+          <strong>Heads up</strong> — on the next page (Stripe), you'll see
+          a short "free trial" notice. That's just how Stripe labels the
+          £0 hold while we get your dashboard built. You won't be charged
+          today, and we set your billing start date manually once you sign off.
         </p>
 
         <div class="summary">
