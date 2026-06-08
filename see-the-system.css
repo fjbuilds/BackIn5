@@ -1248,7 +1248,10 @@
    ============================================================ */
 @media (max-width: 560px) {
   .sts-laptop { max-width: 300px; }
-  .sts-mobile-badge { width: 120px; max-height: 180px; overflow: hidden; border-radius: 18px; }
+  .sts-mobile-badge { width: 155px; max-height: 200px; overflow: hidden; border-radius: 18px; }
+  /* Prevent "Get a Quote" wrapping in the phone header */
+  .sts-mobile-widget-title { font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sts-widget-close { font-size: 13px; }
   .sts-devices { gap: 10px; }
   /* Fix height to a compact size so both laptop + phone fit on screen */
   .sts-fake-browser { height: 260px; overflow: hidden; }

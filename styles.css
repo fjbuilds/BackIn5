@@ -3484,7 +3484,7 @@ section[id] { scroll-margin-top: 80px; }
     padding-block: 40px;
   }
 
-  /* Trust strip - 2×2 grid so all 4 items are visible without scrolling */
+  /* Trust strip - 2×2 grid so all 4 items are visible when reached */
   .trust-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -3493,12 +3493,18 @@ section[id] { scroll-margin-top: 80px; }
     overflow-x: visible;
   }
   .trust-row .item { font-size: 10px; gap: 5px; text-align: center; }
+
+  /* Hero fills full screen so trust strip falls below the fold */
   .hero-inner {
-    padding-top: 32px;
-    padding-bottom: 32px;
+    min-height: 100vh;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .hero-split {
-    gap: 24px;
+    gap: 20px;
   }
   .cta-band {
     padding-top: 56px;
@@ -3825,24 +3831,26 @@ section[id] { scroll-margin-top: 80px; }
   .contact-card {
     padding: 16px;
   }
-  /* Trade cards: square, 2-col (handled above) - final overrides */
+  /* Trade cards: 2-col, icon centred, text left-aligned, descriptions visible */
   .trade-card {
-    aspect-ratio: 1;
-    gap: 8px;
-    padding: 14px;
-    justify-content: flex-start;
+    gap: 6px;
+    padding: 14px 12px;
+    align-items: flex-start;
   }
   .trade-card .ic {
     width: 32px; height: 32px;
+    align-self: center;
   }
   .trade-card .ic svg {
     width: 16px; height: 16px;
   }
   .trade-card .ttl {
-    font-size: 14px;
+    font-size: 13px;
   }
   .trade-card .desc {
-    display: none;
+    display: block;
+    font-size: 11.5px;
+    line-height: 1.4;
   }
 }
 
