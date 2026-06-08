@@ -3557,18 +3557,36 @@ section[id] { scroll-margin-top: 80px; }
   }
   .trust-row .item { font-size: 10px; gap: 5px; text-align: center; }
 
-  /* Hero fills full screen so trust strip falls below the fold */
+  /* Hero fills full screen so trust strip falls below the fold,
+     but content sits at the TOP, not vertically centred. */
   .hero-inner {
-    min-height: 100vh;
-    padding-top: 28px;
-    padding-bottom: 28px;
+    min-height: calc(100vh - 64px);
+    padding-top: 16px;
+    padding-bottom: 24px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
   }
   .hero-split {
     gap: 20px;
   }
+  /* Panel carousel: tall enough that text never overflows into the
+     progress bar / dots at the bottom. */
+  .panel-carousel {
+    min-height: 0;
+  }
+  .panel-stage {
+    min-height: 260px;
+    overflow: hidden;
+  }
+  .panel-stage .panel {
+    padding: 22px 22px;
+    gap: 12px;
+    justify-content: flex-start;
+  }
+  .panel-bignum { font-size: 44px; }
+  .panel-title  { font-size: 19px; line-height: 1.2; }
+  .panel-sub    { font-size: 13.5px; line-height: 1.45; }
   .cta-band {
     padding-top: 56px;
     padding-bottom: 56px;
@@ -3634,26 +3652,8 @@ section[id] { scroll-margin-top: 80px; }
   .hero-cta-note {
     display: none;
   }
-  /* Panel carousel */
-  .panel-bignum {
-    font-size: 48px;
-  }
-  .panel-title {
-    font-size: 20px;
-  }
-  .panel-sub {
-    font-size: 14px;
-  }
-  .panel-stage .panel {
-    padding: 24px;
-  }
-  /* Fix: override the desktop min-height so the card doesn't overflow the screen */
-  .panel-stage {
-    min-height: 140px;
-  }
-  .panel-carousel {
-    min-height: 0;
-  }
+  /* Panel carousel: sizing handled by earlier mobile block in this file
+     (260px stage with overflow:hidden so text never crosses the progress bar) */
   /* CTA band lead copy */
   .cta-lead-block {
     font-size: 16px;
