@@ -422,8 +422,7 @@
           </label>
         </div>
 
-        <a class="cta" id="commit-cta" href="${plan.payLink}" data-disabled="true"
-           onclick="return document.getElementById('commit-check').checked">
+        <a class="cta" id="commit-cta" href="${plan.payLink}" data-disabled="true">
           Add card on file →
         </a>
         <p class="cta-note">Secured by Stripe. £0 charged today.</p>
@@ -437,26 +436,6 @@
             <li>Once you sign off, your <strong>${plan.monthly}</strong> billing starts automatically on the card we've stored.</li>
           </ol>
         </div>
-
-        <script>
-          (function () {
-            const check = document.getElementById('commit-check');
-            const cta   = document.getElementById('commit-cta');
-            const update = () => {
-              if (check.checked) {
-                cta.removeAttribute('data-disabled');
-                cta.style.opacity = '1';
-                cta.style.pointerEvents = 'auto';
-              } else {
-                cta.setAttribute('data-disabled', 'true');
-                cta.style.opacity = '0.5';
-                cta.style.pointerEvents = 'none';
-              }
-            };
-            check.addEventListener('change', update);
-            update();
-          })();
-        </script>
       `;
     } else {
       // Monthly rolling — pay setup fee now via Stripe
@@ -504,26 +483,6 @@
         </a>
         <p class="cta-note">Secured by Stripe. You'll get a receipt by email.</p>
 
-        <script>
-          (function () {
-            const check = document.getElementById('commit-check');
-            const cta   = document.getElementById('commit-cta');
-            const update = () => {
-              if (check.checked) {
-                cta.removeAttribute('data-disabled');
-                cta.style.opacity = '1';
-                cta.style.pointerEvents = 'auto';
-              } else {
-                cta.setAttribute('data-disabled', 'true');
-                cta.style.opacity = '0.5';
-                cta.style.pointerEvents = 'none';
-              }
-            };
-            check.addEventListener('change', update);
-            update();
-          })();
-        </script>
-
         <div class="next-steps">
           <h3>What happens next</h3>
           <ol>
@@ -534,6 +493,26 @@
           </ol>
         </div>
       `;
+    }
+
+    // Wire up the consent checkbox to enable/disable the CTA button
+    // (only present when a plan was matched and a payment step is shown)
+    const check = document.getElementById('commit-check');
+    const cta   = document.getElementById('commit-cta');
+    if (check && cta) {
+      const update = () => {
+        if (check.checked) {
+          cta.removeAttribute('data-disabled');
+          cta.style.opacity = '1';
+          cta.style.pointerEvents = 'auto';
+        } else {
+          cta.setAttribute('data-disabled', 'true');
+          cta.style.opacity = '0.5';
+          cta.style.pointerEvents = 'none';
+        }
+      };
+      check.addEventListener('change', update);
+      update();
     }
 
     // Footer meta (always shown)
