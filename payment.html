@@ -210,10 +210,31 @@
       },
     };
 
-    // ─── Render ───────────────────────────────────────────────────
+    // ─── Detect plan from URL ─────────────────────────────────────
+    // Accepts:
+    //  1. Clean keys: ?plan=smart_3mo / smart_6mo / full_3mo / full_6mo
+    //  2. The raw label text from Tally, e.g.
+    //     ?plan=Tier+1+-+3%2B+months+-+%C2%A3199%2Fmo+%2B+%C2%A399+setup+fee
+    function detectPlanKey(raw) {
+      if (!raw) return null;
+      const lc = raw.toLowerCase();
+      // Direct match against PLANS keys
+      if (PLANS[lc]) return lc;
+      // Pattern-match the Tally label
+      const isTier1 = lc.includes('tier 1') || lc.includes('£199') || lc.includes('199/mo');
+      const isTier2 = lc.includes('tier 2') || lc.includes('£349') || lc.includes('349/mo');
+      const is6mo   = lc.includes('6+ months') || lc.includes('6 month') || lc.includes('6-month') || lc.includes('£0 setup');
+      const is3mo   = lc.includes('3+ months') || lc.includes('3 month') || lc.includes('3-month');
+      if (isTier1 && is6mo) return 'smart_6mo';
+      if (isTier1 && is3mo) return 'smart_3mo';
+      if (isTier2 && is6mo) return 'full_6mo';
+      if (isTier2 && is3mo) return 'full_3mo';
+      return null;
+    }
+
     const params = new URLSearchParams(window.location.search);
-    const planKey = (params.get('plan') || '').toLowerCase();
-    const plan = PLANS[planKey];
+    const planKey = detectPlanKey(params.get('plan'));
+    const plan = planKey ? PLANS[planKey] : null;
     const wrap = document.getElementById('pay-wrap');
 
     if (!plan) {
