@@ -112,12 +112,44 @@
       transition: background 140ms ease;
     }
     .cta:hover { background: #1c378f; }
+    .cta[data-disabled="true"] { cursor: not-allowed; }
     .cta-note {
       margin: 14px 0 0;
       text-align: center;
       font-size: 12.5px;
       color: rgba(234,236,241,0.5);
     }
+
+    .commit-box {
+      background: rgba(35,65,168,0.08);
+      border: 1px solid rgba(35,65,168,0.35);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .commit-line {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      cursor: pointer;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: rgba(234,236,241,0.85);
+    }
+    .commit-line input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      accent-color: #2341A8;
+      cursor: pointer;
+    }
+    .commit-line a {
+      color: #93A9E7;
+      text-decoration: underline;
+    }
+    .commit-line a:hover { color: #fff; }
+    .commit-line strong { color: #fff; }
 
     .next-steps {
       margin-top: 28px;
@@ -255,9 +287,13 @@
         tier: 'Smart Enquiry Handling',
         monthly: '£199 / month',
         term: '6-month commitment',
-        dueNow: '£0 — setup fee waived',
+        dueNow: '£0 today — card on file, billing starts after onboarding',
         dueNowAmount: 0,
-        payLink: null, // no payment needed
+        // 6-month customers go to the monthly subscription link with a trial
+        // attached in Stripe. Card captured today, £0 charged, billing starts
+        // when the trial ends (you control trial length in Stripe dashboard).
+        payLink: 'https://buy.stripe.com/dRm9AT2UV4D3cVr0zp08g00',
+        commitsTo6Months: true,
       },
       full_3mo: {
         tier: 'Full Inbound Desk',
@@ -271,9 +307,10 @@
         tier: 'Full Inbound Desk',
         monthly: '£349 / month',
         term: '6-month commitment',
-        dueNow: '£0 — setup fee waived',
+        dueNow: '£0 today — card on file, billing starts after onboarding',
         dueNowAmount: 0,
-        payLink: null,
+        payLink: 'https://buy.stripe.com/dRmfZh677glL5sZdmb08g01',
+        commitsTo6Months: true,
       },
     };
 
@@ -308,8 +345,10 @@
       // No plan in URL — show the 4 options as cards so the customer can pick
       const card = (key, p) => {
         const isFree = p.dueNowAmount === 0;
-        const href = isFree ? `welcome.html?plan=${key}` : p.payLink;
-        const cta  = isFree ? 'Continue →' : `Pay £${p.dueNowAmount} →`;
+        // 6-month customers (isFree) and setup-fee customers both go to Stripe;
+        // payLink is set for both in PLANS. We just append plan as a hint.
+        const href = `payment.html?plan=${key}`;
+        const cta  = isFree ? 'Add card on file →' : `Pay £${p.dueNowAmount} →`;
         return `
           <a class="pick-card" href="${href}">
             <div class="pick-card-head">
@@ -338,15 +377,18 @@
         </div>
       `;
     } else if (plan.dueNowAmount === 0) {
-      // 6-month commitment — no setup fee, go straight to welcome
+      // 6-month commitment — no setup fee; capture card on file via Stripe
+      // (the linked Payment Link should have a free trial period set in Stripe
+      // so £0 is charged today and billing starts when you end the trial).
       wrap.innerHTML = `
-        <div class="pay-eyebrow">Step 2 of 2 · You're all set</div>
-        <h1>Nothing to pay today.</h1>
+        <div class="pay-eyebrow">Step 2 of 2 · Confirm 6-month commitment</div>
+        <h1>£0 today — card on file only.</h1>
         <p class="pay-lead">
           You've chosen the <strong>6-month commitment</strong> on
-          <strong>${plan.tier}</strong> — your setup fee is waived. We'll
-          have you live within 48 hours, and monthly billing starts only once
-          your dashboard is fully set up and you've signed off.
+          <strong>${plan.tier}</strong> — your setup fee is waived in exchange
+          for the 6-month minimum term. We capture your card now but don't
+          charge it today. Billing only starts once your dashboard is set up
+          and you've signed off.
         </p>
 
         <div class="summary">
@@ -359,26 +401,62 @@
             <span class="value">${plan.term}</span>
           </div>
           <div class="summary-row">
-            <span class="label">Monthly</span>
+            <span class="label">Monthly (starts after onboarding)</span>
             <span class="value">${plan.monthly}</span>
           </div>
           <div class="summary-row total">
-            <span class="label">Due now</span>
+            <span class="label">Charged today</span>
             <span class="value">£0</span>
           </div>
         </div>
 
-        <a class="cta" href="welcome.html?plan=${planKey}">Continue →</a>
-        <p class="cta-note">No card needed today.</p>
+        <div class="commit-box">
+          <label class="commit-line">
+            <input type="checkbox" id="commit-check" />
+            <span>
+              I confirm I'm committing to a <strong>6-month minimum term</strong>
+              at ${plan.monthly}. The waived setup fee and remaining monthly
+              fees are due if I cancel early, per the
+              <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>.
+            </span>
+          </label>
+        </div>
+
+        <a class="cta" id="commit-cta" href="${plan.payLink}" data-disabled="true"
+           onclick="return document.getElementById('commit-check').checked">
+          Add card on file →
+        </a>
+        <p class="cta-note">Secured by Stripe. £0 charged today.</p>
 
         <div class="next-steps">
           <h3>What happens next</h3>
           <ol>
-            <li>We'll <strong>configure your dashboard</strong> and embed the Quote Assistant on your site within 48 hours.</li>
+            <li>Add your card — <strong>no charge today</strong>, card stored securely with Stripe.</li>
+            <li>We <strong>configure your dashboard</strong> and embed the Quote Assistant on your site within 48 hours.</li>
             <li>You'll get a <strong>walkthrough call</strong> to confirm everything is set up exactly how you want it.</li>
-            <li>Once you sign off, your <strong>first monthly payment</strong> is collected and your dashboard goes live.</li>
+            <li>Once you sign off, your <strong>${plan.monthly}</strong> billing starts automatically on the card we've stored.</li>
           </ol>
         </div>
+
+        <script>
+          (function () {
+            const check = document.getElementById('commit-check');
+            const cta   = document.getElementById('commit-cta');
+            const update = () => {
+              if (check.checked) {
+                cta.removeAttribute('data-disabled');
+                cta.style.opacity = '1';
+                cta.style.pointerEvents = 'auto';
+              } else {
+                cta.setAttribute('data-disabled', 'true');
+                cta.style.opacity = '0.5';
+                cta.style.pointerEvents = 'none';
+              }
+            };
+            check.addEventListener('change', update);
+            update();
+          })();
+        </script>
       `;
     } else {
       // Monthly rolling — pay setup fee now via Stripe
@@ -410,8 +488,41 @@
           </div>
         </div>
 
-        <a class="cta" href="${plan.payLink}">Pay £${plan.dueNowAmount} setup fee →</a>
+        <div class="commit-box">
+          <label class="commit-line">
+            <input type="checkbox" id="commit-check" />
+            <span>
+              I confirm I'm signing up for <strong>${plan.tier}</strong> at
+              ${plan.monthly} with a 3-month minimum term, and agree to the
+              <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>.
+            </span>
+          </label>
+        </div>
+
+        <a class="cta" id="commit-cta" href="${plan.payLink}" data-disabled="true">
+          Pay £${plan.dueNowAmount} setup fee →
+        </a>
         <p class="cta-note">Secured by Stripe. You'll get a receipt by email.</p>
+
+        <script>
+          (function () {
+            const check = document.getElementById('commit-check');
+            const cta   = document.getElementById('commit-cta');
+            const update = () => {
+              if (check.checked) {
+                cta.removeAttribute('data-disabled');
+                cta.style.opacity = '1';
+                cta.style.pointerEvents = 'auto';
+              } else {
+                cta.setAttribute('data-disabled', 'true');
+                cta.style.opacity = '0.5';
+                cta.style.pointerEvents = 'none';
+              }
+            };
+            check.addEventListener('change', update);
+            update();
+          })();
+        </script>
 
         <div class="next-steps">
           <h3>What happens next</h3>
