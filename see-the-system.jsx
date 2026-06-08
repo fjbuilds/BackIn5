@@ -595,27 +595,6 @@ function StsChannels() {
             <div className="sts-funnel-line" />
           </div>
 
-          {/* Result — clean text summary, the dashboard is showcased in the next band */}
-          <div className="sts-channels-result">
-            <div className="sts-channels-text">
-              <div className="sts-channels-headline">
-                One organised enquiry in your dashboard
-              </div>
-              <div className="sts-channels-bullets">
-                <span>Name &amp; contact</span>
-                <span className="sts-bullet-sep">·</span>
-                <span>Postcode</span>
-                <span className="sts-bullet-sep">·</span>
-                <span>Photos</span>
-                <span className="sts-bullet-sep">·</span>
-                <span>Your specialist questions answered</span>
-              </div>
-            </div>
-            <div className="sts-result-note">
-              <IconCheck size={14} />
-              <span>Every enquiry lands in one place - already sorted by what needs doing next</span>
-            </div>
-          </div>
         </div>
 
         <p ref={copyRef} className="sts-reveal sts-alerts-copy" style={{ transitionDelay: '0.2s' }}>
@@ -1129,14 +1108,18 @@ function StsPackages() {
                 <p className="sts-pkg-reveal-sub">Both options get you live within 48 hours.</p>
               </div>
               <div className="sts-pkg-reveal-choices">
-                <a href={"thanks-call.html?plan=" + selectedPkg.id} className="sts-pkg-choice">
+                <button
+                  className="sts-pkg-choice"
+                  onClick={() => window.Calendly && window.Calendly.initPopupWidget({ url: 'https://calendly.com/backin5/30min?primary_color=164d9c' })}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', padding: 0 }}
+                >
                   <div className="sts-pkg-choice-icon">📅</div>
                   <div className="sts-pkg-choice-body">
                     <div className="sts-pkg-choice-title">Book a Call</div>
                     <div className="sts-pkg-choice-desc">10 mins with our team - questions answered, setup started same day</div>
                   </div>
                   <IconArrowRight size={20} />
-                </a>
+                </button>
                 <a href={"welcome.html?plan=" + selectedPkg.id} className="sts-pkg-choice">
                   <div className="sts-pkg-choice-icon">⚡</div>
                   <div className="sts-pkg-choice-body">
@@ -1159,6 +1142,20 @@ function StsPackages() {
 // StsPage - root component rendered by see-the-system.html
 // ============================================================
 function StsPage() {
+  useEffectSTS(() => {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const tryScroll = (attempts) => {
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else if (attempts > 0) {
+        setTimeout(() => tryScroll(attempts - 1), 150);
+      }
+    };
+    setTimeout(() => tryScroll(6), 100);
+  }, []);
+
   return (
     <React.Fragment>
       <StsNav />

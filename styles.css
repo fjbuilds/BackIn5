@@ -3421,6 +3421,59 @@ section[id] { scroll-margin-top: 80px; }
 /* ============================================================
    MOBILE — max-width: 768px
 =======
+   LANDSCAPE PHONE - restore 2-col hero so title + buttons + slideshow
+   all fit on one screen without scrolling.
+   ============================================================ */
+@media (max-height: 560px) and (min-width: 560px) {
+  .hero-split,
+  .hero-phone-grid,
+  .hero-dash {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 24px;
+    align-items: start;
+  }
+  .hero-inner {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .display-hero, .hero h1 {
+    font-size: 28px !important;
+    line-height: 1.1;
+  }
+  .hero h1 em {
+    font-size: 28px !important;
+  }
+  .hero-lead {
+    font-size: 13px !important;
+    margin-top: 8px !important;
+  }
+  .hero-cta-row {
+    gap: 8px;
+    margin-top: 12px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .hero-cta-row .btn {
+    height: 44px;
+    font-size: 13px;
+    padding: 0 14px;
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 0;
+  }
+  .panel-carousel {
+    min-height: 0;
+  }
+  .panel-stage {
+    min-height: 120px;
+  }
+  .panel-bignum { font-size: 36px; }
+  .panel-title  { font-size: 16px; }
+  .panel-sub    { font-size: 13px; }
+  .panel-stage .panel { padding: 16px; }
+}
+
+/* ============================================================
    MOBILE - max-width: 768px
    All rules below are mobile-only. Desktop is untouched.
    ============================================================ */
@@ -3428,26 +3481,24 @@ section[id] { scroll-margin-top: 80px; }
 
   /* ── 1. Section vertical padding ── */
   .band {
-    padding-block: 56px;
+    padding-block: 40px;
   }
 
-  /* Trust strip - horizontal scroll so items stay on one line */
+  /* Trust strip - 2×2 grid so all 4 items are visible without scrolling */
   .trust-row {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
-    padding-bottom: 2px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 8px;
+    justify-items: center;
+    overflow-x: visible;
   }
-  .trust-row::-webkit-scrollbar { display: none; }
-  .trust-row .item { flex-shrink: 0; font-size: 11px; gap: 6px; }
+  .trust-row .item { font-size: 10px; gap: 5px; text-align: center; }
   .hero-inner {
-    padding-top: 48px;
-    padding-bottom: 56px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  .hero-split {
+    gap: 24px;
   }
   .cta-band {
     padding-top: 56px;
@@ -3456,7 +3507,7 @@ section[id] { scroll-margin-top: 80px; }
 
   /* ── 2. Section header margin ── */
   .sec-head {
-    margin-bottom: 32px;
+    margin-bottom: 20px;
   }
 
   /* ── 2. H2 + display headings → 24px ── */
@@ -3469,6 +3520,10 @@ section[id] { scroll-margin-top: 80px; }
     line-height: 1.25;
     width: auto !important;
     max-width: 100%;
+  }
+  /* Pricing heading: reduce so "Cheaper than hiring office staff." fits on one line */
+  #pricing .display {
+    font-size: 19px !important;
   }
   /* ── Body / subtext → 16px ── */
   .lead {
@@ -3492,15 +3547,20 @@ section[id] { scroll-margin-top: 80px; }
     font-size: 14px !important;
     line-height: 1.5;
   }
-  /* CTA buttons - stacked full-width */
+  /* CTA buttons - side by side on mobile, compact */
   .hero-cta-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
   }
   .hero-cta-row .btn {
-    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
     justify-content: center;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 13px;
   }
   .hero-cta-note {
     display: none;
@@ -3520,7 +3580,7 @@ section[id] { scroll-margin-top: 80px; }
   }
   /* Fix: override the desktop min-height so the card doesn't overflow the screen */
   .panel-stage {
-    min-height: 180px;
+    min-height: 140px;
   }
   .panel-carousel {
     min-height: 0;
@@ -3565,13 +3625,11 @@ section[id] { scroll-margin-top: 80px; }
   }
 
   /* ──────────────────────────────────────────────────────────
-     5. Trade cards - 1 column, 20px padding, graphics full-width
+     5. Trade cards - 2 column pairs (3 rows of 2), square cards
      ────────────────────────────────────────────────────────── */
   .trades-grid {
-    grid-template-columns: 1fr;
-  }
-  .trade-card {
-    padding: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
   .trades-split {
     grid-template-columns: 1fr;
@@ -3767,10 +3825,12 @@ section[id] { scroll-margin-top: 80px; }
   .contact-card {
     padding: 16px;
   }
-  /* Trade cards: no bottom gap, tighter icon */
+  /* Trade cards: square, 2-col (handled above) - final overrides */
   .trade-card {
-    gap: 10px;
-    padding: 16px;
+    aspect-ratio: 1;
+    gap: 8px;
+    padding: 14px;
+    justify-content: flex-start;
   }
   .trade-card .ic {
     width: 32px; height: 32px;
@@ -3779,10 +3839,10 @@ section[id] { scroll-margin-top: 80px; }
     width: 16px; height: 16px;
   }
   .trade-card .ttl {
-    font-size: 15px;
+    font-size: 14px;
   }
   .trade-card .desc {
-    font-size: 13px;
+    display: none;
   }
 }
 

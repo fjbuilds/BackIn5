@@ -32,10 +32,6 @@ function BuiltFor({ singleTradeMode, focusTradeKey, setFocus }) {
           <h2 className="display">
             Built For Busy Trades
           </h2>
-          <p className="lead" style={{ marginTop: 8 }}>
-
-
-          </p>
         </div>
 
         {singleTradeMode ?
