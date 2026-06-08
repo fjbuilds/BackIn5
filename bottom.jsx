@@ -66,8 +66,12 @@ function Comparison() {
 
 // ----------------- Pricing -----------------
 function Pricing() {
+  const [selectedTier, setSelectedTier] = useStateB(null);
+  const revealRef = React.useRef(null);
+
   const tiers = [
   {
+    id: "smart",
     name: "Smart Enquiry Handling",
     tagline: "For trades who miss calls & messages while working and need every enquiry answered, captured and organised.",
     price: 199,
@@ -82,10 +86,10 @@ function Pricing() {
       "Helps stop jobs being missed while you're on-site",
       "Simple setup - no app, no office staff, no new software to learn",
     ],
-    cta: "Get Started",
     featured: false
   },
   {
+    id: "full",
     name: "Full Inbound Desk",
     tagline: "A complete inbound enquiry and booking system. Without office staff.",
     price: 349,
@@ -100,10 +104,17 @@ function Pricing() {
       "Missed-call quote taker",
       "Quote, callback or site-visit booking",
     ],
-    cta: "Get Started",
     featured: true
   }];
 
+  const handleSelect = (tier) => {
+    setSelectedTier(tier);
+    setTimeout(() => {
+      if (revealRef.current) {
+        revealRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 80);
+  };
 
   return (
     <section className="canvas-soft band" id="pricing">
@@ -118,7 +129,7 @@ function Pricing() {
 
         <div className="pricing-grid">
           {tiers.map((t) =>
-          <div key={t.name} className={"price-card " + (t.featured ? "featured" : "")}>
+          <div key={t.name} className={"price-card " + (t.featured ? "featured" : "") + (selectedTier && selectedTier.id === t.id ? " price-card-selected" : "")}>
               {t.featured && <span className="badge-popular">Most picked</span>}
               <div className="tier">{t.name}</div>
               <div className="tagline">{t.tagline}</div>
@@ -134,17 +145,52 @@ function Pricing() {
               {t.bottomLine && (
                 <div className="price-bottom-line">{t.bottomLine}</div>
               )}
-              <a href="#contact" className={"btn " + (t.featured ? "btn-light" : "btn-dark") + " btn-arrow"} style={{ width: "100%", justifyContent: "center" }}>
-                {t.cta} <IconArrowRight size={16} />
-              </a>
+              <button
+                onClick={() => handleSelect(t)}
+                className={"btn " + (t.featured ? "btn-light" : "btn-dark") + " btn-arrow"}
+                style={{ width: "100%", justifyContent: "center" }}>
+                Get Started <IconArrowRight size={16} />
+              </button>
               <div className="price-foot" style={{ textAlign: "center" }}>{t.foot}</div>
             </div>
           )}
         </div>
 
-        <div style={{ marginTop: 40, textAlign: "center", color: "var(--mute-strong)", fontSize: 14 }}>
-
-        </div>
+        {selectedTier && (
+          <div className="sts-pkg-reveal" key={selectedTier.id} ref={revealRef}>
+            <div className="sts-pkg-reveal-inner">
+              <div className="sts-pkg-reveal-head">
+                <div className="sts-pkg-reveal-eyebrow">
+                  <span className="sts-status-dot" style={{ background: 'var(--accent)', width: '8px', height: '8px' }} />
+                  {selectedTier.name} selected
+                </div>
+                <h3 className="sts-pkg-reveal-title">How would you like to get started?</h3>
+                <p className="sts-pkg-reveal-sub">Both options get you live within 48 hours.</p>
+              </div>
+              <div className="sts-pkg-reveal-choices">
+                <button
+                  className="sts-pkg-choice"
+                  onClick={() => window.Calendly && window.Calendly.initPopupWidget({ url: 'https://calendly.com/backin5/30min?primary_color=164d9c' })}
+                  style={{ background: 'none', border: '1px solid var(--hairline-dark)', cursor: 'pointer', textAlign: 'left', width: '100%', padding: '20px' }}>
+                  <div className="sts-pkg-choice-icon">📅</div>
+                  <div className="sts-pkg-choice-body">
+                    <div className="sts-pkg-choice-title">Book a Call</div>
+                    <div className="sts-pkg-choice-desc">10 mins with our team - questions answered, setup started same day</div>
+                  </div>
+                  <IconArrowRight size={20} />
+                </button>
+                <a href={"welcome.html?plan=" + selectedTier.id} className="sts-pkg-choice">
+                  <div className="sts-pkg-choice-icon">⚡</div>
+                  <div className="sts-pkg-choice-body">
+                    <div className="sts-pkg-choice-title">Self Setup</div>
+                    <div className="sts-pkg-choice-desc">Fill a 3-min form - we handle the rest and get you live within 48 hrs</div>
+                  </div>
+                  <IconArrowRight size={20} />
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>);
 
