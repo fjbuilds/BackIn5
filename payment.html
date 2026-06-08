@@ -159,6 +159,73 @@
 
     .fallback h1 { color: #fff; }
     .fallback .summary { display: none; }
+
+    /* ── Plan picker (shown when no ?plan= in URL) ── */
+    .pick-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    @media (max-width: 520px) {
+      .pick-grid { grid-template-columns: 1fr; }
+    }
+    .pick-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 18px;
+      background: #171B22;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 140ms ease, transform 140ms ease, background 140ms ease;
+    }
+    .pick-card:hover {
+      border-color: #2341A8;
+      background: #1B212B;
+      transform: translateY(-1px);
+    }
+    .pick-card-head { display: flex; flex-direction: column; gap: 2px; }
+    .pick-card-tier {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+    .pick-card-term {
+      font-size: 12px;
+      color: rgba(234,236,241,0.55);
+    }
+    .pick-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 12px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .pick-card-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: rgba(234,236,241,0.7);
+    }
+    .pick-card-row strong { color: #fff; font-weight: 600; }
+    .pick-card-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: #2341A8;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 11px 16px;
+      border-radius: 100px;
+    }
+    .pick-card:hover .pick-card-cta { background: #1c378f; }
   </style>
 </head>
 <body>
@@ -238,17 +305,37 @@
     const wrap = document.getElementById('pay-wrap');
 
     if (!plan) {
-      // Fallback when the URL is missing or wrong
-      wrap.classList.add('fallback');
+      // No plan in URL — show the 4 options as cards so the customer can pick
+      const card = (key, p) => {
+        const isFree = p.dueNowAmount === 0;
+        const href = isFree ? `welcome.html?plan=${key}` : p.payLink;
+        const cta  = isFree ? 'Continue →' : `Pay £${p.dueNowAmount} →`;
+        return `
+          <a class="pick-card" href="${href}">
+            <div class="pick-card-head">
+              <div class="pick-card-tier">${p.tier}</div>
+              <div class="pick-card-term">${p.term}</div>
+            </div>
+            <div class="pick-card-body">
+              <div class="pick-card-row"><span>Monthly</span><strong>${p.monthly}</strong></div>
+              <div class="pick-card-row"><span>Due now</span><strong>${isFree ? '£0' : '£' + p.dueNowAmount}</strong></div>
+            </div>
+            <span class="pick-card-cta">${cta}</span>
+          </a>`;
+      };
       wrap.innerHTML = `
-        <div class="pay-eyebrow">Almost there</div>
-        <h1>We've received your details.</h1>
+        <div class="pay-eyebrow">Step 2 of 2 · Confirm your plan</div>
+        <h1>Which plan did you sign up for?</h1>
         <p class="pay-lead">
-          We couldn't read your selected plan from the link, but no problem —
-          email <a href="mailto:hello@backin5.org" style="color:#fff">hello@backin5.org</a>
-          and we'll send you a tailored invoice and get your setup started.
+          Tap the plan you chose on the form to complete your setup.
+          Monthly billing only starts once your dashboard is live — never today.
         </p>
-        <a class="cta" href="welcome.html">Continue →</a>
+        <div class="pick-grid">
+          ${card('smart_3mo', PLANS.smart_3mo)}
+          ${card('smart_6mo', PLANS.smart_6mo)}
+          ${card('full_3mo',  PLANS.full_3mo)}
+          ${card('full_6mo',  PLANS.full_6mo)}
+        </div>
       `;
     } else if (plan.dueNowAmount === 0) {
       // 6-month commitment — no setup fee, go straight to welcome
