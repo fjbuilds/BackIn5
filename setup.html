@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Setup - BackIn5</title>
+  <meta name="description" content="Get set up with BackIn5 - tell us about your business and we'll have you live within 48 hours." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #0E1116;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .setup-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      background: #1B212B;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .setup-bar a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .setup-bar a:hover { color: #fff; }
+    .setup-bar img { height: 22px; width: auto; }
+    .setup-back {
+      font-size: 13px;
+    }
+    .tally-wrap {
+      width: 100%;
+      height: calc(100vh - 56px);
+      background: #fff;
+    }
+    .tally-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="setup-bar">
+    <a href="index.html"><img src="assets/backin5-logo-v4.png" alt="BackIn5" /></a>
+    <a href="index.html" class="setup-back">← Back to site</a>
+  </div>
+  <div class="tally-wrap">
+    <iframe
+      src="https://tally.so/embed/pbvz9y?alignLeft=1&hideTitle=0&transparentBackground=0&dynamicHeight=0"
+      title="BackIn5 Setup Form"
+      allow="clipboard-write"
+      loading="lazy">
+    </iframe>
+  </div>
+</body>
+</html>

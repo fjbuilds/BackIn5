@@ -1120,7 +1120,7 @@ function StsPackages() {
                   </div>
                   <IconArrowRight size={20} />
                 </button>
-                <a href={"welcome.html?plan=" + selectedPkg.id} className="sts-pkg-choice">
+                <a href={"setup.html?plan=" + selectedPkg.id} className="sts-pkg-choice">
                   <div className="sts-pkg-choice-icon">⚡</div>
                   <div className="sts-pkg-choice-body">
                     <div className="sts-pkg-choice-title">Self Setup</div>
