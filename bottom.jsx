@@ -168,7 +168,7 @@ function CtaBand() {
             Calls get missed, quotes get delayed and decent jobs slip through the cracks whilst trying to stay on top of messages, follow-ups and work on-site.
           </span>
           <span className="cta-lead-block">
-            <span className="cta-lead-brand">BackIn5</span> keeps customers engaged, enquiries organised and jobs moving whilst you focus on the work. Every customer gets their own live dashboard - a real-time view of every open job, quote and callback, updated automatically each day.
+            <span className="cta-lead-brand">BackIn5</span> keeps customers engaged, enquiries organised and jobs moving whilst you focus on the work. Every customer gets their own live dashboard - a real-time view of every open job, quote and callback, updated automatically in real time.
           </span>
           <span className="cta-lead-fine">
             No complicated software. No office staff. No evenings spent catching up on admin.

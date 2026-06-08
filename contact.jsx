@@ -128,7 +128,7 @@ function Contact() {
             <IconMail size={18} />
             <span>Email us</span>
           </a>
-          <button className="contact-pill" onClick={() => setShowCalendly(true)}>
+          <button className="contact-pill" onClick={() => window.Calendly && window.Calendly.initPopupWidget({url: 'https://calendly.com/backin5/30min?primary_color=164d9c'})}>
             <IconCalendar size={18} />
             <span>Book a chat</span>
           </button>
