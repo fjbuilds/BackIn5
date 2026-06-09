@@ -476,8 +476,14 @@ function Faqs() {
   const activeInMore = MORE_TRADE_FAQS.find((t) => t.key === activeTrade);
 
   // On mobile, scroll to the questions panel when a trade is tapped.
-  // Uses window.scrollTo instead of scrollIntoView - more reliable on iOS Safari.
+  // Skip the very first render so visitors don't get yanked down to the
+  // FAQs section the moment the homepage loads.
+  const firstRenderRef = React.useRef(true);
   React.useEffect(() => {
+    if (firstRenderRef.current) {
+      firstRenderRef.current = false;
+      return;
+    }
     if (tradePanelRef.current && window.innerWidth < 900) {
       setTimeout(() => {
         var el = tradePanelRef.current;
