@@ -41,10 +41,10 @@ function StsNav() {
           <a className="nav-link sts-nav-active" href="see-the-system.html">How does it work?</a>
           <a className="nav-link" href="index.html#pricing">Pricing</a>
           <a className="nav-link" href="index.html#faqs">FAQs</a>
-          <a className="nav-link" href="index.html#contact">Contact</a>
+          <a className="nav-link" href="index.html#pricing">Contact</a>
         </div>
         <div className="nav-cta">
-          <a href="index.html#contact" className="btn btn-primary btn-sm nav-cta-btn">Get Started</a>
+          <a href="index.html#pricing" className="btn btn-primary btn-sm nav-cta-btn">Get Started</a>
           <button
             className={'nav-burger ' + (open ? 'is-open' : '')}
             onClick={() => setOpen(o => !o)}
@@ -63,8 +63,8 @@ function StsNav() {
           <a className="nav-drawer-link" href="see-the-system.html" onClick={() => setOpen(false)}>How does it work?</a>
           <a className="nav-drawer-link" href="index.html#pricing" onClick={() => setOpen(false)}>Pricing</a>
           <a className="nav-drawer-link" href="index.html#faqs" onClick={() => setOpen(false)}>FAQs</a>
-          <a className="nav-drawer-link" href="index.html#contact" onClick={() => setOpen(false)}>Contact</a>
-          <a href="index.html#contact" className="btn btn-primary btn-lg nav-drawer-cta" onClick={() => setOpen(false)}>
+          <a className="nav-drawer-link" href="index.html#pricing" onClick={() => setOpen(false)}>Contact</a>
+          <a href="index.html#pricing" className="btn btn-primary btn-lg nav-drawer-cta" onClick={() => setOpen(false)}>
             Get Started <IconArrowRight size={16} />
           </a>
         </div>
@@ -104,7 +104,7 @@ function StsFooter() {
               <li><a href="index.html#compare">Comparison</a></li>
               <li><a href="index.html#pricing">Pricing</a></li>
               <li><a href="index.html#faqs">FAQs</a></li>
-              <li><a href="index.html#contact">Contact</a></li>
+              <li><a href="index.html#pricing">Contact</a></li>
             </ul>
           </div>
         </div>
@@ -181,30 +181,29 @@ const STS_SCENARIOS = [
     note: 'Questions are tailored to your trade and how you quote jobs.',
   },
   {
-    key: 'checkatrade',
-    title: 'Checkatrade Lead',
-    sub: 'New lead drops into your queue',
-    icon: 'star',
+    key: 'whatsapp',
+    title: 'WhatsApp Enquiry',
+    sub: 'Message drops on your WhatsApp',
+    icon: 'message',
     steps: [
-      'New Checkatrade lead arrives in your queue',
-      'BackIn5 qualifies it before any other firm responds',
-      'Customer receives an instant tailored response',
-      'Photos, availability, and job details collected',
+      'Customer messages your WhatsApp business number',
+      'Instant reply sent — they\'re kept engaged before they move on',
+      'Job details, photos and postcode collected automatically',
+      'Customer books a callback or confirms availability',
       'Enquiry arrives in your dashboard, ready to quote',
     ],
-    note: 'Filter by area, job type, urgency, and budget.',
   },
   {
-    key: 'out-of-hours',
-    title: 'Out-of-Hours Enquiry',
-    sub: 'Evening, weekend, or bank holiday',
-    icon: 'clock',
+    key: 'email',
+    title: 'Email Enquiry',
+    sub: 'Customer emails in a job request',
+    icon: 'chat',
     steps: [
-      'Customer enquires outside your working hours',
-      'Instant response sent - 24/7, no delay',
-      'Enquiry details collected automatically',
-      'Customer books a callback at a suitable time',
-      'Enquiry arrives in your dashboard, ready to quote',
+      'Customer sends an email enquiry',
+      'Instant acknowledgement sent — no awkward silence',
+      'BackIn5 follows up to collect job details and photos',
+      'Customer confirms availability and next steps',
+      'Enquiry arrives in your dashboard, organised and ready to quote',
     ],
   },
   {
@@ -246,8 +245,8 @@ function StsHowItWorks() {
 Every enquiry type, handled.
           </h2>
           <p className="lead">
-            From missed calls to Checkatrade leads - BackIn5 captures, qualifies and organises
-            every enquiry while your team is busy on-site.
+            Calls, WhatsApp, email, Facebook, website — every channel covered. BackIn5 captures,
+            qualifies and organises every enquiry while your team is busy on-site.
           </p>
         </div>
 
@@ -874,9 +873,9 @@ function StsEnquiryDetailLegacy() {
               </div>
               <div className="sts-detail-divider" />
               <div className="sts-detail-actions">
-                <a href="index.html#contact" className="btn btn-ghost-light btn-sm">📞 Call Back</a>
-                <a href="index.html#contact" className="btn btn-ghost-light btn-sm">✉️ Send Quote</a>
-                <a href="index.html#contact" className="btn btn-primary btn-sm">✓ Mark as Quoted</a>
+                <a href="index.html#pricing" className="btn btn-ghost-light btn-sm">📞 Call Back</a>
+                <a href="index.html#pricing" className="btn btn-ghost-light btn-sm">✉️ Send Quote</a>
+                <a href="index.html#pricing" className="btn btn-primary btn-sm">✓ Mark as Quoted</a>
               </div>
             </div>
           </div>
@@ -966,8 +965,8 @@ function StsSetup() {
         </div>
         <div ref={copyRef} className="sts-reveal sts-setup-footer" style={{ transitionDelay: '0.4s' }}>
           <div className="sts-setup-cta-wrap">
-            <a href="index.html#contact" className="btn btn-primary btn-lg btn-arrow">
-              Start Setup <IconArrowRight size={16} />
+            <a href="#sts-packages" className="btn btn-primary btn-lg btn-arrow">
+              See packages &amp; start trial <IconArrowRight size={16} />
             </a>
           </div>
         </div>
@@ -986,7 +985,7 @@ const PACKAGES = [
     name: 'Smart Enquiry Handling',
     tagline: 'For trades who miss calls & messages while working and need every enquiry answered, captured and organised.',
     price: '£199',
-    note: 'per month · £99 setup fee',
+    note: 'per month · monthly rolling',
     features: [
       'Instant replies to new enquiries',
       'Missed-call text reply',
@@ -1006,7 +1005,7 @@ const PACKAGES = [
     name: 'Full Inbound Desk',
     tagline: 'A complete inbound enquiry and booking system. Without office staff.',
     price: '£349',
-    note: 'per month · £149 setup fee',
+    note: 'per month · monthly rolling',
     featured: true,
     badge: 'Most popular',
     features: [
@@ -1048,6 +1047,18 @@ function PkgCard({ pkg, delay, isSelected, onSelect }) {
           <li key={i}><IconCheck size={14} />{f}</li>
         ))}
       </ul>
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{ marginTop: 8 }}
+      >
+        <button
+          onClick={e => { e.stopPropagation(); onSelect(pkg); }}
+          className={'btn btn-arrow ' + (pkg.featured ? 'btn-light' : 'btn-dark')}
+          style={{ width: '100%', justifyContent: 'center' }}
+        >
+          Start Free Trial <IconArrowRight size={16} />
+        </button>
+      </div>
       <button
         className="sts-pkg-toggle"
         onClick={e => { e.stopPropagation(); setOpen(o => !o); }}
@@ -1072,16 +1083,24 @@ function PkgCard({ pkg, delay, isSelected, onSelect }) {
 function StsPackages() {
   const headRef = useReveal();
   const [selectedPkg, setSelectedPkg] = useStateSTS(null);
+  const revealRef = useRefSTS(null);
+
+  const handleSelect = (pkg) => {
+    setSelectedPkg(pkg);
+    setTimeout(() => {
+      if (revealRef.current) revealRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 80);
+  };
 
   return (
     <section className="canvas-light band" id="sts-packages">
       <div className="container">
         <div ref={headRef} className="sec-head center sts-reveal">
           <span className="eyebrow">What is Included</span>
-          <h2 className="display">Pick what fits your business</h2>
+          <h2 className="display">Try it free for 7 days.<br />Pay only if it works.</h2>
           <p className="lead">
-            Two plans. Both run on the same system - the difference is how much we handle for you.
-            Click a plan to get started.
+            Two plans. Both start with a free trial — no setup fee, no commitment.
+            Pick what fits your business.
           </p>
         </div>
         <div className="sts-pkg-grid-new">
@@ -1091,21 +1110,21 @@ function StsPackages() {
               pkg={p}
               delay={i * 0.12}
               isSelected={selectedPkg && selectedPkg.id === p.id}
-              onSelect={setSelectedPkg}
+              onSelect={handleSelect}
             />
           ))}
         </div>
 
         {selectedPkg && (
-          <div className="sts-pkg-reveal" key={selectedPkg.id}>
+          <div className="sts-pkg-reveal" key={selectedPkg.id} ref={revealRef}>
             <div className="sts-pkg-reveal-inner">
               <div className="sts-pkg-reveal-head">
                 <div className="sts-pkg-reveal-eyebrow">
-                  <span className="sts-status-dot" style={{ background: 'var(--accent)', width: '8px', height: '8px' }} />
-                  {selectedPkg.name} selected
+                  <span className="sts-status-dot" style={{ background: '#4ADE80', width: '8px', height: '8px' }} />
+                  {selectedPkg.name} — free trial
                 </div>
-                <h3 className="sts-pkg-reveal-title">How would you like to get started?</h3>
-                <p className="sts-pkg-reveal-sub">Both options get you live within 48 hours.</p>
+                <h3 className="sts-pkg-reveal-title">How would you like to start your trial?</h3>
+                <p className="sts-pkg-reveal-sub">7 days live, no setup fee, no commitment. Both options get you running fast.</p>
               </div>
               <div className="sts-pkg-reveal-choices">
                 <button
@@ -1116,15 +1135,15 @@ function StsPackages() {
                   <div className="sts-pkg-choice-icon">📅</div>
                   <div className="sts-pkg-choice-body">
                     <div className="sts-pkg-choice-title">Book a Call</div>
-                    <div className="sts-pkg-choice-desc">10 mins with our team - questions answered, setup started same day</div>
+                    <div className="sts-pkg-choice-desc">10 mins — we walk you through it and get your trial live same day</div>
                   </div>
                   <IconArrowRight size={20} />
                 </button>
                 <a href={"setup.html?plan=" + selectedPkg.id} className="sts-pkg-choice">
                   <div className="sts-pkg-choice-icon">⚡</div>
                   <div className="sts-pkg-choice-body">
-                    <div className="sts-pkg-choice-title">Self Setup</div>
-                    <div className="sts-pkg-choice-desc">Fill a 3-min form - we handle the rest and get you live within 48 hrs</div>
+                    <div className="sts-pkg-choice-title">Fill in the Form</div>
+                    <div className="sts-pkg-choice-desc">3-min form — we handle everything and get your trial live within 48 hrs</div>
                   </div>
                   <IconArrowRight size={20} />
                 </a>

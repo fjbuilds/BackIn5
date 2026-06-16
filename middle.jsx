@@ -372,30 +372,29 @@ const HOW_SCENARIOS = [
 
 },
 {
-  key: "checkatrade",
-  title: "Checkatrade Lead",
-  sub: "New lead drops in your queue",
-  Icon: window.IconStar,
+  key: "whatsapp",
+  title: "WhatsApp Enquiry",
+  sub: "Message drops on your WhatsApp",
+  Icon: window.IconMessage,
   steps: [
-  "New Checkatrade lead comes through",
-  "BackIn5 qualifies the enquiry before any other firm",
-  "Customer receives an instant tailored response",
-  "Photos, availability and job details collected",
-  "Qualified enquiry arrives ready to quote"],
+  "Customer messages your WhatsApp business number",
+  "Instant reply sent - they're kept engaged before they move on",
+  "Job details, photos and postcode collected automatically",
+  "Customer books a callback or confirms availability",
+  "Qualified enquiry arrives in your dashboard, ready to quote"]
 
-  note: "Filter enquiries by service area, job type, urgency, budget and more."
 },
 {
-  key: "out-of-hours",
-  title: "Out-of-Hours Enquiry",
-  sub: "Evening / weekend / bank holiday",
-  Icon: window.IconClock,
+  key: "email",
+  title: "Email Enquiry",
+  sub: "Customer emails in a job request",
+  Icon: window.IconChat,
   steps: [
-  "Customer enquires after hours",
-  "Instant response sent 24/7",
-  "Enquiry details collected automatically",
-  "Customer books suitable callback / site visit time",
-  "You wake up to new jobs - no enquiries left waiting until morning"]
+  "Customer sends an email enquiry",
+  "Instant acknowledgement sent - no awkward silence",
+  "BackIn5 follows up to collect job details and photos",
+  "Customer confirms availability and next steps",
+  "Enquiry arrives in your dashboard, organised and ready to quote"]
 
 },
 {
@@ -425,9 +424,7 @@ function HowItWorks() {
           <h2 className="display">
 Every enquiry type, handled from start to finish
           </h2>
-          <p className="lead" style={{ color: "rgb(14, 17, 22)", fontSize: "18px", fontFamily: "Inter" }}>From missed calls to Checkatrade leads, Backin5 captures, qualifies and organises enquiries whilst your team’s busy.
-
-
+          <p className="lead" style={{ color: "rgb(14, 17, 22)", fontSize: "18px", fontFamily: "Inter" }}>Calls, WhatsApp, email, Facebook, website — every channel covered. BackIn5 captures, qualifies and organises every enquiry whilst your team’s busy on-site.
           </p>
         </div>
 

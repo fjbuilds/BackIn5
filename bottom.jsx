@@ -75,7 +75,7 @@ function Pricing() {
     name: "Smart Enquiry Handling",
     tagline: "For trades who miss calls & messages while working and need every enquiry answered, captured and organised.",
     price: 199,
-    foot: "Monthly rolling · Cancel with 30 days' notice after your first month",
+    foot: "",
     bottomLine: "Best for smaller trade businesses that need faster replies and better enquiry organisation, without full quote or booking automation.",
     feats: [
       "Instant replies to new enquiries",
@@ -93,7 +93,7 @@ function Pricing() {
     name: "Full Inbound Desk",
     tagline: "A complete inbound enquiry and booking system. Without office staff.",
     price: 349,
-    foot: "Monthly rolling · Cancel with 30 days' notice after your first month",
+    foot: "",
     bottomLine: "Best for busy firms that want enquiries handled properly from first message through to callback, quote or booked visit. Without lifting a finger.",
     feats: [
       "Everything in Smart Enquiry Handling",
@@ -131,8 +131,8 @@ function Pricing() {
           <div className="trial-flow-step">
             <div className="trial-flow-num">1</div>
             <div>
-              <div className="trial-flow-label">Book a call</div>
-              <div className="trial-flow-sub">10 mins with our team</div>
+              <div className="trial-flow-label">Select your package</div>
+              <div className="trial-flow-sub">Tier 1 or Tier 2 below</div>
             </div>
           </div>
           <div className="trial-flow-arrow">→</div>
@@ -177,7 +177,7 @@ function Pricing() {
                 style={{ width: "100%", justifyContent: "center" }}>
                 Start Free Trial <IconArrowRight size={16} />
               </button>
-              <div className="price-foot" style={{ textAlign: "center" }}>{t.foot}</div>
+              {t.foot && <div className="price-foot" style={{ textAlign: "center" }}>{t.foot}</div>}
             </div>
           )}
         </div>
@@ -241,8 +241,8 @@ function TrialNudge() {
     <div className="trial-nudge" role="complementary" aria-label="Free trial offer">
       <span className="trial-nudge-dot" />
       <span><strong style={{ color: '#fff' }}>7-day free trial</strong> — no setup fee, no commitment</span>
-      <a href="#contact" className="trial-nudge-cta">
-        Book a call <IconArrowRight size={13} />
+      <a href="#pricing" className="trial-nudge-cta">
+        Get started <IconArrowRight size={13} />
       </a>
       <button
         className="trial-nudge-dismiss"

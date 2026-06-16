@@ -34,7 +34,7 @@ function Nav() {
           <a className="nav-link" href="#contact">Contact</a>
         </div>
         <div className="nav-cta">
-          <a href="see-the-system.html#sts-packages" className="btn btn-primary btn-sm nav-cta-btn">Get Started</a>
+          <a href="#pricing" className="btn btn-primary btn-sm nav-cta-btn">Get Started</a>
           <button
             className={"nav-burger " + (menuOpen ? "is-open" : "")}
             onClick={() => setMenuOpen((o) => !o)}
@@ -54,7 +54,7 @@ function Nav() {
           <a className="nav-drawer-link" href="#pricing" onClick={close}>Pricing</a>
           <a className="nav-drawer-link" href="#faqs" onClick={close}>FAQs</a>
           <a className="nav-drawer-link" href="#contact" onClick={close}>Contact</a>
-          <a href="see-the-system.html#sts-packages" className="btn btn-primary btn-lg nav-drawer-cta" onClick={close}>
+          <a href="#pricing" className="btn btn-primary btn-lg nav-drawer-cta" onClick={close}>
             Get Started <IconArrowRight size={16} />
           </a>
         </div>
@@ -331,16 +331,12 @@ function HeroV1({ headline, lead }) {
         <h1 className="display-hero" style={{ fontSize: "60px" }}>{headline}</h1>
         <div style={{ height: 28 }} />
         <p className="hero-lead">{lead}</p>
-        <p className="hero-lead" style={{ marginTop: 18, fontSize: 16, color: "rgba(234,236,241,0.5)" }}>Built to Save Time and Stop Customers Shopping Around.
-
-        </p>
         <div style={{ height: 32 }} />
         <div className="hero-cta-row">
-          <a href="see-the-system.html" className="btn btn-primary btn-lg btn-arrow">
-            How does it work? <IconArrowRight size={16} />
+          <a href="#pricing" className="btn btn-trial btn-lg btn-arrow">
+            Start 7-day free trial <IconArrowRight size={16} />
           </a>
-          <a href="#pricing" className="btn btn-ghost-dark btn-lg">7-day free trial →</a>
-          <span className="hero-cta-note"></span>
+          <a href="see-the-system.html" className="btn btn-ghost-dark btn-lg">How does it work?</a>
         </div>
       </div>
       <PanelCarousel />
