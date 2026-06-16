@@ -988,56 +988,69 @@ function StsPackages() {
 
         <div ref={blockRef} className="sts-reveal sts-trial-block">
           <div className="sts-trial-art" aria-hidden="true">
-            {/* Big stylised brand "5" with morphing channel icon inside */}
-            <span className="sts-art-five">5</span>
-            <div className="sts-art-ring" />
-            <div className="sts-art-channel-stack">
-              {/* Phone */}
-              <span className="sts-art-channel sts-art-ch-1">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
-                  <path d="M5 4a2 2 0 012-2h2l2 4-2 1a10 10 0 005 5l1-2 4 2v2a2 2 0 01-2 2A14 14 0 015 6V4z"
-                        stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </span>
-              {/* SMS / Message bubble */}
-              <span className="sts-art-channel sts-art-ch-2">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
-                  <path d="M4 5h16a1 1 0 011 1v10a1 1 0 01-1 1h-9l-5 4v-4H4a1 1 0 01-1-1V6a1 1 0 011-1z"
-                        stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
-                  <circle cx="8.5" cy="11" r="1" fill="currentColor"/>
-                  <circle cx="12" cy="11" r="1" fill="currentColor"/>
-                  <circle cx="15.5" cy="11" r="1" fill="currentColor"/>
-                </svg>
-              </span>
-              {/* WhatsApp */}
-              <span className="sts-art-channel sts-art-ch-3">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.7-1.2A9 9 0 1012 3z"
-                        stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
-                  <path d="M8.5 9c0-.6.5-1 1-1h1l1 2-1 .7a4.5 4.5 0 002.8 2.8l.7-1 2 1v1c0 .5-.4 1-1 1A7.5 7.5 0 018.5 9z"
-                        stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round"/>
-                </svg>
-              </span>
-              {/* Email */}
-              <span className="sts-art-channel sts-art-ch-4">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
-                  <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.6"/>
-                  <path d="M3 7l9 6 9-6" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
-                </svg>
-              </span>
-              {/* Website chat */}
-              <span className="sts-art-channel sts-art-ch-5">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
-                  <rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.6"/>
-                  <path d="M3 8h18" stroke="currentColor" strokeWidth="1.6"/>
-                  <path d="M7 13h6M7 15.5h4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-                </svg>
-              </span>
+            {/* Phone mockup with real enquiries landing during the trial */}
+            <div className="sts-phone">
+              <div className="sts-phone-notch" />
+              <div className="sts-phone-screen">
+                <div className="sts-phone-statbar">
+                  <span>9:41</span>
+                  <span className="sts-phone-statbar-right">
+                    <svg width="14" height="9" viewBox="0 0 14 9" fill="none">
+                      <rect x="0" y="2" width="11" height="6" rx="1" stroke="#0E1116" strokeWidth="0.9"/>
+                      <rect x="2" y="3.5" width="6" height="3" fill="#0E1116"/>
+                      <rect x="12" y="3.5" width="1.5" height="3" rx="0.4" fill="#0E1116"/>
+                    </svg>
+                  </span>
+                </div>
+                <div className="sts-phone-header">
+                  <div className="sts-phone-header-app">BackIn5</div>
+                  <div className="sts-phone-header-day">Trial · Day 3</div>
+                </div>
+
+                <div className="sts-phone-feed">
+                  <div className="sts-phone-card sts-phone-card-1">
+                    <div className="sts-phone-card-icon sts-phone-icon-call">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M3 2a1 1 0 011-1h1.4l1 2.5L4.8 4.5a7 7 0 003.7 3.7L9.5 7l2.5 1V9.4a1 1 0 01-1 1A9.4 9.4 0 013 2z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                    <div className="sts-phone-card-body">
+                      <div className="sts-phone-card-title">Missed call replied</div>
+                      <div className="sts-phone-card-sub">Sarah K · leak repair · BS6</div>
+                    </div>
+                    <div className="sts-phone-card-time">14:02</div>
+                  </div>
+
+                  <div className="sts-phone-card sts-phone-card-2">
+                    <div className="sts-phone-card-icon sts-phone-icon-msg">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M2 3h10v6H7l-3 3V9H2z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                    <div className="sts-phone-card-body">
+                      <div className="sts-phone-card-title">New enquiry</div>
+                      <div className="sts-phone-card-sub">Mike T · flat roof · Bristol</div>
+                    </div>
+                    <div className="sts-phone-card-time">14:11</div>
+                  </div>
+
+                  <div className="sts-phone-card sts-phone-card-3">
+                    <div className="sts-phone-card-icon sts-phone-icon-book">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <rect x="2" y="3" width="10" height="9" rx="1.2" stroke="currentColor" strokeWidth="1.2"/>
+                        <path d="M2 6h10M5 2v2M9 2v2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+                        <path d="M5 9l1.5 1.5L9 8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                    <div className="sts-phone-card-body">
+                      <div className="sts-phone-card-title">Site visit booked</div>
+                      <div className="sts-phone-card-sub">Thursday 9:30am · confirmed</div>
+                    </div>
+                    <div className="sts-phone-card-time">14:14</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            {/* Floating orbit dots */}
-            <span className="sts-art-orbit-dot sts-art-orbit-dot-1" />
-            <span className="sts-art-orbit-dot sts-art-orbit-dot-2" />
-            <span className="sts-art-orbit-dot sts-art-orbit-dot-3" />
           </div>
 
           <div className="sts-trial-copy">
