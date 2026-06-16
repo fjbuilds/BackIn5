@@ -562,7 +562,6 @@ function Hero({ variant }) {
           <span className="item">BUILT FOR BUSY TRADES</span>
           <span className="item" style={{ color: "rgb(255, 255, 255)" }}>ENQUIRIES HANDLED 24/7</span>
           <span className="item">LIVE DASHBOARD INCLUDED</span>
-          <span className="item" style={{ color: "#4ADE80" }}>7-DAY FREE TRIAL</span>
         </div>
       </div>
     </section>);
