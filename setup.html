@@ -70,11 +70,36 @@
   </div>
   <div class="tally-wrap">
     <iframe
-      src="https://tally.so/embed/pbvz9y?alignLeft=1&hideTitle=0&transparentBackground=0&dynamicHeight=0"
+      data-tally-src="https://tally.so/embed/pbvz9y?alignLeft=1&hideTitle=0&transparentBackground=0&dynamicHeight=0"
       title="BackIn5 Setup Form"
       allow="clipboard-write"
-      loading="lazy">
+      loading="lazy"
+      width="100%"
+      height="100%"
+      frameborder="0">
     </iframe>
   </div>
+  <script>
+    var d = document,
+        w = "https://tally.so/widgets/embed.js",
+        v = function () {
+          if (typeof Tally !== "undefined") {
+            Tally.loadEmbeds();
+          } else {
+            d.querySelectorAll("iframe[data-tally-src]:not([src=''])").forEach(function (e) {
+              e.src = e.dataset.tallySrc;
+            });
+          }
+        };
+    if (typeof Tally !== "undefined") {
+      v();
+    } else if (d.querySelector('script[src="' + w + '"]') == null) {
+      var s = d.createElement("script");
+      s.src = w;
+      s.onload = v;
+      s.onerror = v;
+      d.body.appendChild(s);
+    }
+  </script>
 </body>
 </html>
