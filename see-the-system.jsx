@@ -988,7 +988,79 @@ function StsPackages() {
 
         <div ref={blockRef} className="sts-reveal sts-trial-block">
           <div className="sts-trial-art" aria-hidden="true">
-            {/* Phone mockup showing the real BackIn5 dashboard, gently scrolling */}
+            {/* Channel chips flowing INTO the phone (the live dashboard) */}
+            <div className="sts-flow-channels">
+              <div className="sts-flow-chip sts-flow-chip-1">
+                <span className="sts-flow-chip-ic" style={{ color: '#B83A3A' }}>
+                  <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                    <path d="M3 2a1 1 0 011-1h1.4l1 2.5L4.8 4.5a7 7 0 003.7 3.7L9.5 7l2.5 1V9.4a1 1 0 01-1 1A9.4 9.4 0 013 2z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+                    <path d="M11 1.5l-2 2M9 1.5l2 2" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round"/>
+                  </svg>
+                </span>
+                Missed call
+              </div>
+              <div className="sts-flow-chip sts-flow-chip-2">
+                <span className="sts-flow-chip-ic" style={{ color: '#22944F' }}>
+                  <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                    <path d="M2 3h10v6H7l-3 3V9H2z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+                WhatsApp
+              </div>
+              <div className="sts-flow-chip sts-flow-chip-3">
+                <span className="sts-flow-chip-ic" style={{ color: '#1B3380' }}>
+                  <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                    <path d="M2 3h10v6H7l-3 3V9H2z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+                Facebook DM
+              </div>
+              <div className="sts-flow-chip sts-flow-chip-4">
+                <span className="sts-flow-chip-ic" style={{ color: '#3450b3' }}>
+                  <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                    <rect x="2" y="3" width="10" height="8" rx="1" stroke="currentColor" strokeWidth="1.2"/>
+                    <path d="M2 4l5 4 5-4" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+                Email
+              </div>
+              <div className="sts-flow-chip sts-flow-chip-5">
+                <span className="sts-flow-chip-ic" style={{ color: '#0E1116' }}>
+                  <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                    <rect x="1.5" y="2.5" width="11" height="8" rx="1" stroke="currentColor" strokeWidth="1.2"/>
+                    <path d="M1.5 5h11" stroke="currentColor" strokeWidth="1.2"/>
+                  </svg>
+                </span>
+                Web chat
+              </div>
+              <div className="sts-flow-chip sts-flow-chip-6">
+                <span className="sts-flow-chip-ic" style={{ color: '#C9802B' }}>
+                  <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                    <path d="M7 1.5l1.8 3.7 4 .6-2.9 2.8.7 4-3.6-1.9-3.6 1.9.7-4L1.2 5.8l4-.6z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+                Checkatrade
+              </div>
+            </div>
+
+            {/* SVG with curved paths + travelling particles from chips to phone */}
+            <svg className="sts-flow-paths" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="stsFlowLine" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%"   stopColor="rgba(35,65,168,0)" />
+                  <stop offset="60%"  stopColor="rgba(35,65,168,0.45)" />
+                  <stop offset="100%" stopColor="rgba(35,65,168,0)" />
+                </linearGradient>
+              </defs>
+              <path className="sts-flow-path" d="M 60 40   C 160 40,  200 150, 270 150" style={{ animationDelay: '0s'   }} />
+              <path className="sts-flow-path" d="M 60 90   C 170 90,  220 150, 270 150" style={{ animationDelay: '0.4s' }} />
+              <path className="sts-flow-path" d="M 60 140  C 180 140, 230 150, 270 150" style={{ animationDelay: '0.8s' }} />
+              <path className="sts-flow-path" d="M 60 180  C 180 180, 230 150, 270 150" style={{ animationDelay: '1.2s' }} />
+              <path className="sts-flow-path" d="M 60 230  C 170 230, 220 150, 270 150" style={{ animationDelay: '1.6s' }} />
+              <path className="sts-flow-path" d="M 60 280  C 160 280, 200 150, 270 150" style={{ animationDelay: '2.0s' }} />
+            </svg>
+
+            {/* Phone showing the real BackIn5 dashboard, crossfading views */}
             <div className="sts-phone">
               <div className="sts-phone-notch" />
               <div className="sts-phone-screen">

@@ -1310,32 +1310,124 @@
 }
 
 /* ── Animated illustration ── */
-/* Canvas behind the phone */
+/* Canvas behind the phone + channels */
 .sts-trial-art {
   position: relative;
   aspect-ratio: 4/3;
   border-radius: 20px;
-  background: linear-gradient(160deg, #F5F7FA 0%, #EAEEF5 100%);
+  background:
+    radial-gradient(80% 60% at 75% 50%, rgba(35,65,168,0.08), transparent 70%),
+    linear-gradient(160deg, #F5F7FA 0%, #EAEEF5 100%);
   border: 1px solid #E5E8EE;
   overflow: hidden;
-  min-height: 340px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 28px 0;
+  min-height: 360px;
+  padding: 24px 0;
 }
 
-/* Phone sized by HEIGHT so it always fits the container fully */
+/* Subtle grid background */
+.sts-trial-art::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(35,65,168,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(35,65,168,0.04) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(80% 80% at 65% 50%, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(80% 80% at 65% 50%, #000 30%, transparent 75%);
+  pointer-events: none;
+}
+
+/* Channel chips floating on the left, flowing into the phone */
+.sts-flow-channels {
+  position: absolute;
+  left: 4%; top: 0; bottom: 0;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  z-index: 2;
+  padding: 14px 0;
+}
+.sts-flow-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #fff;
+  border: 1px solid #E5E8EE;
+  border-radius: 100px;
+  padding: 7px 12px 7px 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #0E1116;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px -6px rgba(14,17,22,0.18);
+  width: fit-content;
+  opacity: 0;
+  animation: flowChipIn 600ms cubic-bezier(0.16,1,0.3,1) forwards,
+             flowChipFloat 5.5s ease-in-out infinite 800ms;
+}
+.sts-flow-chip-ic {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #F5F7FA;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sts-flow-chip-1 { align-self: flex-start;  animation-delay: 0s, 0.6s;    margin-left: 2%;  }
+.sts-flow-chip-2 { align-self: flex-end;    animation-delay: 0.15s, 1.0s; margin-right: -2%; }
+.sts-flow-chip-3 { align-self: flex-start;  animation-delay: 0.30s, 0.4s; margin-left: 12%; }
+.sts-flow-chip-4 { align-self: flex-end;    animation-delay: 0.45s, 1.4s; margin-right: 2%; }
+.sts-flow-chip-5 { align-self: flex-start;  animation-delay: 0.60s, 0.2s; margin-left: 4%;  }
+.sts-flow-chip-6 { align-self: flex-end;    animation-delay: 0.75s, 1.2s; margin-right: -3%; }
+
+@keyframes flowChipIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes flowChipFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
+/* SVG with curved flow lines + travelling particles */
+.sts-flow-paths {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.sts-flow-path {
+  fill: none;
+  stroke: url(#stsFlowLine);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 4 6;
+  stroke-dashoffset: 0;
+  animation: flowDash 1.6s linear infinite;
+  opacity: 0.65;
+}
+@keyframes flowDash {
+  to { stroke-dashoffset: -20; }
+}
+
+/* Phone positioned on the right, sized by container height */
 .sts-phone {
-  position: relative;
-  height: 100%;
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  transform: translateY(-50%);
+  height: calc(100% - 32px);
   aspect-ratio: 9/19;
   background: #0E1116;
-  border-radius: 30px;
-  padding: 8px;
+  border-radius: 28px;
+  padding: 7px;
   box-shadow:
     0 36px 60px -20px rgba(14,17,22,0.32),
     0 14px 30px -10px rgba(14,17,22,0.18);
+  z-index: 3;
 }
 .sts-phone-notch {
   position: absolute;
@@ -1384,16 +1476,24 @@
 @media (max-width: 860px) {
   .sts-trial-art {
     aspect-ratio: 4/3;
-    min-height: 380px;
-    padding: 24px 0;
+    min-height: 400px;
+    padding: 22px 0;
   }
+  .sts-flow-channels { width: 44%; }
+  .sts-flow-chip { font-size: 10.5px; padding: 6px 10px 6px 6px; gap: 6px; }
+  .sts-flow-chip-ic { width: 20px; height: 20px; }
 }
 @media (max-width: 560px) {
   .sts-trial-art {
     aspect-ratio: auto;
-    min-height: 420px;
-    padding: 22px 0;
+    min-height: 440px;
+    padding: 18px 0;
   }
+  .sts-flow-channels { width: 42%; left: 3%; }
+  .sts-flow-chip { font-size: 9.5px; padding: 5px 8px 5px 5px; gap: 5px; }
+  .sts-flow-chip-ic { width: 18px; height: 18px; }
+  .sts-flow-chip-ic svg { width: 10px; height: 10px; }
+  .sts-phone { right: 3%; }
 }
 
 /* ── Benefit copy ── */

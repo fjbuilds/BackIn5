@@ -87,23 +87,20 @@ function BuiltFor({ singleTradeMode, focusTradeKey, setFocus }) {
             </div>
           </React.Fragment> :
 
-        <div className="trades-split">
-          <div className="trades-grid">
-            {TRADES.map((t, i) =>
-              <button
-                type="button"
-                key={t.key}
-                className={"trade-card " + (i === activeIdx ? "active" : "")}
-                onClick={() => { userPicked.current = true; setActiveIdx(i); }}
-                aria-pressed={i === activeIdx}
-              >
-                <div className="ic"><t.Icon /></div>
-                <div className="ttl">{t.name}</div>
-                <div className="desc">{t.desc}</div>
-              </button>
-            )}
-          </div>
-          <BuiltForMotion activeTrade={activeTrade} />
+        <div className="trades-grid trades-grid-full">
+          {TRADES.map((t, i) =>
+            <button
+              type="button"
+              key={t.key}
+              className={"trade-card " + (i === activeIdx ? "active" : "")}
+              onClick={() => { userPicked.current = true; setActiveIdx(i); }}
+              aria-pressed={i === activeIdx}
+            >
+              <div className="ic"><t.Icon /></div>
+              <div className="ttl">{t.name}</div>
+              <div className="desc">{t.desc}</div>
+            </button>
+          )}
         </div>
         }
 
