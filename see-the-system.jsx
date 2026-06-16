@@ -974,76 +974,135 @@ function StsSetup() {
 // ============================================================
 function StsPackages() {
   const headRef = useReveal();
+  const blockRef = useReveal();
   const choicesRef = useReveal();
 
   return (
     <section className="canvas-light band" id="sts-packages">
       <div className="container">
-        <div ref={headRef} className="sec-head center sts-reveal">
+        <div ref={headRef} className="sec-head center sts-reveal sts-trial-head">
           <span className="eyebrow">Try BackIn5 Free</span>
-          <h2 className="display">7 days live in your business.<br />No card. No commitment.</h2>
+          <h2 className="sts-trial-title">7 days, fully live. No card. No commitment.</h2>
+          <p className="sts-trial-sub">We set it up, switch it on, and you watch real enquiries land for a week. Continue if it works. Walk away if it doesn't.</p>
         </div>
 
-        <div className="sts-trial-block">
+        <div ref={blockRef} className="sts-reveal sts-trial-block">
           <div className="sts-trial-art" aria-hidden="true">
-            <div className="sts-trial-art-bg"></div>
-            <div className="sts-trial-art-card sts-trial-art-card-1">
-              <div className="sts-trial-art-dot"></div>
-              <div>
-                <div className="sts-trial-art-line"></div>
-                <div className="sts-trial-art-line sts-trial-art-line-short"></div>
+            {/* Animated dashboard mock */}
+            <div className="sts-art-window">
+              <div className="sts-art-titlebar">
+                <span className="sts-art-traffic"><i /><i /><i /></span>
+                <span className="sts-art-tt">Enquiry dashboard</span>
+              </div>
+              <div className="sts-art-body">
+                <div className="sts-art-row sts-art-row-1">
+                  <span className="sts-art-pin sts-art-pin-new" />
+                  <div className="sts-art-rowlines">
+                    <span className="sts-art-line sts-art-line-w70" />
+                    <span className="sts-art-line sts-art-line-w40" />
+                  </div>
+                  <span className="sts-art-tag sts-art-tag-new">New</span>
+                </div>
+                <div className="sts-art-row sts-art-row-2">
+                  <span className="sts-art-pin sts-art-pin-qual" />
+                  <div className="sts-art-rowlines">
+                    <span className="sts-art-line sts-art-line-w60" />
+                    <span className="sts-art-line sts-art-line-w50" />
+                  </div>
+                  <span className="sts-art-tag sts-art-tag-qual">Qualified</span>
+                </div>
+                <div className="sts-art-row sts-art-row-3">
+                  <span className="sts-art-pin sts-art-pin-bk" />
+                  <div className="sts-art-rowlines">
+                    <span className="sts-art-line sts-art-line-w55" />
+                    <span className="sts-art-line sts-art-line-w35" />
+                  </div>
+                  <span className="sts-art-tag sts-art-tag-bk">Booked</span>
+                </div>
               </div>
             </div>
-            <div className="sts-trial-art-card sts-trial-art-card-2">
-              <div className="sts-trial-art-dot sts-trial-art-dot-2"></div>
-              <div>
-                <div className="sts-trial-art-line"></div>
-                <div className="sts-trial-art-line sts-trial-art-line-short"></div>
-              </div>
-            </div>
-            <div className="sts-trial-art-badge">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M5 9.5l3 3 6-6" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+
+            {/* Incoming notification chips */}
+            <div className="sts-art-chip sts-art-chip-1">
+              <span className="sts-art-chip-pulse" />
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <span>7 days free</span>
+              <span>New enquiry</span>
+            </div>
+            <div className="sts-art-chip sts-art-chip-2">
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                <path d="M3 5l5-3 1 1-5 3zM3 5v4l3 1V6z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>Missed call replied</span>
+            </div>
+            <div className="sts-art-chip sts-art-chip-3">
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                <path d="M2 5l4 4 4-7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>Job booked in</span>
+            </div>
+
+            {/* 7-day badge with subtle pulse */}
+            <div className="sts-art-badge">
+              <div className="sts-art-badge-num">7</div>
+              <div className="sts-art-badge-text">
+                <div>Days</div>
+                <div>Free</div>
+              </div>
             </div>
           </div>
 
           <div className="sts-trial-copy">
-            <p className="sts-trial-lead">
-              We set the whole system up properly, get it running in your business within 24 hours, and you spend a week watching real enquiries land in one place. If it's not for you, walk away. Nothing to cancel.
-            </p>
             <ul className="sts-trial-points">
-              <li>Full system live, not a demo</li>
-              <li>Tailored to how your trade quotes jobs</li>
-              <li>No setup fee if you continue after</li>
+              <li>
+                <strong>Live in 24 hours.</strong>
+                <span>Fully built around your trade. Not a demo.</span>
+              </li>
+              <li>
+                <strong>Real enquiries, real jobs.</strong>
+                <span>Watch the system work in your business for a week.</span>
+              </li>
+              <li>
+                <strong>No setup fee, no card.</strong>
+                <span>Continue after the trial and the setup fee stays waived.</span>
+              </li>
             </ul>
           </div>
         </div>
 
         <div ref={choicesRef} className="sts-reveal sts-trial-choices-wrap">
           <h3 className="sts-trial-choices-title">How do you want to start?</h3>
-          <div className="sts-pkg-reveal-choices sts-trial-choices">
-            <button
-              className="sts-pkg-choice"
-              onClick={() => window.Calendly && window.Calendly.initPopupWidget({ url: 'https://calendly.com/backin5/30min?primary_color=164d9c' })}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', padding: 0 }}
-            >
-              <div className="sts-pkg-choice-icon">📅</div>
-              <div className="sts-pkg-choice-body">
-                <div className="sts-pkg-choice-title">Book a quick chat</div>
-                <div className="sts-pkg-choice-desc">10 mins to walk through it and get your trial live same day</div>
+          <div className="sts-trial-choices">
+            <a href="trial.html" className="sts-trial-choice sts-trial-choice-primary">
+              <div className="sts-trial-choice-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M11 2L4 11h5l-1 7 7-9h-5l1-7z" fill="currentColor"/>
+                </svg>
               </div>
-              <IconArrowRight size={20} />
-            </button>
-            <a href="trial.html" className="sts-pkg-choice">
-              <div className="sts-pkg-choice-icon">⚡</div>
-              <div className="sts-pkg-choice-body">
-                <div className="sts-pkg-choice-title">Start straight away</div>
-                <div className="sts-pkg-choice-desc">3-min form, we handle everything and get your trial live within 24 hrs</div>
+              <div className="sts-trial-choice-body">
+                <div className="sts-trial-choice-title">Start straight away</div>
+                <div className="sts-trial-choice-desc">3-min form. Live in 24 hours.</div>
               </div>
-              <IconArrowRight size={20} />
+              <span className="sts-trial-choice-arrow"><IconArrowRight size={18} /></span>
             </a>
+            <button
+              className="sts-trial-choice sts-trial-choice-secondary"
+              onClick={() => window.Calendly && window.Calendly.initPopupWidget({ url: 'https://calendly.com/backin5/30min?primary_color=164d9c' })}
+              type="button"
+            >
+              <div className="sts-trial-choice-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor" strokeWidth="1.6"/>
+                  <path d="M3 8h14M7 2v4M13 2v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+                </svg>
+              </div>
+              <div className="sts-trial-choice-body">
+                <div className="sts-trial-choice-title">Book a quick chat</div>
+                <div className="sts-trial-choice-desc">10 mins. Trial live same day.</div>
+              </div>
+              <span className="sts-trial-choice-arrow"><IconArrowRight size={18} /></span>
+            </button>
           </div>
         </div>
       </div>
