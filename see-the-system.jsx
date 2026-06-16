@@ -187,7 +187,7 @@ const STS_SCENARIOS = [
     icon: 'message',
     steps: [
       'Customer messages your WhatsApp business number',
-      'Instant reply sent — they\'re kept engaged before they move on',
+      'Instant reply sent, keeping them engaged before they move on',
       'Job details, photos and postcode collected automatically',
       'Customer books a callback or confirms availability',
       'Enquiry arrives in your dashboard, ready to quote',
@@ -200,7 +200,7 @@ const STS_SCENARIOS = [
     icon: 'chat',
     steps: [
       'Customer sends an email enquiry',
-      'Instant acknowledgement sent — no awkward silence',
+      'Instant acknowledgement sent, no waiting around',
       'BackIn5 follows up to collect job details and photos',
       'Customer confirms availability and next steps',
       'Enquiry arrives in your dashboard, organised and ready to quote',
@@ -245,7 +245,7 @@ function StsHowItWorks() {
 Every enquiry type, handled.
           </h2>
           <p className="lead">
-            Calls, WhatsApp, email, Facebook, website — every channel covered. BackIn5 captures,
+            Calls, WhatsApp, email, Facebook and website enquiries all covered. BackIn5 captures,
             qualifies and organises every enquiry while your team is busy on-site.
           </p>
         </div>
@@ -381,7 +381,7 @@ function StsQuoteAssistant() {
                 <div className="sts-fake-site">
                   {/* Top utility bar */}
                   <div className="sts-fake-topbar">
-                    <span>Mon–Fri: 8am – 6pm</span>
+                    <span>Mon-Fri: 8am - 6pm</span>
                     <span className="sts-fake-topbar-phone">Call: 0800 000 0000</span>
                   </div>
                   {/* Site nav */}
@@ -1099,7 +1099,7 @@ function StsPackages() {
           <span className="eyebrow">What is Included</span>
           <h2 className="display">Try it free for 7 days.<br />Pay only if it works.</h2>
           <p className="lead">
-            Two plans. Both start with a free trial — no setup fee, no commitment.
+            Two plans. Both start with a free trial. No setup fee, no commitment.
             Pick what fits your business.
           </p>
         </div>
@@ -1121,7 +1121,7 @@ function StsPackages() {
               <div className="sts-pkg-reveal-head">
                 <div className="sts-pkg-reveal-eyebrow">
                   <span className="sts-status-dot" style={{ background: '#4ADE80', width: '8px', height: '8px' }} />
-                  {selectedPkg.name} — free trial
+                  {selectedPkg.name} selected
                 </div>
                 <h3 className="sts-pkg-reveal-title">How would you like to start your trial?</h3>
                 <p className="sts-pkg-reveal-sub">7 days live, no setup fee, no commitment. Both options get you running fast.</p>
@@ -1135,7 +1135,7 @@ function StsPackages() {
                   <div className="sts-pkg-choice-icon">📅</div>
                   <div className="sts-pkg-choice-body">
                     <div className="sts-pkg-choice-title">Book a Call</div>
-                    <div className="sts-pkg-choice-desc">10 mins — we walk you through it and get your trial live same day</div>
+                    <div className="sts-pkg-choice-desc">10 mins to walk through it and get your trial live same day</div>
                   </div>
                   <IconArrowRight size={20} />
                 </button>
@@ -1143,7 +1143,7 @@ function StsPackages() {
                   <div className="sts-pkg-choice-icon">⚡</div>
                   <div className="sts-pkg-choice-body">
                     <div className="sts-pkg-choice-title">Fill in the Form</div>
-                    <div className="sts-pkg-choice-desc">3-min form — we handle everything and get your trial live within 48 hrs</div>
+                    <div className="sts-pkg-choice-desc">3-min form, we handle everything and get your trial live within 48 hrs</div>
                   </div>
                   <IconArrowRight size={20} />
                 </a>

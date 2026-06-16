@@ -188,7 +188,7 @@ function Pricing() {
               <div className="sts-pkg-reveal-head">
                 <div className="sts-pkg-reveal-eyebrow">
                   <span className="sts-status-dot" style={{ background: '#4ADE80', width: '8px', height: '8px' }} />
-                  {selectedTier.name} — free trial
+                  {selectedTier.name} selected
                 </div>
                 <h3 className="sts-pkg-reveal-title">How would you like to start your trial?</h3>
                 <p className="sts-pkg-reveal-sub">7 days live, no setup fee, no commitment. Both options below get you running fast.</p>
@@ -201,7 +201,7 @@ function Pricing() {
                   <div className="sts-pkg-choice-icon">📅</div>
                   <div className="sts-pkg-choice-body">
                     <div className="sts-pkg-choice-title">Book a Call</div>
-                    <div className="sts-pkg-choice-desc">10 mins — we walk you through it and get your trial live same day</div>
+                    <div className="sts-pkg-choice-desc">10 mins to walk through it and get your trial live same day</div>
                   </div>
                   <IconArrowRight size={20} />
                 </button>
@@ -209,7 +209,7 @@ function Pricing() {
                   <div className="sts-pkg-choice-icon">⚡</div>
                   <div className="sts-pkg-choice-body">
                     <div className="sts-pkg-choice-title">Fill in the Form</div>
-                    <div className="sts-pkg-choice-desc">3-min form — we handle everything and get your trial live within 48 hrs</div>
+                    <div className="sts-pkg-choice-desc">3-min form, we handle everything and get your trial live within 48 hrs</div>
                   </div>
                   <IconArrowRight size={20} />
                 </a>
@@ -240,7 +240,7 @@ function TrialNudge() {
   return (
     <div className="trial-nudge" role="complementary" aria-label="Free trial offer">
       <span className="trial-nudge-dot" />
-      <span><strong style={{ color: '#fff' }}>7-day free trial</strong> — no setup fee, no commitment</span>
+      <span><strong style={{ color: '#fff' }}>7-day free trial</strong> · no setup fee · no commitment</span>
       <a href="#pricing" className="trial-nudge-cta">
         Get started <IconArrowRight size={13} />
       </a>

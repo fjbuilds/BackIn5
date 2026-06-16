@@ -424,7 +424,7 @@ function HowItWorks() {
           <h2 className="display">
 Every enquiry type, handled from start to finish
           </h2>
-          <p className="lead" style={{ color: "rgb(14, 17, 22)", fontSize: "18px", fontFamily: "Inter" }}>Calls, WhatsApp, email, Facebook, website — every channel covered. BackIn5 captures, qualifies and organises every enquiry whilst your team’s busy on-site.
+          <p className="lead" style={{ color: "rgb(14, 17, 22)", fontSize: "18px", fontFamily: "Inter" }}>Calls, WhatsApp, email, Facebook and website enquiries all covered. BackIn5 captures, qualifies and organises every one whilst your team’s busy on-site.
           </p>
         </div>
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Continue Your Trial - BackIn5</title>
-  <meta name="description" content="Continue with BackIn5 after your free trial — no setup fee, monthly rolling." />
+  <meta name="description" content="Continue with BackIn5 after your free trial. No setup fee, monthly rolling." />
   <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; }
@@ -345,8 +345,8 @@
         <div class="pay-eyebrow">Continuing from your trial</div>
         <h1>Which plan would you like?</h1>
         <p class="pay-lead">
-          Your setup fee is waived. Monthly billing starts from today —
-          cancel with 30 days' written notice after your first month.
+          Your setup fee is waived. Monthly billing starts from today.
+          Cancel with 30 days written notice after your first month.
         </p>
         <div class="pick-grid">
           ${card('tier1', PLANS.tier1)}
@@ -361,7 +361,7 @@
         <h1>Let's get you set up.</h1>
         <p class="pay-lead">
           You're continuing with <strong>${plan.tier}</strong>.
-          Your setup fee is waived — no charge for that today.
+          Your setup fee is waived. No extra charge today.
         </p>
         <p class="pay-note">
           <strong>Continuing within 24 hours of your trial ending?</strong>
@@ -380,7 +380,7 @@
           </div>
           <div class="summary-row" id="first-month-row" style="display:none">
             <span class="label">First month (50% off)</span>
-            <span class="value" id="first-month-val">—</span>
+            <span class="value" id="first-month-val">-</span>
           </div>
           <div class="summary-row total">
             <span class="label" id="due-label">Monthly</span>
@@ -392,7 +392,7 @@
           <label class="commit-line">
             <input type="checkbox" id="commit6-check" />
             <span>
-              <strong>6-month commitment</strong> — get <strong>50% off your first month</strong>
+              <strong>6-month commitment:</strong> get <strong>50% off your first month</strong>
               (£${plan.firstMonth6mo.toFixed(2)} instead of £${plan.monthly}).
               Full details in the <a href="terms.html" target="_blank" rel="noopener">Terms</a>.
             </span>
@@ -411,15 +411,15 @@
         </div>
 
         <a class="cta" id="commit-cta" href="${plan.payLinkMonthly}" data-disabled="true">
-          Continue — ${plan.monthlyFmt} →
+          Continue: ${plan.monthlyFmt} →
         </a>
         <p class="cta-note">Secured by Stripe. You'll receive a receipt by email.</p>
 
         <div class="next-steps">
           <h3>What happens next</h3>
           <ol>
-            <li>Complete payment — takes about 30 seconds.</li>
-            <li>Your <strong>dashboard stays live</strong> — no further setup needed.</li>
+            <li>Complete payment. Takes about 30 seconds.</li>
+            <li>Your <strong>dashboard stays live</strong>. No further setup needed.</li>
             <li>You'll get a <strong>brief check-in</strong> to make sure everything is running exactly how you want it.</li>
           </ol>
         </div>
@@ -447,13 +447,13 @@
           firstVal.textContent   = `£${plan.firstMonth6mo.toFixed(2)} (then £${plan.monthly}/mo)`;
           dueLabel.textContent   = 'First month';
           dueVal.textContent     = `£${plan.firstMonth6mo.toFixed(2)}`;
-          cta.textContent        = `Continue — £${plan.firstMonth6mo.toFixed(2)} today →`;
+          cta.textContent        = `Continue: £${plan.firstMonth6mo.toFixed(2)} today →`;
           cta.href               = plan.payLink6Month;
         } else {
           firstRow.style.display = 'none';
           dueLabel.textContent   = 'Monthly';
           dueVal.textContent     = plan.monthlyFmt;
-          cta.textContent        = `Continue — ${plan.monthlyFmt} →`;
+          cta.textContent        = `Continue: ${plan.monthlyFmt} →`;
           cta.href               = plan.payLinkMonthly;
         }
         refreshCta();
