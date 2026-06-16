@@ -339,7 +339,7 @@ function HeroV1({ headline, lead }) {
           <a href="see-the-system.html" className="btn btn-primary btn-lg btn-arrow">
             How does it work? <IconArrowRight size={16} />
           </a>
-          <a href="#pricing" className="btn btn-ghost-dark btn-lg">How much does it cost?</a>
+          <a href="#pricing" className="btn btn-ghost-dark btn-lg">7-day free trial →</a>
           <span className="hero-cta-note"></span>
         </div>
       </div>
@@ -566,6 +566,7 @@ function Hero({ variant }) {
           <span className="item">BUILT FOR BUSY TRADES</span>
           <span className="item" style={{ color: "rgb(255, 255, 255)" }}>ENQUIRIES HANDLED 24/7</span>
           <span className="item">LIVE DASHBOARD INCLUDED</span>
+          <span className="item" style={{ color: "#4ADE80" }}>7-DAY FREE TRIAL</span>
         </div>
       </div>
     </section>);

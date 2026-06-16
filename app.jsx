@@ -41,6 +41,7 @@ function App() {
       </main>
       <Footer />
       <ChatBubble />
+      <TrialNudge />
 
       <TweaksPanel>
         <TweakSection label="Hero" />

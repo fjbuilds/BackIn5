@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Payment - BackIn5</title>
-  <meta name="description" content="Complete your BackIn5 setup - we'll have you live within 48 hours." />
+  <title>Continue Your Trial - BackIn5</title>
+  <meta name="description" content="Continue with BackIn5 after your free trial — no setup fee, monthly rolling." />
   <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; }
@@ -80,7 +80,7 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 14px;
       padding: 22px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .summary-row {
       display: flex;
@@ -132,11 +132,11 @@
     }
 
     .commit-box {
-      background: rgba(35,65,168,0.08);
-      border: 1px solid rgba(35,65,168,0.35);
+      background: rgba(35,65,168,0.07);
+      border: 1px solid rgba(35,65,168,0.3);
       border-radius: 12px;
       padding: 14px 16px;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
     .commit-line {
       display: flex;
@@ -200,10 +200,7 @@
     }
     .pay-meta a:hover { color: #fff; }
 
-    .fallback h1 { color: #fff; }
-    .fallback .summary { display: none; }
-
-    /* ── Plan picker (shown when no ?plan= in URL) ── */
+    /* ── Plan picker ── */
     .pick-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -256,6 +253,7 @@
       color: rgba(234,236,241,0.7);
     }
     .pick-card-row strong { color: #fff; font-weight: 600; }
+    .pick-card-row .green { color: #4ADE80; font-weight: 600; }
     .pick-card-cta {
       display: inline-flex;
       align-items: center;
@@ -283,253 +281,187 @@
 
   <script>
     // ─── Plan config ──────────────────────────────────────────────
-    // Update these URLs when you go live (copy each link in Stripe
-    // via ··· → Copy to live mode, then paste the new URLs here).
+    // You need 4 Stripe Payment Links. Create them in Stripe, then
+    // paste the URLs below. For the 6-month links, apply a 50%-off
+    // coupon on the first invoice in Stripe before generating the link.
     const PLANS = {
-      smart_3mo: {
+      tier1: {
         tier: 'Smart Enquiry Handling',
-        monthly: '£199 / month',
-        term: 'Monthly rolling (3+ months)',
-        dueNow: '£99 setup fee',
-        dueNowAmount: 99,
-        payLink: 'https://buy.stripe.com/4gM9AT7bb4D308Fa9Z08g02',
+        monthly: 199,
+        monthlyFmt: '£199 / month',
+        firstMonth6mo: 99.50,
+        payLinkMonthly: 'https://buy.stripe.com/REPLACE_TIER1_MONTHLY',
+        payLink6Month:  'https://buy.stripe.com/REPLACE_TIER1_6MONTH',
       },
-      smart_6mo: {
-        tier: 'Smart Enquiry Handling',
-        monthly: '£199 / month',
-        term: '6-month commitment',
-        dueNow: '£0 today — card on file, billing starts after onboarding',
-        dueNowAmount: 0,
-        // 6-month customers go to the monthly subscription link with a trial
-        // attached in Stripe. Card captured today, £0 charged, billing starts
-        // when the trial ends (you control trial length in Stripe dashboard).
-        payLink: 'https://buy.stripe.com/dRmfZh677glL5sZdmb08g01',
-        commitsTo6Months: true,
-      },
-      full_3mo: {
+      tier2: {
         tier: 'Full Inbound Desk',
-        monthly: '£349 / month',
-        term: 'Monthly rolling (3+ months)',
-        dueNow: '£149 setup fee',
-        dueNowAmount: 149,
-        payLink: 'https://buy.stripe.com/fZubJ16774D31cJ3LB08g03',
-      },
-      full_6mo: {
-        tier: 'Full Inbound Desk',
-        monthly: '£349 / month',
-        term: '6-month commitment',
-        dueNow: '£0 today — card on file, billing starts after onboarding',
-        dueNowAmount: 0,
-        payLink: 'https://buy.stripe.com/dRm9AT2UV4D3cVr0zp08g00',
-        commitsTo6Months: true,
+        monthly: 349,
+        monthlyFmt: '£349 / month',
+        firstMonth6mo: 174.50,
+        payLinkMonthly: 'https://buy.stripe.com/REPLACE_TIER2_MONTHLY',
+        payLink6Month:  'https://buy.stripe.com/REPLACE_TIER2_6MONTH',
       },
     };
 
-    // ─── Detect plan from URL ─────────────────────────────────────
-    // Accepts:
-    //  1. Clean keys: ?plan=smart_3mo / smart_6mo / full_3mo / full_6mo
-    //  2. The raw label text from Tally, e.g.
-    //     ?plan=Tier+1+-+3%2B+months+-+%C2%A3199%2Fmo+%2B+%C2%A399+setup+fee
+    // Backwards-compat aliases (old Tally labels / direct links)
+    PLANS.smart     = PLANS.tier1;
+    PLANS.full      = PLANS.tier2;
+    PLANS.smart_3mo = PLANS.tier1;
+    PLANS.smart_6mo = PLANS.tier1;
+    PLANS.full_3mo  = PLANS.tier2;
+    PLANS.full_6mo  = PLANS.tier2;
+
     function detectPlanKey(raw) {
       if (!raw) return null;
-      const lc = raw.toLowerCase();
-      // Direct match against PLANS keys
+      const lc = decodeURIComponent(raw).toLowerCase().trim();
       if (PLANS[lc]) return lc;
-      // Pattern-match the Tally label
-      const isTier1 = lc.includes('tier 1') || lc.includes('£199') || lc.includes('199/mo');
-      const isTier2 = lc.includes('tier 2') || lc.includes('£349') || lc.includes('349/mo');
-      const is6mo   = lc.includes('6+ months') || lc.includes('6 month') || lc.includes('6-month') || lc.includes('£0 setup');
-      const is3mo   = lc.includes('3+ months') || lc.includes('3 month') || lc.includes('3-month');
-      if (isTier1 && is6mo) return 'smart_6mo';
-      if (isTier1 && is3mo) return 'smart_3mo';
-      if (isTier2 && is6mo) return 'full_6mo';
-      if (isTier2 && is3mo) return 'full_3mo';
+      const is1 = lc.includes('tier 1') || lc.includes('tier1') || lc.includes('smart') || lc.includes('199');
+      const is2 = lc.includes('tier 2') || lc.includes('tier2') || lc.includes('full')  || lc.includes('349');
+      if (is1) return 'tier1';
+      if (is2) return 'tier2';
       return null;
     }
 
-    const params = new URLSearchParams(window.location.search);
+    const params  = new URLSearchParams(window.location.search);
     const planKey = detectPlanKey(params.get('plan'));
-    const plan = planKey ? PLANS[planKey] : null;
-    const wrap = document.getElementById('pay-wrap');
+    const plan    = planKey ? PLANS[planKey] : null;
+    const wrap    = document.getElementById('pay-wrap');
 
+    // ─── No plan param: show picker ──────────────────────────────
     if (!plan) {
-      // No plan in URL — show the 4 options as cards so the customer can pick
-      const card = (key, p) => {
-        const isFree = p.dueNowAmount === 0;
-        // 6-month customers (isFree) and setup-fee customers both go to Stripe;
-        // payLink is set for both in PLANS. We just append plan as a hint.
-        const href = `payment.html?plan=${key}`;
-        const cta  = isFree ? 'Add card on file →' : `Pay £${p.dueNowAmount} →`;
-        return `
-          <a class="pick-card" href="${href}">
-            <div class="pick-card-head">
-              <div class="pick-card-tier">${p.tier}</div>
-              <div class="pick-card-term">${p.term}</div>
-            </div>
-            <div class="pick-card-body">
-              <div class="pick-card-row"><span>Monthly</span><strong>${p.monthly}</strong></div>
-              <div class="pick-card-row"><span>Due now</span><strong>${isFree ? '£0' : '£' + p.dueNowAmount}</strong></div>
-            </div>
-            <span class="pick-card-cta">${cta}</span>
-          </a>`;
-      };
+      const card = (key, p) => `
+        <a class="pick-card" href="payment.html?plan=${key}">
+          <div class="pick-card-head">
+            <div class="pick-card-tier">${p.tier}</div>
+            <div class="pick-card-term">Monthly rolling</div>
+          </div>
+          <div class="pick-card-body">
+            <div class="pick-card-row"><span>Monthly</span><strong>${p.monthlyFmt}</strong></div>
+            <div class="pick-card-row"><span>Setup fee</span><span class="green">Waived</span></div>
+          </div>
+          <span class="pick-card-cta">Continue with this plan →</span>
+        </a>`;
       wrap.innerHTML = `
-        <div class="pay-eyebrow">Step 2 of 2 · Confirm your plan</div>
-        <h1>Which plan did you sign up for?</h1>
+        <div class="pay-eyebrow">Continuing from your trial</div>
+        <h1>Which plan would you like?</h1>
         <p class="pay-lead">
-          Tap the plan you chose on the form to complete your setup.
-          Monthly billing only starts once your dashboard is live.
+          Your setup fee is waived. Monthly billing starts from today —
+          cancel with 30 days' written notice after your first month.
         </p>
         <div class="pick-grid">
-          ${card('smart_3mo', PLANS.smart_3mo)}
-          ${card('smart_6mo', PLANS.smart_6mo)}
-          ${card('full_3mo',  PLANS.full_3mo)}
-          ${card('full_6mo',  PLANS.full_6mo)}
+          ${card('tier1', PLANS.tier1)}
+          ${card('tier2', PLANS.tier2)}
         </div>
       `;
-    } else if (plan.dueNowAmount === 0) {
-      // 6-month commitment — no setup fee; capture card on file via Stripe
-      // (the linked Payment Link should have a free trial period set in Stripe
-      // so £0 is charged today and billing starts when you end the trial).
+
+    // ─── Plan selected: show confirmation ────────────────────────
+    } else {
       wrap.innerHTML = `
-        <div class="pay-eyebrow">Step 2 of 2 · Confirm 6-month commitment</div>
-        <h1>£0 today — card on file only.</h1>
+        <div class="pay-eyebrow">Continuing from your trial</div>
+        <h1>Let's get you set up.</h1>
         <p class="pay-lead">
-          You've chosen the <strong>6-month commitment</strong> on
-          <strong>${plan.tier}</strong> — your setup fee is waived in exchange
-          for the 6-month minimum term. We capture your card now but don't
-          charge it today. Billing only starts once your dashboard is set up
-          and you've signed off.
+          You're continuing with <strong>${plan.tier}</strong>.
+          Your setup fee is waived — no charge for that today.
         </p>
         <p class="pay-note">
-          <strong>Heads up</strong> — on the next page, Stripe will hold £0
-          on your card while we build your dashboard. You won't be charged
-          today. Billing only starts once your dashboard is live and you've
-          signed off.
+          <strong>Continuing within 24 hours of your trial ending?</strong>
+          Your setup fee remains waived. If you're outside that window,
+          get in touch at <a href="mailto:hello@backin5.org" style="color:#93A9E7">hello@backin5.org</a> and we'll sort it.
         </p>
 
-        <div class="summary">
+        <div class="summary" id="pay-summary">
           <div class="summary-row">
             <span class="label">Plan</span>
             <span class="value">${plan.tier}</span>
           </div>
           <div class="summary-row">
-            <span class="label">Term</span>
-            <span class="value">${plan.term}</span>
+            <span class="label">Setup fee</span>
+            <span class="value" style="color:#4ADE80">Waived</span>
           </div>
-          <div class="summary-row">
-            <span class="label">Monthly (starts after onboarding)</span>
-            <span class="value">${plan.monthly}</span>
+          <div class="summary-row" id="first-month-row" style="display:none">
+            <span class="label">First month (50% off)</span>
+            <span class="value" id="first-month-val">—</span>
           </div>
           <div class="summary-row total">
-            <span class="label">Charged today</span>
-            <span class="value">£0</span>
+            <span class="label" id="due-label">Monthly</span>
+            <span class="value" id="due-val">${plan.monthlyFmt}</span>
           </div>
+        </div>
+
+        <div class="commit-box">
+          <label class="commit-line">
+            <input type="checkbox" id="commit6-check" />
+            <span>
+              <strong>6-month commitment</strong> — get <strong>50% off your first month</strong>
+              (£${plan.firstMonth6mo.toFixed(2)} instead of £${plan.monthly}).
+              Full details in the <a href="terms.html" target="_blank" rel="noopener">Terms</a>.
+            </span>
+          </label>
         </div>
 
         <div class="commit-box">
           <label class="commit-line">
             <input type="checkbox" id="commit-check" />
             <span>
-              I confirm I'm committing to a <strong>6-month minimum term</strong>
-              at ${plan.monthly}. The waived setup fee and remaining monthly
-              fees are due if I cancel early, per the
+              I agree to the
               <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>.
+              I understand I can cancel with 30 days' written notice after my first paid month.
             </span>
           </label>
         </div>
 
-        <a class="cta" id="commit-cta" href="${plan.payLink}" data-disabled="true">
-          Add card on file →
+        <a class="cta" id="commit-cta" href="${plan.payLinkMonthly}" data-disabled="true">
+          Continue — ${plan.monthlyFmt} →
         </a>
-        <p class="cta-note">Secured by Stripe. £0 charged today.</p>
+        <p class="cta-note">Secured by Stripe. You'll receive a receipt by email.</p>
 
         <div class="next-steps">
           <h3>What happens next</h3>
           <ol>
-            <li>Add your card — <strong>no charge today</strong>, card stored securely with Stripe.</li>
-            <li>We <strong>configure your dashboard</strong> and embed the Quote Assistant on your site within 48 hours.</li>
-            <li>You'll get a <strong>walkthrough call</strong> to confirm everything is set up exactly how you want it.</li>
-            <li>Once you sign off, your <strong>${plan.monthly}</strong> billing starts automatically on the card we've stored.</li>
+            <li>Complete payment — takes about 30 seconds.</li>
+            <li>Your <strong>dashboard stays live</strong> — no further setup needed.</li>
+            <li>You'll get a <strong>brief check-in</strong> to make sure everything is running exactly how you want it.</li>
           </ol>
         </div>
       `;
-    } else {
-      // Monthly rolling — pay setup fee now via Stripe
-      wrap.innerHTML = `
-        <div class="pay-eyebrow">Step 2 of 2 · Setup fee</div>
-        <h1>One-off setup fee, then you're done.</h1>
-        <p class="pay-lead">
-          Pay your setup fee below and we'll get your dashboard built within
-          48 hours. Monthly billing starts only once your setup is complete
-          and you've signed off — not today.
-        </p>
 
-        <div class="summary">
-          <div class="summary-row">
-            <span class="label">Plan</span>
-            <span class="value">${plan.tier}</span>
-          </div>
-          <div class="summary-row">
-            <span class="label">Term</span>
-            <span class="value">${plan.term}</span>
-          </div>
-          <div class="summary-row">
-            <span class="label">Monthly (starts after onboarding)</span>
-            <span class="value">${plan.monthly}</span>
-          </div>
-          <div class="summary-row total">
-            <span class="label">Due now</span>
-            <span class="value">£${plan.dueNowAmount}</span>
-          </div>
-        </div>
+      const check6     = document.getElementById('commit6-check');
+      const commitChk  = document.getElementById('commit-check');
+      const cta        = document.getElementById('commit-cta');
+      const dueVal     = document.getElementById('due-val');
+      const dueLabel   = document.getElementById('due-label');
+      const firstRow   = document.getElementById('first-month-row');
+      const firstVal   = document.getElementById('first-month-val');
 
-        <div class="commit-box">
-          <label class="commit-line">
-            <input type="checkbox" id="commit-check" />
-            <span>
-              I confirm I'm signing up for <strong>${plan.tier}</strong> at
-              ${plan.monthly} with a 3-month minimum term, and agree to the
-              <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>.
-            </span>
-          </label>
-        </div>
-
-        <a class="cta" id="commit-cta" href="${plan.payLink}" data-disabled="true">
-          Pay £${plan.dueNowAmount} setup fee →
-        </a>
-        <p class="cta-note">Secured by Stripe. You'll get a receipt by email.</p>
-
-        <div class="next-steps">
-          <h3>What happens next</h3>
-          <ol>
-            <li>Pay the setup fee — takes about 30 seconds.</li>
-            <li>We <strong>configure your dashboard</strong> and embed the Quote Assistant on your site within 48 hours.</li>
-            <li>You'll get a <strong>walkthrough call</strong> to confirm everything is set up exactly how you want it.</li>
-            <li>Once you sign off, your <strong>${plan.monthly}</strong> billing starts.</li>
-          </ol>
-        </div>
-      `;
-    }
-
-    // Wire up the consent checkbox to enable/disable the CTA button
-    // (only present when a plan was matched and a payment step is shown)
-    const check = document.getElementById('commit-check');
-    const cta   = document.getElementById('commit-cta');
-    if (check && cta) {
-      const update = () => {
-        if (check.checked) {
-          cta.removeAttribute('data-disabled');
-          cta.style.opacity = '1';
-          cta.style.pointerEvents = 'auto';
-        } else {
-          cta.setAttribute('data-disabled', 'true');
-          cta.style.opacity = '0.5';
-          cta.style.pointerEvents = 'none';
-        }
+      const refreshCta = () => {
+        const enabled = commitChk.checked;
+        cta.toggleAttribute('data-disabled', !enabled);
+        cta.style.opacity       = enabled ? '1'    : '0.5';
+        cta.style.pointerEvents = enabled ? 'auto' : 'none';
       };
-      check.addEventListener('change', update);
-      update();
+
+      const refresh6mo = () => {
+        const is6mo = check6.checked;
+        if (is6mo) {
+          firstRow.style.display = '';
+          firstVal.textContent   = `£${plan.firstMonth6mo.toFixed(2)} (then £${plan.monthly}/mo)`;
+          dueLabel.textContent   = 'First month';
+          dueVal.textContent     = `£${plan.firstMonth6mo.toFixed(2)}`;
+          cta.textContent        = `Continue — £${plan.firstMonth6mo.toFixed(2)} today →`;
+          cta.href               = plan.payLink6Month;
+        } else {
+          firstRow.style.display = 'none';
+          dueLabel.textContent   = 'Monthly';
+          dueVal.textContent     = plan.monthlyFmt;
+          cta.textContent        = `Continue — ${plan.monthlyFmt} →`;
+          cta.href               = plan.payLinkMonthly;
+        }
+        refreshCta();
+      };
+
+      check6.addEventListener('change', refresh6mo);
+      commitChk.addEventListener('change', refreshCta);
+      refreshCta();
     }
 
     // Footer meta (always shown)

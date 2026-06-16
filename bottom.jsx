@@ -75,8 +75,8 @@ function Pricing() {
     name: "Smart Enquiry Handling",
     tagline: "For trades who miss calls & messages while working and need every enquiry answered, captured and organised.",
     price: 199,
-    foot: "£99 setup fee · Min 3-month term, rolling thereafter\nSetup fee waived on 6+ month agreements.",
-    bottomLine: "Best for smaller trade businesses that need faster replies and better enquiry organisation, but do not need full quote or booking automation yet.",
+    foot: "Monthly rolling · Cancel with 30 days' notice after your first month",
+    bottomLine: "Best for smaller trade businesses that need faster replies and better enquiry organisation, without full quote or booking automation.",
     feats: [
       "Instant replies to new enquiries",
       "Missed-call text reply",
@@ -93,7 +93,7 @@ function Pricing() {
     name: "Full Inbound Desk",
     tagline: "A complete inbound enquiry and booking system. Without office staff.",
     price: 349,
-    foot: "£149 setup fee · Min 3-month term, rolling thereafter\nSetup fee waived on 6+ month agreements.",
+    foot: "Monthly rolling · Cancel with 30 days' notice after your first month",
     bottomLine: "Best for busy firms that want enquiries handled properly from first message through to callback, quote or booked visit. Without lifting a finger.",
     feats: [
       "Everything in Smart Enquiry Handling",
@@ -122,9 +122,35 @@ function Pricing() {
         <div className="sec-head center" style={{ alignItems: "center" }}>
           <span className="eyebrow">Pricing</span>
           <h2 className="display">
-            Cheaper than hiring office staff.<br />Handles enquiries 24/7.
+            Try it free for 7 days.<br />Pay only if it works.
           </h2>
-          <p className="lead" style={{ textAlign: "center" }}>Fixed monthly pricing · Cancel anytime · Includes your live enquiry dashboard</p>
+          <p className="lead" style={{ textAlign: "center" }}>No setup fee · No commitment · Includes your live enquiry dashboard</p>
+        </div>
+
+        <div className="trial-flow-strip">
+          <div className="trial-flow-step">
+            <div className="trial-flow-num">1</div>
+            <div>
+              <div className="trial-flow-label">Book a call</div>
+              <div className="trial-flow-sub">10 mins with our team</div>
+            </div>
+          </div>
+          <div className="trial-flow-arrow">→</div>
+          <div className="trial-flow-step">
+            <div className="trial-flow-num">2</div>
+            <div>
+              <div className="trial-flow-label">7-day free trial</div>
+              <div className="trial-flow-sub">Full system, live in your business</div>
+            </div>
+          </div>
+          <div className="trial-flow-arrow">→</div>
+          <div className="trial-flow-step">
+            <div className="trial-flow-num">3</div>
+            <div>
+              <div className="trial-flow-label">Continue if it works</div>
+              <div className="trial-flow-sub">Setup fee waived · No obligation</div>
+            </div>
+          </div>
         </div>
 
         <div className="pricing-grid">
@@ -149,7 +175,7 @@ function Pricing() {
                 onClick={() => handleSelect(t)}
                 className={"btn " + (t.featured ? "btn-light" : "btn-dark") + " btn-arrow"}
                 style={{ width: "100%", justifyContent: "center" }}>
-                Get Started <IconArrowRight size={16} />
+                Start Free Trial <IconArrowRight size={16} />
               </button>
               <div className="price-foot" style={{ textAlign: "center" }}>{t.foot}</div>
             </div>
@@ -161,11 +187,11 @@ function Pricing() {
             <div className="sts-pkg-reveal-inner">
               <div className="sts-pkg-reveal-head">
                 <div className="sts-pkg-reveal-eyebrow">
-                  <span className="sts-status-dot" style={{ background: 'var(--accent)', width: '8px', height: '8px' }} />
-                  {selectedTier.name} selected
+                  <span className="sts-status-dot" style={{ background: '#4ADE80', width: '8px', height: '8px' }} />
+                  {selectedTier.name} — free trial
                 </div>
-                <h3 className="sts-pkg-reveal-title">How would you like to get started?</h3>
-                <p className="sts-pkg-reveal-sub">Both options get you live within 48 hours.</p>
+                <h3 className="sts-pkg-reveal-title">How would you like to start your trial?</h3>
+                <p className="sts-pkg-reveal-sub">7 days live, no setup fee, no commitment. Both options below get you running fast.</p>
               </div>
               <div className="sts-pkg-reveal-choices">
                 <button
@@ -175,15 +201,15 @@ function Pricing() {
                   <div className="sts-pkg-choice-icon">📅</div>
                   <div className="sts-pkg-choice-body">
                     <div className="sts-pkg-choice-title">Book a Call</div>
-                    <div className="sts-pkg-choice-desc">10 mins with our team - questions answered, setup started same day</div>
+                    <div className="sts-pkg-choice-desc">10 mins — we walk you through it and get your trial live same day</div>
                   </div>
                   <IconArrowRight size={20} />
                 </button>
                 <a href={"setup.html?plan=" + selectedTier.id} className="sts-pkg-choice">
                   <div className="sts-pkg-choice-icon">⚡</div>
                   <div className="sts-pkg-choice-body">
-                    <div className="sts-pkg-choice-title">Self Setup</div>
-                    <div className="sts-pkg-choice-desc">Fill a 3-min form - we handle the rest and get you live within 48 hrs</div>
+                    <div className="sts-pkg-choice-title">Fill in the Form</div>
+                    <div className="sts-pkg-choice-desc">3-min form — we handle everything and get your trial live within 48 hrs</div>
                   </div>
                   <IconArrowRight size={20} />
                 </a>
@@ -194,6 +220,37 @@ function Pricing() {
       </div>
     </section>);
 
+}
+
+// ----------------- Trial Nudge (floating pill) -----------------
+function TrialNudge() {
+  const [show, setShow] = React.useState(false);
+  const [dismissed, setDismissed] = React.useState(false);
+
+  React.useEffect(() => {
+    if (dismissed) return;
+    const onScroll = () => { if (window.scrollY > 500) setShow(true); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [dismissed]);
+
+  if (!show || dismissed) return null;
+
+  return (
+    <div className="trial-nudge" role="complementary" aria-label="Free trial offer">
+      <span className="trial-nudge-dot" />
+      <span><strong style={{ color: '#fff' }}>7-day free trial</strong> — no setup fee, no commitment</span>
+      <a href="#contact" className="trial-nudge-cta">
+        Book a call <IconArrowRight size={13} />
+      </a>
+      <button
+        className="trial-nudge-dismiss"
+        onClick={() => setDismissed(true)}
+        aria-label="Dismiss trial nudge"
+      >×</button>
+    </div>
+  );
 }
 
 // ----------------- CTA Band -----------------
@@ -649,4 +706,4 @@ function Footer() {
 
 }
 
-Object.assign(window, { Comparison, Pricing, CtaBand, Faqs, Footer });
+Object.assign(window, { Comparison, Pricing, TrialNudge, CtaBand, Faqs, Footer });
