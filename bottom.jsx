@@ -196,32 +196,14 @@ function Pricing() {
 
 }
 
-// ----------------- Trial Nudge (floating pill) -----------------
+// ----------------- Trial Nudge (sticky floating pill, always visible) -----------------
 function TrialNudge() {
-  const [show, setShow] = React.useState(false);
-  const [dismissed, setDismissed] = React.useState(false);
-
-  React.useEffect(() => {
-    if (dismissed) return;
-    const onScroll = () => { if (window.scrollY > 500) setShow(true); };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [dismissed]);
-
-  if (!show || dismissed) return null;
-
   return (
     <div className="trial-nudge" role="complementary" aria-label="Free trial offer">
       <span><strong style={{ color: '#fff' }}>7-day free trial</strong> · no setup fee · no commitment</span>
       <a href="trial.html" className="trial-nudge-cta">
         Get started <IconArrowRight size={13} />
       </a>
-      <button
-        className="trial-nudge-dismiss"
-        onClick={() => setDismissed(true)}
-        aria-label="Dismiss trial nudge"
-      >×</button>
     </div>
   );
 }
