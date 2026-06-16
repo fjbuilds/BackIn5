@@ -120,15 +120,17 @@ function Contact() {
         </div>
 
         <div className="contact-row">
-          <a href="tel:+447000000000" className="contact-pill">
+          <a href="tel:+447948091506" className="contact-pill">
             <IconPhone size={18} />
             <span>Call or text</span>
           </a>
           <a
             href="mailto:hello@backin5.org?subject=Hi%20BackIn5&body=Hi%20BackIn5%2C%0A%0A"
-            target="_blank"
-            rel="noopener"
             className="contact-pill"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = 'mailto:hello@backin5.org?subject=Hi%20BackIn5&body=Hi%20BackIn5%2C%0A%0A';
+            }}
           >
             <IconMail size={18} />
             <span>Email us</span>
