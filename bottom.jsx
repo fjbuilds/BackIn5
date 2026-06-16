@@ -175,7 +175,7 @@ function Pricing() {
                 onClick={() => handleSelect(t)}
                 className={"btn " + (t.featured ? "btn-light" : "btn-dark") + " btn-arrow"}
                 style={{ width: "100%", justifyContent: "center" }}>
-                Start Free Trial <IconArrowRight size={16} />
+                Get Started <IconArrowRight size={16} />
               </button>
               {t.foot && <div className="price-foot" style={{ textAlign: "center" }}>{t.foot}</div>}
             </div>
@@ -241,7 +241,7 @@ function TrialNudge() {
     <div className="trial-nudge" role="complementary" aria-label="Free trial offer">
       <span className="trial-nudge-dot" />
       <span><strong style={{ color: '#fff' }}>7-day free trial</strong> · no setup fee · no commitment</span>
-      <a href="#pricing" className="trial-nudge-cta">
+      <a href="trial.html" className="trial-nudge-cta">
         Get started <IconArrowRight size={13} />
       </a>
       <button

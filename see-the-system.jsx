@@ -1047,18 +1047,6 @@ function PkgCard({ pkg, delay, isSelected, onSelect }) {
           <li key={i}><IconCheck size={14} />{f}</li>
         ))}
       </ul>
-      <div
-        onClick={e => e.stopPropagation()}
-        style={{ marginTop: 8 }}
-      >
-        <button
-          onClick={e => { e.stopPropagation(); onSelect(pkg); }}
-          className={'btn btn-arrow ' + (pkg.featured ? 'btn-light' : 'btn-dark')}
-          style={{ width: '100%', justifyContent: 'center' }}
-        >
-          Start Free Trial <IconArrowRight size={16} />
-        </button>
-      </div>
       <button
         className="sts-pkg-toggle"
         onClick={e => { e.stopPropagation(); setOpen(o => !o); }}

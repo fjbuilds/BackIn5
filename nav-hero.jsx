@@ -333,7 +333,7 @@ function HeroV1({ headline, lead }) {
         <p className="hero-lead">{lead}</p>
         <div style={{ height: 32 }} />
         <div className="hero-cta-row">
-          <a href="#pricing" className="btn btn-trial btn-lg btn-arrow">
+          <a href="trial.html" className="btn btn-trial btn-lg btn-arrow">
             Start 7-day free trial <IconArrowRight size={16} />
           </a>
           <a href="see-the-system.html" className="btn btn-ghost-dark btn-lg">How does it work?</a>
@@ -376,7 +376,7 @@ function HeroV3({ headline, lead }) {
         <p className="hero-lead">{lead}</p>
         <div style={{ height: 32 }} />
         <div className="hero-cta-row">
-          <a href="#pricing" className="btn btn-primary btn-lg btn-arrow">
+          <a href="trial.html" className="btn btn-primary btn-lg btn-arrow">
             Start free trial <IconArrowRight size={16} />
           </a>
           <a href="see-the-system.html" className="btn btn-ghost-dark btn-lg">See how it works</a>
@@ -398,7 +398,7 @@ function HeroV4({ headline, lead }) {
         <p className="hero-lead">{lead}</p>
         <div style={{ height: 32 }} />
         <div className="hero-cta-row">
-          <a href="#pricing" className="btn btn-primary btn-lg btn-arrow">
+          <a href="trial.html" className="btn btn-primary btn-lg btn-arrow">
             Start free trial <IconArrowRight size={16} />
           </a>
           <a href="see-the-system.html" className="btn btn-ghost-dark btn-lg">See how it works</a>
