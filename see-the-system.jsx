@@ -988,69 +988,56 @@ function StsPackages() {
 
         <div ref={blockRef} className="sts-reveal sts-trial-block">
           <div className="sts-trial-art" aria-hidden="true">
-            {/* Animated dashboard mock */}
-            <div className="sts-art-window">
-              <div className="sts-art-titlebar">
-                <span className="sts-art-traffic"><i /><i /><i /></span>
-                <span className="sts-art-tt">Enquiry dashboard</span>
-              </div>
-              <div className="sts-art-body">
-                <div className="sts-art-row sts-art-row-1">
-                  <span className="sts-art-pin sts-art-pin-new" />
-                  <div className="sts-art-rowlines">
-                    <span className="sts-art-line sts-art-line-w70" />
-                    <span className="sts-art-line sts-art-line-w40" />
-                  </div>
-                  <span className="sts-art-tag sts-art-tag-new">New</span>
-                </div>
-                <div className="sts-art-row sts-art-row-2">
-                  <span className="sts-art-pin sts-art-pin-qual" />
-                  <div className="sts-art-rowlines">
-                    <span className="sts-art-line sts-art-line-w60" />
-                    <span className="sts-art-line sts-art-line-w50" />
-                  </div>
-                  <span className="sts-art-tag sts-art-tag-qual">Qualified</span>
-                </div>
-                <div className="sts-art-row sts-art-row-3">
-                  <span className="sts-art-pin sts-art-pin-bk" />
-                  <div className="sts-art-rowlines">
-                    <span className="sts-art-line sts-art-line-w55" />
-                    <span className="sts-art-line sts-art-line-w35" />
-                  </div>
-                  <span className="sts-art-tag sts-art-tag-bk">Booked</span>
-                </div>
-              </div>
+            {/* Big stylised brand "5" with morphing channel icon inside */}
+            <span className="sts-art-five">5</span>
+            <div className="sts-art-ring" />
+            <div className="sts-art-channel-stack">
+              {/* Phone */}
+              <span className="sts-art-channel sts-art-ch-1">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 4a2 2 0 012-2h2l2 4-2 1a10 10 0 005 5l1-2 4 2v2a2 2 0 01-2 2A14 14 0 015 6V4z"
+                        stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+              {/* SMS / Message bubble */}
+              <span className="sts-art-channel sts-art-ch-2">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 5h16a1 1 0 011 1v10a1 1 0 01-1 1h-9l-5 4v-4H4a1 1 0 01-1-1V6a1 1 0 011-1z"
+                        stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
+                  <circle cx="8.5" cy="11" r="1" fill="currentColor"/>
+                  <circle cx="12" cy="11" r="1" fill="currentColor"/>
+                  <circle cx="15.5" cy="11" r="1" fill="currentColor"/>
+                </svg>
+              </span>
+              {/* WhatsApp */}
+              <span className="sts-art-channel sts-art-ch-3">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.7-1.2A9 9 0 1012 3z"
+                        stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
+                  <path d="M8.5 9c0-.6.5-1 1-1h1l1 2-1 .7a4.5 4.5 0 002.8 2.8l.7-1 2 1v1c0 .5-.4 1-1 1A7.5 7.5 0 018.5 9z"
+                        stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round"/>
+                </svg>
+              </span>
+              {/* Email */}
+              <span className="sts-art-channel sts-art-ch-4">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
+                  <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.6"/>
+                  <path d="M3 7l9 6 9-6" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
+                </svg>
+              </span>
+              {/* Website chat */}
+              <span className="sts-art-channel sts-art-ch-5">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
+                  <rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.6"/>
+                  <path d="M3 8h18" stroke="currentColor" strokeWidth="1.6"/>
+                  <path d="M7 13h6M7 15.5h4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                </svg>
+              </span>
             </div>
-
-            {/* Incoming notification chips */}
-            <div className="sts-art-chip sts-art-chip-1">
-              <span className="sts-art-chip-pulse" />
-              <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>New enquiry</span>
-            </div>
-            <div className="sts-art-chip sts-art-chip-2">
-              <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                <path d="M3 5l5-3 1 1-5 3zM3 5v4l3 1V6z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Missed call replied</span>
-            </div>
-            <div className="sts-art-chip sts-art-chip-3">
-              <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                <path d="M2 5l4 4 4-7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Job booked in</span>
-            </div>
-
-            {/* 7-day badge with subtle pulse */}
-            <div className="sts-art-badge">
-              <div className="sts-art-badge-num">7</div>
-              <div className="sts-art-badge-text">
-                <div>Days</div>
-                <div>Free</div>
-              </div>
-            </div>
+            {/* Floating orbit dots */}
+            <span className="sts-art-orbit-dot sts-art-orbit-dot-1" />
+            <span className="sts-art-orbit-dot sts-art-orbit-dot-2" />
+            <span className="sts-art-orbit-dot sts-art-orbit-dot-3" />
           </div>
 
           <div className="sts-trial-copy">
