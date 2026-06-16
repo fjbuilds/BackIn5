@@ -183,7 +183,7 @@ function Pricing() {
                   <div className="sts-pkg-choice-icon">⚡</div>
                   <div className="sts-pkg-choice-body">
                     <div className="sts-pkg-choice-title">Fill in the Form</div>
-                    <div className="sts-pkg-choice-desc">3-min form, we handle everything and get your trial live within 48 hrs</div>
+                    <div className="sts-pkg-choice-desc">3-min form, we handle everything and get your trial live within 24 hrs</div>
                   </div>
                   <IconArrowRight size={20} />
                 </a>
@@ -264,7 +264,7 @@ const GENERAL_FAQS = [
   },
   {
     q: "How long does it take to get set up?",
-    a: "Most businesses are up and running within 24-48 hours, depending on the type of enquiries you handle and how tailored you want the workflow to be."
+    a: "Most businesses are up and running within 24 hours, depending on the type of enquiries you handle and how tailored you want the workflow to be."
   },
 ];
 const MAIN_TRADE_FAQS = [

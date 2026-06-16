@@ -69,7 +69,7 @@ function HowItWorksPopup({ onClose }) {
           <div className="hiw-popup-point"><span>→</span> Live quote assistant on your website</div>
           <div className="hiw-popup-point"><span>→</span> Missed call auto-follow-up</div>
           <div className="hiw-popup-point"><span>→</span> Every enquiry lands in your live dashboard</div>
-          <div className="hiw-popup-point"><span>→</span> Pick the right plan and get set up in 48 hrs</div>
+          <div className="hiw-popup-point"><span>→</span> Pick the right plan and get set up in 24 hrs</div>
         </div>
         <a
           href="see-the-system.html"

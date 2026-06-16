@@ -359,7 +359,7 @@ function StsQuoteAssistant() {
             </div>
             <div className="sts-qa-strip-item">
               <div className="sts-qa-strip-label">We set it up</div>
-              <div className="sts-qa-strip-desc">Embedded on your site within 48 hours - no technical effort required from you</div>
+              <div className="sts-qa-strip-desc">Embedded on your site within 24 hours - no technical effort required from you</div>
             </div>
           </div>
         </div>
@@ -907,7 +907,7 @@ const SETUP_STEPS = [
   },
   {
     num: '03',
-    title: 'Go live within 48 hours',
+    title: 'Go live within 24 hours',
     desc: 'We embed the enquiry system into your website and provide you with your live dashboard. First enquiry lands - you will see exactly how it works.',
     visual: 'live',
   },
@@ -957,7 +957,7 @@ function StsSetup() {
       <div className="container">
         <div ref={headRef} className="sec-head center sts-reveal">
           <span className="eyebrow on-dark">Getting Started</span>
-          <h2 className="display">Up and running in 48 hours</h2>
+          <h2 className="display">Up and running in 24 hours</h2>
           <p className="lead">Three steps. We handle everything. You just confirm a few details and continue to work as normal.</p>
         </div>
         <div className="sts-setup-grid-new">
@@ -1131,7 +1131,7 @@ function StsPackages() {
                   <div className="sts-pkg-choice-icon">⚡</div>
                   <div className="sts-pkg-choice-body">
                     <div className="sts-pkg-choice-title">Fill in the Form</div>
-                    <div className="sts-pkg-choice-desc">3-min form, we handle everything and get your trial live within 48 hrs</div>
+                    <div className="sts-pkg-choice-desc">3-min form, we handle everything and get your trial live within 24 hrs</div>
                   </div>
                   <IconArrowRight size={20} />
                 </a>
