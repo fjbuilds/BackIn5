@@ -37,9 +37,12 @@
 
     /* ── Hero ── */
     .t-hero {
-      padding: 64px 20px 40px;
+      padding: 40px 20px 28px;
       text-align: center;
       border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    @media (min-width: 640px) {
+      .t-hero { padding: 64px 20px 40px; }
     }
     .t-eyebrow {
       display: inline-block;
@@ -51,46 +54,60 @@
       margin-bottom: 18px;
     }
     .t-hero h1 {
-      font-size: clamp(30px, 6vw, 48px);
+      font-size: 26px;
       font-weight: 800;
-      line-height: 1.1;
+      line-height: 1.15;
       letter-spacing: -0.02em;
       color: #fff;
-      margin: 0 0 18px;
+      margin: 0 0 14px;
+    }
+    @media (min-width: 640px) {
+      .t-hero h1 { font-size: clamp(32px, 5vw, 44px); margin-bottom: 18px; line-height: 1.1; }
     }
     .t-hero h1 em {
       font-style: normal;
       color: #4F73D9;
     }
     .t-hero p {
-      font-size: 17px;
+      font-size: 15px;
       line-height: 1.55;
       color: rgba(234,236,241,0.7);
       max-width: 520px;
       margin: 0 auto;
+    }
+    @media (min-width: 640px) {
+      .t-hero p { font-size: 17px; }
     }
 
     /* ── Main wrap ── */
     .t-wrap {
       max-width: 720px;
       margin: 0 auto;
-      padding: 48px 20px 64px;
+      padding: 32px 18px 48px;
+    }
+    @media (min-width: 640px) {
+      .t-wrap { padding: 48px 20px 64px; }
     }
 
     /* ── Section heading ── */
     .t-h2 {
-      font-size: 22px;
+      font-size: 19px;
       font-weight: 700;
       color: #fff;
       letter-spacing: -0.01em;
-      margin: 0 0 8px;
+      margin: 0 0 6px;
     }
     .t-section-sub {
-      font-size: 15px;
+      font-size: 14px;
       color: rgba(234,236,241,0.6);
-      margin: 0 0 20px;
+      margin: 0 0 16px;
     }
-    .t-block { margin-bottom: 44px; }
+    .t-block { margin-bottom: 36px; }
+    @media (min-width: 640px) {
+      .t-h2 { font-size: 22px; margin: 0 0 8px; }
+      .t-section-sub { font-size: 15px; margin: 0 0 20px; }
+      .t-block { margin-bottom: 44px; }
+    }
 
     /* ── Plain steps (no numbers, no dots) ── */
     .t-steps {

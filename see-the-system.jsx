@@ -963,13 +963,6 @@ function StsSetup() {
         <div className="sts-setup-grid-new">
           {SETUP_STEPS.map((s, i) => <SetupStep key={s.num} step={s} delay={i * 0.12} />)}
         </div>
-        <div ref={copyRef} className="sts-reveal sts-setup-footer" style={{ transitionDelay: '0.4s' }}>
-          <div className="sts-setup-cta-wrap">
-            <a href="#sts-packages" className="btn btn-primary btn-lg btn-arrow">
-              See packages &amp; start trial <IconArrowRight size={16} />
-            </a>
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -979,166 +972,80 @@ function StsSetup() {
 // ============================================================
 // SECTION: Packages (selectable + popup)
 // ============================================================
-const PACKAGES = [
-  {
-    id: 'smart',
-    name: 'Smart Enquiry Handling',
-    tagline: 'For trades who miss calls & messages while working and need every enquiry answered, captured and organised.',
-    price: '£199',
-    note: 'per month · monthly rolling',
-    features: [
-      'Instant replies to new enquiries',
-      'Missed-call text reply',
-      'Customer name, number, postcode and job details captured',
-      'Enquiries from your website, trade sites and via phone organised in one place',
-      'Receive leads via text, email and on your live enquiry dashboard',
-      'Helps stop jobs being missed while you\'re on-site',
-      'Simple setup - no app, no office staff, no new software to learn',
-    ],
-    extra: [
-      'Best for smaller trade businesses that need faster replies and better enquiry organisation, but do not need full quote or booking automation yet.',
-    ],
-    bottomLine: 'Best for smaller trade businesses that need faster replies and better enquiry organisation, but do not need full quote or booking automation yet.',
-  },
-  {
-    id: 'full',
-    name: 'Full Inbound Desk',
-    tagline: 'A complete inbound enquiry and booking system. Without office staff.',
-    price: '£349',
-    note: 'per month · monthly rolling',
-    featured: true,
-    badge: 'Most popular',
-    features: [
-      'Everything in Smart Enquiry Handling',
-      'Website quote assistant built around your trade',
-      'Smart job qualification questions',
-      'Photo and video collection',
-      'Live enquiry dashboard - every lead, job detail and next action',
-      'Missed-call quote taker',
-      'Quote, callback or site-visit booking',
-    ],
-    extra: [
-      'Best for busy firms that want enquiries handled properly from first message through to callback, quote or booked visit. Without lifting a finger.',
-    ],
-    bottomLine: 'Best for busy firms that want enquiries handled properly from first message through to callback, quote or booked visit. Without lifting a finger.',
-  },
-];
-
-function PkgCard({ pkg, delay, isSelected, onSelect }) {
-  const revealRef = useReveal();
-  const [open, setOpen] = useStateSTS(false);
-  return (
-    <div ref={revealRef} className="sts-reveal" style={{ transitionDelay: delay + 's' }}>
-    <div
-      className={'sts-pkg-card-new' + (isSelected ? ' sts-pkg-selected' : '')}
-      style={{ cursor: 'pointer' }}
-      onClick={() => onSelect(pkg)}
-    >
-      {pkg.badge && <span className="sts-pkg-badge">{pkg.badge}</span>}
-      {isSelected && (
-        <div className="sts-pkg-check"><IconCheck size={14} /></div>
-      )}
-      <div className="sts-pkg-name-new">{pkg.name}</div>
-      <div className="sts-pkg-tagline">{pkg.tagline}</div>
-      <div className="sts-pkg-price-new">{pkg.price}</div>
-      <div className="sts-pkg-note-new">{pkg.note}</div>
-      <ul className="sts-pkg-features-new">
-        {pkg.features.map((f, i) => (
-          <li key={i}><IconCheck size={14} />{f}</li>
-        ))}
-      </ul>
-      <button
-        className="sts-pkg-toggle"
-        onClick={e => { e.stopPropagation(); setOpen(o => !o); }}
-        aria-expanded={open}
-      >
-        {open ? 'Hide' : 'Who is this best for?'}
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-          style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
-          <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-        </svg>
-      </button>
-      {open && (
-        <div className="sts-pkg-extra" onClick={e => e.stopPropagation()}>
-          <p style={{ margin: 0, fontSize: '13px', lineHeight: '1.6', color: 'var(--muted)' }}>{pkg.bottomLine}</p>
-        </div>
-      )}
-    </div>
-    </div>
-  );
-}
-
 function StsPackages() {
   const headRef = useReveal();
-  const [selectedPkg, setSelectedPkg] = useStateSTS(null);
-  const revealRef = useRefSTS(null);
-
-  const handleSelect = (pkg) => {
-    setSelectedPkg(pkg);
-    setTimeout(() => {
-      if (revealRef.current) revealRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 80);
-  };
+  const choicesRef = useReveal();
 
   return (
     <section className="canvas-light band" id="sts-packages">
       <div className="container">
         <div ref={headRef} className="sec-head center sts-reveal">
-          <span className="eyebrow">What is Included</span>
-          <h2 className="display">Try it free for 7 days.<br />Pay only if it works.</h2>
-          <p className="lead">
-            Two plans. Both start with a free trial. No setup fee, no commitment.
-            Pick what fits your business.
-          </p>
-        </div>
-        <div className="sts-pkg-grid-new">
-          {PACKAGES.map((p, i) => (
-            <PkgCard
-              key={p.id}
-              pkg={p}
-              delay={i * 0.12}
-              isSelected={selectedPkg && selectedPkg.id === p.id}
-              onSelect={handleSelect}
-            />
-          ))}
+          <span className="eyebrow">Try BackIn5 Free</span>
+          <h2 className="display">7 days live in your business.<br />No card. No commitment.</h2>
         </div>
 
-        {selectedPkg && (
-          <div className="sts-pkg-reveal" key={selectedPkg.id} ref={revealRef}>
-            <div className="sts-pkg-reveal-inner">
-              <div className="sts-pkg-reveal-head">
-                <div className="sts-pkg-reveal-eyebrow">
-                  <span className="sts-status-dot" style={{ background: '#4ADE80', width: '8px', height: '8px' }} />
-                  {selectedPkg.name} selected
-                </div>
-                <h3 className="sts-pkg-reveal-title">How would you like to start your trial?</h3>
-                <p className="sts-pkg-reveal-sub">7 days live, no setup fee, no commitment. Both options get you running fast.</p>
-              </div>
-              <div className="sts-pkg-reveal-choices">
-                <button
-                  className="sts-pkg-choice"
-                  onClick={() => window.Calendly && window.Calendly.initPopupWidget({ url: 'https://calendly.com/backin5/30min?primary_color=164d9c' })}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', padding: 0 }}
-                >
-                  <div className="sts-pkg-choice-icon">📅</div>
-                  <div className="sts-pkg-choice-body">
-                    <div className="sts-pkg-choice-title">Book a Call</div>
-                    <div className="sts-pkg-choice-desc">10 mins to walk through it and get your trial live same day</div>
-                  </div>
-                  <IconArrowRight size={20} />
-                </button>
-                <a href={"setup.html?plan=" + selectedPkg.id} className="sts-pkg-choice">
-                  <div className="sts-pkg-choice-icon">⚡</div>
-                  <div className="sts-pkg-choice-body">
-                    <div className="sts-pkg-choice-title">Fill in the Form</div>
-                    <div className="sts-pkg-choice-desc">3-min form, we handle everything and get your trial live within 24 hrs</div>
-                  </div>
-                  <IconArrowRight size={20} />
-                </a>
+        <div className="sts-trial-block">
+          <div className="sts-trial-art" aria-hidden="true">
+            <div className="sts-trial-art-bg"></div>
+            <div className="sts-trial-art-card sts-trial-art-card-1">
+              <div className="sts-trial-art-dot"></div>
+              <div>
+                <div className="sts-trial-art-line"></div>
+                <div className="sts-trial-art-line sts-trial-art-line-short"></div>
               </div>
             </div>
+            <div className="sts-trial-art-card sts-trial-art-card-2">
+              <div className="sts-trial-art-dot sts-trial-art-dot-2"></div>
+              <div>
+                <div className="sts-trial-art-line"></div>
+                <div className="sts-trial-art-line sts-trial-art-line-short"></div>
+              </div>
+            </div>
+            <div className="sts-trial-art-badge">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M5 9.5l3 3 6-6" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>7 days free</span>
+            </div>
           </div>
-        )}
+
+          <div className="sts-trial-copy">
+            <p className="sts-trial-lead">
+              We set the whole system up properly, get it running in your business within 24 hours, and you spend a week watching real enquiries land in one place. If it's not for you, walk away. Nothing to cancel.
+            </p>
+            <ul className="sts-trial-points">
+              <li>Full system live, not a demo</li>
+              <li>Tailored to how your trade quotes jobs</li>
+              <li>No setup fee if you continue after</li>
+            </ul>
+          </div>
+        </div>
+
+        <div ref={choicesRef} className="sts-reveal sts-trial-choices-wrap">
+          <h3 className="sts-trial-choices-title">How do you want to start?</h3>
+          <div className="sts-pkg-reveal-choices sts-trial-choices">
+            <button
+              className="sts-pkg-choice"
+              onClick={() => window.Calendly && window.Calendly.initPopupWidget({ url: 'https://calendly.com/backin5/30min?primary_color=164d9c' })}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', width: '100%', padding: 0 }}
+            >
+              <div className="sts-pkg-choice-icon">📅</div>
+              <div className="sts-pkg-choice-body">
+                <div className="sts-pkg-choice-title">Book a quick chat</div>
+                <div className="sts-pkg-choice-desc">10 mins to walk through it and get your trial live same day</div>
+              </div>
+              <IconArrowRight size={20} />
+            </button>
+            <a href="trial.html" className="sts-pkg-choice">
+              <div className="sts-pkg-choice-icon">⚡</div>
+              <div className="sts-pkg-choice-body">
+                <div className="sts-pkg-choice-title">Start straight away</div>
+                <div className="sts-pkg-choice-desc">3-min form, we handle everything and get your trial live within 24 hrs</div>
+              </div>
+              <IconArrowRight size={20} />
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

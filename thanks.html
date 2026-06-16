@@ -38,17 +38,23 @@
     .ty-shell {
       max-width: 760px;
       margin: 0 auto;
-      padding: 40px 20px 64px;
+      padding: 24px 16px 48px;
+    }
+    @media (min-width: 640px) {
+      .ty-shell { padding: 40px 20px 64px; }
     }
     .ty-hero-card {
       background: #fff;
       border: 1px solid #E5E8EE;
-      border-radius: 18px;
-      padding: 48px 36px 40px;
+      border-radius: 16px;
+      padding: 32px 22px 26px;
       text-align: center;
       box-shadow: 0 2px 24px rgba(14,17,22,0.04);
       position: relative;
       overflow: hidden;
+    }
+    @media (min-width: 640px) {
+      .ty-hero-card { padding: 48px 36px 40px; border-radius: 18px; }
     }
     .ty-hero-card::before {
       content: "";
@@ -69,19 +75,23 @@
     }
     .ty-tick svg { display: block; }
     .ty-hero-card h1 {
-      font-size: clamp(28px, 5.5vw, 40px);
+      font-size: 24px;
       font-weight: 800;
-      line-height: 1.1;
+      line-height: 1.15;
       letter-spacing: -0.02em;
       color: #0E1116;
-      margin: 0 0 14px;
+      margin: 0 0 12px;
     }
     .ty-hero-card p {
-      font-size: 16.5px;
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.55;
       color: #4F5666;
       max-width: 520px;
       margin: 0 auto;
+    }
+    @media (min-width: 640px) {
+      .ty-hero-card h1 { font-size: clamp(28px, 5vw, 36px); line-height: 1.1; margin: 0 0 14px; }
+      .ty-hero-card p { font-size: 16px; line-height: 1.6; }
     }
     .ty-confirm-strip {
       margin-top: 28px;

@@ -550,9 +550,6 @@ function Faqs() {
             <div className="faq-trade-head">
               <div className="faq-block-eyebrow accent">Tailored to your trade</div>
               <h3 className="faq-trade-title">Pick your trade for specific answers.</h3>
-              <p className="faq-trade-sub">
-                Each trade gets four questions we hear most often during onboarding.
-              </p>
             </div>
 
             <div className="trade-pills" role="tablist" aria-label="Select your trade">
