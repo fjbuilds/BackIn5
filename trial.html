@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>7-Day Free Trial | BackIn5</title>
-  <meta name="description" content="Try BackIn5 free for 7 days. Full system, live in your business. No setup fee, no commitment." />
+  <meta name="description" content="Try BackIn5 free for 7 days. Full system live in your business. No setup fee. No commitment." />
   <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; }
@@ -12,8 +12,9 @@
       margin: 0; padding: 0;
       background: #0E1116;
       color: #EAECF1;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height: 100vh;
+      line-height: 1.5;
     }
 
     /* ── Nav ── */
@@ -21,8 +22,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 20px;
-      background: #1B212B;
+      padding: 14px 24px;
+      background: #171B22;
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .t-nav a { text-decoration: none; }
@@ -36,175 +37,163 @@
 
     /* ── Hero ── */
     .t-hero {
-      background: #0E1116;
-      padding: 56px 20px 40px;
+      padding: 64px 20px 40px;
       text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     .t-eyebrow {
       display: inline-block;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: #4ADE80;
-      margin-bottom: 16px;
+      color: #8B94A7;
+      margin-bottom: 18px;
     }
     .t-hero h1 {
-      font-size: clamp(32px, 6vw, 52px);
+      font-size: clamp(30px, 6vw, 48px);
       font-weight: 800;
       line-height: 1.1;
       letter-spacing: -0.02em;
       color: #fff;
-      margin: 0 0 16px;
+      margin: 0 0 18px;
+    }
+    .t-hero h1 em {
+      font-style: normal;
+      color: #4F73D9;
     }
     .t-hero p {
       font-size: 17px;
-      line-height: 1.6;
-      color: rgba(234,236,241,0.65);
-      max-width: 480px;
-      margin: 0 auto 32px;
+      line-height: 1.55;
+      color: rgba(234,236,241,0.7);
+      max-width: 520px;
+      margin: 0 auto;
     }
-    .t-badge-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      font-size: 13px;
-      color: rgba(234,236,241,0.5);
+
+    /* ── Main wrap ── */
+    .t-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 20px 64px;
+    }
+
+    /* ── Section heading ── */
+    .t-h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+    .t-section-sub {
+      font-size: 15px;
+      color: rgba(234,236,241,0.6);
+      margin: 0 0 20px;
+    }
+    .t-block { margin-bottom: 44px; }
+
+    /* ── Plain steps (no numbers, no dots) ── */
+    .t-steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+    .t-step {
+      background: #171B22;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .t-step-when {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #4F73D9;
       margin-bottom: 8px;
     }
-    .t-badge-row span { display: flex; align-items: center; gap: 6px; }
-    .t-badge-row .dot {
-      width: 6px; height: 6px; border-radius: 50%; background: #4ADE80;
-    }
-
-    /* ── Main content ── */
-    .t-wrap {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 20px 64px;
-    }
-
-    /* ── Timeline ── */
-    .t-timeline {
-      display: flex;
-      gap: 0;
-      margin: 40px 0;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .t-tl-step {
-      flex: 1;
-      padding: 20px 16px;
-      background: #171B22;
-      text-align: center;
-      position: relative;
-    }
-    .t-tl-step + .t-tl-step {
-      border-left: 1px solid rgba(255,255,255,0.08);
-    }
-    .t-tl-step.active { background: rgba(35,65,168,0.12); }
-    .t-tl-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(234,236,241,0.4);
-      margin-bottom: 6px;
-    }
-    .t-tl-step.active .t-tl-label { color: #93A9E7; }
-    .t-tl-title {
+    .t-step-what {
       font-size: 15px;
       font-weight: 700;
       color: #fff;
       margin-bottom: 4px;
     }
-    .t-tl-sub {
-      font-size: 12.5px;
-      color: rgba(234,236,241,0.5);
-      line-height: 1.4;
+    .t-step-sub {
+      font-size: 13px;
+      color: rgba(234,236,241,0.55);
+      line-height: 1.45;
     }
-    @media (max-width: 560px) {
-      .t-timeline { flex-direction: column; }
-      .t-tl-step + .t-tl-step { border-left: 0; border-top: 1px solid rgba(255,255,255,0.08); }
+    @media (max-width: 620px) {
+      .t-steps { grid-template-columns: 1fr; }
     }
 
-    /* ── Feature list ── */
-    .t-section-title {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(234,236,241,0.4);
-      margin: 40px 0 16px;
-    }
-    .t-features {
+    /* ── Bullet list ── */
+    .t-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       background: #171B22;
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
+      border-radius: 12px;
       overflow: hidden;
     }
-    .t-feat {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px 18px;
+    .t-bullets li {
+      padding: 16px 20px;
       border-bottom: 1px solid rgba(255,255,255,0.05);
-      font-size: 14px;
+      font-size: 15px;
+      color: rgba(234,236,241,0.88);
       line-height: 1.5;
-      color: rgba(234,236,241,0.85);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
     }
-    .t-feat:last-child { border-bottom: 0; }
-    .t-feat-check {
+    .t-bullets li:last-child { border-bottom: 0; }
+    .t-bullets li::before {
+      content: "";
       flex-shrink: 0;
-      width: 20px; height: 20px;
-      background: rgba(74,222,128,0.12);
-      border: 1px solid rgba(74,222,128,0.3);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin-top: 1px;
+      margin-top: 7px;
+      width: 8px;
+      height: 8px;
+      background: #2341A8;
+      border-radius: 2px;
     }
-    .t-feat-check svg { display: block; }
 
-    /* ── After trial block ── */
+    /* ── After-trial table ── */
     .t-after {
       background: #171B22;
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 20px 20px 8px;
-      margin-top: 12px;
+      border-radius: 12px;
+      overflow: hidden;
     }
     .t-after-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 10px 0;
+      padding: 14px 20px;
       border-bottom: 1px solid rgba(255,255,255,0.05);
-      font-size: 14px;
+      font-size: 14.5px;
+      gap: 16px;
     }
     .t-after-row:last-child { border-bottom: 0; }
-    .t-after-row .lbl { color: rgba(234,236,241,0.5); }
-    .t-after-row .val { font-weight: 600; color: #fff; text-align: right; }
-    .t-after-row .val.green { color: #4ADE80; }
+    .t-after-row .lbl { color: rgba(234,236,241,0.65); }
+    .t-after-row .val { font-weight: 700; color: #fff; text-align: right; }
 
-    /* ── Note box ── */
+    /* ── Note ── */
     .t-note {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
+      margin-top: 14px;
+      padding: 16px 18px;
+      background: rgba(35,65,168,0.08);
+      border: 1px solid rgba(35,65,168,0.25);
       border-radius: 10px;
-      padding: 14px 16px;
-      font-size: 13px;
-      color: rgba(234,236,241,0.55);
-      line-height: 1.6;
-      margin-top: 12px;
+      font-size: 14px;
+      color: rgba(234,236,241,0.75);
+      line-height: 1.55;
     }
-    .t-note strong { color: rgba(234,236,241,0.85); }
+    .t-note strong { color: #fff; }
 
     /* ── CTA ── */
     .t-cta-wrap {
-      margin-top: 40px;
+      margin-top: 48px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -214,9 +203,9 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
       width: 100%;
-      max-width: 400px;
+      max-width: 420px;
       background: #16a34a;
       color: #fff;
       text-decoration: none;
@@ -229,8 +218,9 @@
     .t-cta:hover { background: #15803d; }
     .t-cta-note {
       font-size: 13px;
-      color: rgba(234,236,241,0.4);
+      color: rgba(234,236,241,0.45);
       text-align: center;
+      margin: 0;
     }
 
     /* ── Footer ── */
@@ -255,128 +245,86 @@
     <a href="index.html" class="t-nav-back">Back to site</a>
   </nav>
 
-  <div class="t-hero">
-    <div class="t-eyebrow">Free Trial</div>
-    <h1>7 days, fully live.<br />No cost. No commitment.</h1>
-    <p>We set the system up in your business and you see exactly how it works. If it's not for you, walk away. No charge.</p>
-    <div class="t-badge-row">
-      <span><span class="dot"></span> No setup fee</span>
-      <span><span class="dot"></span> Full system active</span>
-      <span><span class="dot"></span> No card required</span>
-    </div>
-  </div>
+  <section class="t-hero">
+    <div class="t-eyebrow">7-Day Free Trial</div>
+    <h1>See it run in your business.<br /><em>No cost. No commitment.</em></h1>
+    <p>We set BackIn5 up properly, get you live within 48 hours, and you spend a week watching enquiries land in one place. If it's not for you, walk away. Simple.</p>
+  </section>
 
   <div class="t-wrap">
 
-    <div class="t-timeline">
-      <div class="t-tl-step active">
-        <div class="t-tl-label">Day 1</div>
-        <div class="t-tl-title">You fill the form</div>
-        <div class="t-tl-sub">Takes 3 minutes. We handle everything from there.</div>
-      </div>
-      <div class="t-tl-step active">
-        <div class="t-tl-label">Within 48 hrs</div>
-        <div class="t-tl-title">System goes live</div>
-        <div class="t-tl-sub">Fully configured and running in your business.</div>
-      </div>
-      <div class="t-tl-step">
-        <div class="t-tl-label">Day 7</div>
-        <div class="t-tl-title">Trial ends</div>
-        <div class="t-tl-sub">Continue within 24 hours and your setup fee stays waived.</div>
+    <div class="t-block">
+      <h2 class="t-h2">How it works</h2>
+      <p class="t-section-sub">Three things happen. None of them are on you.</p>
+      <div class="t-steps">
+        <div class="t-step">
+          <div class="t-step-when">Today</div>
+          <div class="t-step-what">Fill the form</div>
+          <div class="t-step-sub">3 minutes. Tell us about your trade and how you take jobs.</div>
+        </div>
+        <div class="t-step">
+          <div class="t-step-when">Within 48 hrs</div>
+          <div class="t-step-what">You go live</div>
+          <div class="t-step-sub">We build it round your business and switch it on for you.</div>
+        </div>
+        <div class="t-step">
+          <div class="t-step-when">Day 7</div>
+          <div class="t-step-what">Trial ends</div>
+          <div class="t-step-sub">Carry on if it's working. Walk away if it's not.</div>
+        </div>
       </div>
     </div>
 
-    <div class="t-section-title">What is included</div>
-    <div class="t-features">
-      <div class="t-feat">
-        <div class="t-feat-check">
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-            <path d="M2 6l3 3 5-5" stroke="#4ADE80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        Instant replies to calls, messages and website enquiries, 24/7
-      </div>
-      <div class="t-feat">
-        <div class="t-feat-check">
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-            <path d="M2 6l3 3 5-5" stroke="#4ADE80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        Missed-call text reply so no job goes unanswered
-      </div>
-      <div class="t-feat">
-        <div class="t-feat-check">
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-            <path d="M2 6l3 3 5-5" stroke="#4ADE80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        Job details, photos and postcode collected automatically
-      </div>
-      <div class="t-feat">
-        <div class="t-feat-check">
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-            <path d="M2 6l3 3 5-5" stroke="#4ADE80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        Live enquiry dashboard with every lead in one place
-      </div>
-      <div class="t-feat">
-        <div class="t-feat-check">
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-            <path d="M2 6l3 3 5-5" stroke="#4ADE80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        Callbacks and site visits booked automatically
-      </div>
-      <div class="t-feat">
-        <div class="t-feat-check">
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-            <path d="M2 6l3 3 5-5" stroke="#4ADE80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        Website quote assistant tailored to your trade
-      </div>
-      <div class="t-feat">
-        <div class="t-feat-check">
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-            <path d="M2 6l3 3 5-5" stroke="#4ADE80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        Standard template setup, fully configured before you go live
-      </div>
+    <div class="t-block">
+      <h2 class="t-h2">What you actually get</h2>
+      <p class="t-section-sub">The full system, working for you, the whole week.</p>
+      <ul class="t-bullets">
+        <li>Every call, message and website enquiry answered the second it lands</li>
+        <li>Miss a call? Customer gets an instant text back so they don't ring the next firm</li>
+        <li>A live dashboard with every enquiry in one place. Calls, Checkatrade, Facebook, the lot</li>
+        <li>Customer name, number, postcode, job details and photos taken upfront</li>
+        <li>Customers book their own callback or site visit straight into your diary</li>
+        <li>A quote assistant on your website, built around how your trade quotes jobs</li>
+        <li>Leads come through however suits you. Text, email or in the dashboard</li>
+        <li>Less time on admin in the evenings. More decent jobs landed</li>
+        <li>We do the setup. No app to learn, no office staff, no faff</li>
+      </ul>
     </div>
 
-    <div class="t-section-title">After your trial</div>
-    <div class="t-after">
-      <div class="t-after-row">
-        <span class="lbl">Tier 1 - Smart Enquiry Handling</span>
-        <span class="val">£199 / month</span>
+    <div class="t-block">
+      <h2 class="t-h2">After your trial</h2>
+      <p class="t-section-sub">If you stay on, here's the deal.</p>
+      <div class="t-after">
+        <div class="t-after-row">
+          <span class="lbl">Tier 1 (Smart Enquiry Handling)</span>
+          <span class="val">£199 / month</span>
+        </div>
+        <div class="t-after-row">
+          <span class="lbl">Tier 2 (Full Inbound Desk)</span>
+          <span class="val">£349 / month</span>
+        </div>
+        <div class="t-after-row">
+          <span class="lbl">Setup fee</span>
+          <span class="val">Waived if you continue</span>
+        </div>
+        <div class="t-after-row">
+          <span class="lbl">Billing</span>
+          <span class="val">Monthly rolling</span>
+        </div>
       </div>
-      <div class="t-after-row">
-        <span class="lbl">Tier 2 - Full Inbound Desk</span>
-        <span class="val">£349 / month</span>
+      <div class="t-note">
+        <strong>No pressure.</strong> Walk away after the trial and there's nothing to pay and nothing to cancel. Continue within 24 hours of the trial ending and we waive the setup fee for you.
       </div>
-      <div class="t-after-row">
-        <span class="lbl">Setup fee</span>
-        <span class="val green">Waived if you continue within 24 hrs</span>
-      </div>
-      <div class="t-after-row">
-        <span class="lbl">Billing</span>
-        <span class="val">Monthly rolling</span>
-      </div>
-    </div>
-    <div class="t-note">
-      <strong>No pressure.</strong> If you decide not to continue after the trial, there is nothing to pay and nothing to cancel. The offer to waive the setup fee only applies if you continue within 24 hours of the trial ending.
     </div>
 
     <div class="t-cta-wrap">
       <a href="setup.html" class="t-cta">
-        Fill in the form to get started
+        Fill in the form
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
-      <p class="t-cta-note">Takes 3 minutes. We set everything up and get you live within 48 hours.</p>
+      <p class="t-cta-note">Takes 3 minutes. We do the rest.</p>
     </div>
 
   </div>

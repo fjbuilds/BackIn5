@@ -127,32 +127,6 @@ function Pricing() {
           <p className="lead" style={{ textAlign: "center" }}>No setup fee · No commitment · Includes your live enquiry dashboard</p>
         </div>
 
-        <div className="trial-flow-strip">
-          <div className="trial-flow-step">
-            <div className="trial-flow-num">1</div>
-            <div>
-              <div className="trial-flow-label">Select your package</div>
-              <div className="trial-flow-sub">Tier 1 or Tier 2 below</div>
-            </div>
-          </div>
-          <div className="trial-flow-arrow">→</div>
-          <div className="trial-flow-step">
-            <div className="trial-flow-num">2</div>
-            <div>
-              <div className="trial-flow-label">7-day free trial</div>
-              <div className="trial-flow-sub">Full system, live in your business</div>
-            </div>
-          </div>
-          <div className="trial-flow-arrow">→</div>
-          <div className="trial-flow-step">
-            <div className="trial-flow-num">3</div>
-            <div>
-              <div className="trial-flow-label">Continue if it works</div>
-              <div className="trial-flow-sub">Setup fee waived · No obligation</div>
-            </div>
-          </div>
-        </div>
-
         <div className="pricing-grid">
           {tiers.map((t) =>
           <div key={t.name} className={"price-card " + (t.featured ? "featured" : "") + (selectedTier && selectedTier.id === t.id ? " price-card-selected" : "")}>
@@ -239,7 +213,6 @@ function TrialNudge() {
 
   return (
     <div className="trial-nudge" role="complementary" aria-label="Free trial offer">
-      <span className="trial-nudge-dot" />
       <span><strong style={{ color: '#fff' }}>7-day free trial</strong> · no setup fee · no commitment</span>
       <a href="trial.html" className="trial-nudge-cta">
         Get started <IconArrowRight size={13} />
