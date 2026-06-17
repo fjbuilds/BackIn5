@@ -48,7 +48,7 @@ export function useChat(config: BusinessConfig) {
 
   const answersRef = useRef<FlowAnswers>({ custom_answers: [] })
   const [messages, setMessages] = useState<ChatMessage[]>([])
-  const [step, setStep] = useState<FlowStepId>('service')
+  const [step, setStep] = useState<FlowStepId>('name')
   const [isTyping, setIsTyping] = useState(false)
   const [inputError, setInputError] = useState<string | null>(null)
   const [multiSelected, setMultiSelected] = useState<string[]>([])
@@ -124,29 +124,38 @@ export function useChat(config: BusinessConfig) {
   }
 
   function firstCustomStep(): FlowStepId {
-    return customQuestions.length > 0 ? 'custom_0' : 'name'
+    return customQuestions.length > 0 ? 'custom_0' : 'email'
   }
 
   function nextStep(current: FlowStepId): FlowStepId {
+    // Contact details first — rapport + a fallback way to reach them
+    if (current === 'name')           return 'phone'
+    if (current === 'phone')          return 'service'
+
+    // Job essentials
     if (current === 'service')        return 'postcode'
     if (current === 'service_other')  return 'postcode'
     if (current === 'postcode')       return 'town'
     if (current === 'town')           return 'urgency'
     if (current === 'urgency')        return 'enquiry_intent'
+
+    // Booking branch
     if (current === 'enquiry_intent') {
       return answersRef.current.booking_requested ? 'booking_type' : 'photo'
     }
     if (current === 'booking_type')   return 'calendar'
     if (current === 'calendar')       return 'photo'
+
+    // Photo + custom questions
     if (current === 'photo')          return firstCustomStep()
     if (current === 'photo_upload')   return firstCustomStep()
     if (current.startsWith('custom_')) {
       const idx = parseInt(current.split('_')[1], 10)
       const next = idx + 1
-      return next < customQuestions.length ? `custom_${next}` as FlowStepId : 'name'
+      return next < customQuestions.length ? `custom_${next}` as FlowStepId : 'email'
     }
-    if (current === 'name')                   return 'phone'
-    if (current === 'phone')                  return 'email'
+
+    // Optional polish at the end
     if (current === 'email')                  return 'preferred_contact_time'
     if (current === 'preferred_contact_time') return 'submitting'
     return 'done'
@@ -202,7 +211,7 @@ export function useChat(config: BusinessConfig) {
     const welcome = settings.welcome_message
       ?? `Hi, thanks for getting in touch with ${business.business_name}. I'll ask a few quick questions so we can get the right details over to the team.`
     await queueBotMessage(welcome, 600)
-    await advanceTo('service')
+    await advanceTo('name')
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
