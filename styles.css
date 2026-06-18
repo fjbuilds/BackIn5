@@ -3,7 +3,7 @@
    Custom tokens layered over the design system's structural rules
    ============================================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap");
 
 :root {
   /* === BRAND PALETTE (user-supplied) === */
@@ -1870,21 +1870,19 @@ html { scroll-behavior: smooth; }
   to   { width: 100%; }
 }
 .how-row-num {
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 28px;
+  font-family: "Caveat", "Marker Felt", "Comic Sans MS", cursive;
+  font-size: 36px;
   line-height: 1;
   color: var(--mute);
-  letter-spacing: -0.02em;
-  font-weight: 800;
-  font-variation-settings: "opsz" 120, "SOFT" 60;
+  letter-spacing: 0;
+  font-weight: 700;
   transition: color 200ms ease, transform 220ms ease;
   width: 32px;
   text-align: center;
 }
 .how-row.active .how-row-num {
   color: var(--accent);
-  font-weight: 900;
-  transform: scale(1.08);
+  transform: rotate(-4deg) scale(1.1);
 }
 .how-row-icon {
   width: 40px;
@@ -2036,12 +2034,11 @@ html { scroll-behavior: smooth; }
   color: #fff;
   display: grid;
   place-items: center;
-  font-family: "Fraunces", Georgia, serif;
-  font-weight: 800;
-  font-size: 22px;
+  font-family: "Caveat", "Marker Felt", "Comic Sans MS", cursive;
+  font-weight: 700;
+  font-size: 28px;
   line-height: 1;
-  letter-spacing: -0.02em;
-  font-variation-settings: "opsz" 144, "SOFT" 60;
+  letter-spacing: 0;
   position: relative;
   z-index: 1;
   box-shadow: 0 0 0 5px #fff, 0 0 0 6px var(--accent-tint-2);
@@ -3349,15 +3346,14 @@ section[id] { scroll-margin-top: 80px; }
   font-weight: 500;
 }
 .panel-counter {
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 18px;
+  font-family: "Caveat", "Marker Felt", "Comic Sans MS", cursive;
+  font-size: 24px;
   color: rgba(234,236,241,0.6);
-  letter-spacing: -0.01em;
-  font-variation-settings: "opsz" 60, "SOFT" 60;
+  letter-spacing: 0;
 }
-.panel-counter .now { color: #fff; font-weight: 800; font-size: 22px; }
-.panel-counter .sep { margin: 0 6px; color: rgba(234,236,241,0.3); }
-.panel-counter .total { color: rgba(234,236,241,0.5); font-weight: 700; }
+.panel-counter .now { color: #fff; font-weight: 700; font-size: 28px; }
+.panel-counter .sep { margin: 0 4px; color: rgba(234,236,241,0.3); }
+.panel-counter .total { color: rgba(234,236,241,0.5); font-weight: 600; }
 .panel-stage {
   position: relative;
   flex: 1;
@@ -3386,15 +3382,16 @@ section[id] { scroll-margin-top: 80px; }
   opacity: 0;
 }
 .panel-bignum {
-  font-family: "Fraunces", Georgia, serif;
-  font-weight: 900;
-  font-size: 128px;
-  line-height: 0.95;
-  letter-spacing: -0.045em;
-  font-variation-settings: "opsz" 144, "SOFT" 80;
+  font-family: "Caveat", "Marker Felt", "Comic Sans MS", cursive;
+  font-weight: 700;
+  font-size: 160px;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
   color: rgb(52, 80, 179);
-  margin-bottom: 8px;
-  text-shadow: 0 0 60px rgba(35, 65, 168, 0.18);
+  margin-bottom: 4px;
+  text-shadow: 0 2px 24px rgba(35, 65, 168, 0.22);
+  transform: rotate(-2deg);
+  display: inline-block;
 }
 .panel-title {
   font-family: var(--font-display);
@@ -4251,10 +4248,18 @@ section[id] { scroll-margin-top: 80px; }
 .trial-nudge-cta:hover { background: #1c378f; }
 .trial-nudge-dismiss {
   background: none; border: none; cursor: pointer;
-  color: rgba(234,236,241,0.35); padding: 2px 4px;
-  font-size: 18px; line-height: 1; flex-shrink: 0;
+  color: rgba(234,236,241,0.45);
+  width: 28px; height: 28px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-left: 2px;
+  transition: color 140ms ease, background 140ms ease;
 }
-.trial-nudge-dismiss:hover { color: rgba(234,236,241,0.7); }
+.trial-nudge-dismiss:hover { color: #fff; background: rgba(255,255,255,0.06); }
+.trial-nudge-dismiss:focus-visible {
+  outline: 2px solid rgba(35,65,168,0.6); outline-offset: 2px;
+}
 @keyframes nudge-slide-up {
   from { transform: translateX(-50%) translateY(16px); opacity: 0; }
   to   { transform: translateX(-50%) translateY(0); opacity: 1; }
@@ -4276,6 +4281,14 @@ section[id] { scroll-margin-top: 80px; }
     padding: 12px 14px;
   }
   .trial-nudge-cta { flex: 1; justify-content: center; }
+  .trial-nudge-dismiss {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 26px; height: 26px;
+    background: rgba(255,255,255,0.06);
+  }
+  .trial-nudge { position: fixed; padding-right: 14px; padding-top: 22px; }
   @keyframes nudge-slide-up {
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }

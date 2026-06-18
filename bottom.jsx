@@ -195,14 +195,34 @@ function Pricing() {
 
 }
 
-// ----------------- Trial Nudge (sticky floating pill, always visible) -----------------
+// ----------------- Trial Nudge (sticky floating pill, dismissible) -----------------
 function TrialNudge() {
+  const [visible, setVisible] = useStateB(() => {
+    try { return sessionStorage.getItem('bi5-trial-nudge-dismissed') !== '1'; }
+    catch { return true; }
+  });
+  if (!visible) return null;
+  function dismiss() {
+    setVisible(false);
+    try { sessionStorage.setItem('bi5-trial-nudge-dismissed', '1'); } catch {}
+  }
   return (
     <div className="trial-nudge" role="complementary" aria-label="Free trial offer">
       <span><strong style={{ color: '#fff' }}>7-day free trial</strong> · no setup fee · no commitment</span>
       <a href="trial.html" className="trial-nudge-cta">
         Get started <IconArrowRight size={13} />
       </a>
+      <button
+        type="button"
+        className="trial-nudge-dismiss"
+        onClick={dismiss}
+        aria-label="Dismiss trial banner"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
     </div>
   );
 }
