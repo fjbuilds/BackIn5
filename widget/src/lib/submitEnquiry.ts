@@ -1,37 +1,18 @@
 import type { EnquiryPayload } from '../types'
 import { dashboardSupabase } from './dashboardSupabase'
 
-const functionUrl = process.env.VITE_SUPABASE_FUNCTION_URL ?? ''
-const anonKey = process.env.VITE_SUPABASE_ANON_KEY ?? ''
+const INSERT_TIMEOUT_MS = 12_000
+const MAX_ATTEMPTS = 3
+const RETRY_BACKOFF_MS = 800
 
 export async function submitEnquiry(payload: EnquiryPayload): Promise<{ enquiry_id: string }> {
-  // Step 1 — save to widget Supabase via Edge Function
-  const res = await fetch(`${functionUrl}/submit-enquiry`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'apikey': anonKey,
-      'Authorization': `Bearer ${anonKey}`,
-    },
-    body: JSON.stringify(payload),
-  })
-
-  if (!res.ok) {
-    // Edge Function errors are non-fatal — dashboard insert is the primary target
-    console.warn('Edge Function error:', res.status)
+  if (!payload.dashboard_trade_id) {
+    throw new Error('Submission misconfigured: missing dashboard_trade_id on business')
+  }
+  if (!payload.customer_name && !payload.phone) {
+    throw new Error('Submission missing both customer name and phone')
   }
 
-  // Step 2 — save directly to dashboard Supabase
-  await saveToDashboard(payload)
-
-  return { enquiry_id: 'submitted' }
-}
-
-async function saveToDashboard(payload: EnquiryPayload): Promise<void> {
-  if (!payload.dashboard_trade_id) return
-
-  // If they picked a specific date/time via the calendar -> Booked.
-  // If they clicked 'book directly' but skipped the calendar -> Needs Action.
   const status = payload.appointment_datetime ? 'Booked' : 'Needs Action'
 
   const row: Record<string, unknown> = {
@@ -40,56 +21,83 @@ async function saveToDashboard(payload: EnquiryPayload): Promise<void> {
     status,
   }
 
-  if (payload.customer_name)       row.customer_name = payload.customer_name
-  if (payload.phone)               row.phone = payload.phone
-  if (payload.email)               row.email = payload.email
-  if (payload.postcode)            row.postcode = payload.postcode
-  if (payload.service_requested)   row.service_requested = payload.service_requested
-  if (payload.action_tag)          row.action_tag = payload.action_tag
+  if (payload.customer_name)        row.customer_name = payload.customer_name
+  if (payload.phone)                row.phone = payload.phone
+  if (payload.email)                row.email = payload.email
+  if (payload.postcode)             row.postcode = payload.postcode
+  if (payload.service_requested)    row.service_requested = payload.service_requested
+  if (payload.action_tag)           row.action_tag = payload.action_tag
   if (payload.appointment_datetime) row.appointment_datetime = payload.appointment_datetime
-
-  // NEW — separate columns instead of stuffing into job_description
-  if (payload.town)                    row.town = payload.town
-  if (payload.urgency)                 row.urgency = payload.urgency
+  if (payload.town)                 row.town = payload.town
+  if (payload.urgency)              row.urgency = payload.urgency
   if (payload.preferred_contact_time)  row.preferred_contact_time = payload.preferred_contact_time
-  if (payload.enquiry_intent)          row.enquiry_intent = payload.enquiry_intent
+  if (payload.enquiry_intent)       row.enquiry_intent = payload.enquiry_intent
   if (payload.booking_requested !== undefined) row.booking_requested = payload.booking_requested
-  if (payload.booking_type)            row.booking_type = payload.booking_type
+  if (payload.booking_type)         row.booking_type = payload.booking_type
+  if (payload.job_description)      row.job_description = payload.job_description
+  if (payload.media_url)            row.media_url = payload.media_url
   if (payload.custom_answers && payload.custom_answers.length > 0) {
     row.custom_answers = payload.custom_answers
   }
 
-  if (payload.job_description) row.job_description = payload.job_description
-
-  // Store full payload for reference
   row.raw_payload = payload
 
-  const { error } = await dashboardSupabase.from('enquiries').insert(row)
+  const insertedId = await insertWithRetry(row)
+  return { enquiry_id: insertedId }
+}
 
-  if (error) {
-    console.error('Dashboard Supabase insert failed:', error)
-    return
-  }
+async function insertWithRetry(row: Record<string, unknown>): Promise<string> {
+  let lastError: unknown = null
 
-  // Update media_url separately on the most recently inserted row for this trade
-  if (payload.media_url) {
-    const { data: latest, error: fetchError } = await dashboardSupabase
-      .from('enquiries')
-      .select('id')
-      .eq('trade_id', payload.dashboard_trade_id)
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .single()
-
-    console.log('media_url update — latest row:', latest, fetchError)
-
-    if (latest?.id) {
-      const { error: mediaError } = await dashboardSupabase
-        .from('enquiries')
-        .update({ media_url: payload.media_url })
-        .eq('id', latest.id)
-      if (mediaError) console.error('media_url update failed:', mediaError)
-      else console.log('media_url updated successfully')
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      const id = await insertOnce(row)
+      if (attempt > 1) console.info(`[BackIn5] Enquiry submitted on retry ${attempt}`)
+      return id
+    } catch (err) {
+      lastError = err
+      const isTransient = isTransientError(err)
+      console.warn(`[BackIn5] Submit attempt ${attempt} failed`, { transient: isTransient, err })
+      if (!isTransient || attempt === MAX_ATTEMPTS) break
+      await wait(RETRY_BACKOFF_MS * attempt)
     }
   }
+
+  console.error('[BackIn5] Enquiry submit failed after retries', lastError)
+  throw lastError instanceof Error ? lastError : new Error('Submission failed')
+}
+
+async function insertOnce(row: Record<string, unknown>): Promise<string> {
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), INSERT_TIMEOUT_MS)
+  try {
+    const { data, error } = await dashboardSupabase
+      .from('enquiries')
+      .insert(row)
+      .select('id')
+      .single()
+      .abortSignal(controller.signal)
+    if (error) throw error
+    if (!data?.id) throw new Error('Insert returned no id')
+    return String(data.id)
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
+function isTransientError(err: unknown): boolean {
+  if (!err || typeof err !== 'object') return false
+  const e = err as { name?: string; message?: string; code?: string; status?: number }
+  if (e.name === 'AbortError') return true
+  if (typeof e.status === 'number' && e.status >= 500) return true
+  if (typeof e.message === 'string') {
+    const m = e.message.toLowerCase()
+    if (m.includes('network') || m.includes('failed to fetch') || m.includes('timeout')) return true
+  }
+  // PostgREST codes: 42501 = RLS denial (NOT transient), 23505 = unique violation (NOT transient)
+  return false
+}
+
+function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }
