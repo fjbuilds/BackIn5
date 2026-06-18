@@ -648,6 +648,15 @@ function Footer() {
               <li><a href="#contact">Contact</a></li>
             </ul>
           </div>
+          <div className="footer-col">
+            <div className="footer-col-ttl">Customers</div>
+            <ul>
+              <li><a href="https://billing.stripe.com/p/login/dRm9AT2UV4D3cVr0zp08g00" target="_blank" rel="noopener">Manage subscription</a></li>
+              <li><a href="mailto:hello@backin5.org">Support</a></li>
+              <li><a href="terms.html" target="_blank" rel="noopener">Terms</a></li>
+              <li><a href="privacy.html" target="_blank" rel="noopener">Privacy</a></li>
+            </ul>
+          </div>
         </div>
         <div className="footer-base">
           <span>© 2026 BackIn5 Ltd · Registered in England · Made for trades.</span>
