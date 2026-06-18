@@ -286,37 +286,43 @@
     // coupon on the first invoice in Stripe before generating the link.
     const PLANS = {
       tier1: {
-        tier: 'Smart Enquiry Handling',
-        monthly: 199,
-        monthlyFmt: '£199 / month',
-        firstMonth6mo: 99.50,
+        tier: 'On It',
+        monthly: 129,
+        monthlyFmt: '£129 / month',
+        firstMonth6mo: 64.50,
         payLinkMonthly: 'https://buy.stripe.com/REPLACE_TIER1_MONTHLY',
         payLink6Month:  'https://buy.stripe.com/REPLACE_TIER1_6MONTH',
       },
       tier2: {
-        tier: 'Full Inbound Desk',
-        monthly: 349,
-        monthlyFmt: '£349 / month',
-        firstMonth6mo: 174.50,
+        tier: 'All Over It',
+        monthly: 229,
+        monthlyFmt: '£229 / month',
+        firstMonth6mo: 114.50,
         payLinkMonthly: 'https://buy.stripe.com/REPLACE_TIER2_MONTHLY',
         payLink6Month:  'https://buy.stripe.com/REPLACE_TIER2_6MONTH',
       },
     };
 
-    // Backwards-compat aliases (old Tally labels / direct links)
-    PLANS.smart     = PLANS.tier1;
-    PLANS.full      = PLANS.tier2;
-    PLANS.smart_3mo = PLANS.tier1;
-    PLANS.smart_6mo = PLANS.tier1;
-    PLANS.full_3mo  = PLANS.tier2;
-    PLANS.full_6mo  = PLANS.tier2;
+    // Backwards-compat aliases (old plan keys + Tally labels)
+    PLANS.smart        = PLANS.tier1;
+    PLANS.full         = PLANS.tier2;
+    PLANS.smart_3mo    = PLANS.tier1;
+    PLANS.smart_6mo    = PLANS.tier1;
+    PLANS.full_3mo     = PLANS.tier2;
+    PLANS.full_6mo     = PLANS.tier2;
+    PLANS['on-it']     = PLANS.tier1;
+    PLANS['all-over-it'] = PLANS.tier2;
 
     function detectPlanKey(raw) {
       if (!raw) return null;
       const lc = decodeURIComponent(raw).toLowerCase().trim();
       if (PLANS[lc]) return lc;
-      const is1 = lc.includes('tier 1') || lc.includes('tier1') || lc.includes('smart') || lc.includes('199');
-      const is2 = lc.includes('tier 2') || lc.includes('tier2') || lc.includes('full')  || lc.includes('349');
+      const is1 = lc.includes('tier 1') || lc.includes('tier1')
+               || lc.includes('on it')  || lc.includes('on-it')
+               || lc.includes('smart')  || lc.includes('129') || lc.includes('199');
+      const is2 = lc.includes('tier 2') || lc.includes('tier2')
+               || lc.includes('all over it') || lc.includes('all-over-it')
+               || lc.includes('full')   || lc.includes('229') || lc.includes('349');
       if (is1) return 'tier1';
       if (is2) return 'tier2';
       return null;
