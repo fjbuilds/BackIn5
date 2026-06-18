@@ -260,7 +260,6 @@ Every enquiry type, handled.
                 className={"how-row " + (s.key === activeKey ? 'active' : '')}
                 onClick={() => setActiveKey(s.key)}
               >
-                <div className="how-row-num">{String(i + 1).padStart(2, '0')}</div>
                 <div className="how-row-icon"><StsScenarioIcon icon={s.icon} /></div>
                 <div className="how-row-body">
                   <div className="how-row-title">{s.title}</div>
@@ -294,7 +293,7 @@ Every enquiry type, handled.
                   >
                     <div className="flow-rail">
                       <div className="flow-circle">
-                        {isFinal ? <IconCheck size={16} /> : String(i + 1).padStart(2, '0')}
+                        {isFinal ? <IconCheck size={16} /> : i + 1}
                       </div>
                     </div>
                     <div className="flow-text">
@@ -746,7 +745,6 @@ function StsBoard() {
           <a href="https://fjbuilds.github.io/backin5-pwa/?demo" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-arrow">
             See the dashboard yourself <IconArrowRight size={16} />
           </a>
-          <span className="sts-demo-note">Live demo. No signup. Have a click around.</span>
         </div>
       </div>
     </section>
