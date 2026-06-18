@@ -1680,3 +1680,15 @@
   .sts-trial-art { min-height: 220px; }
   .sts-art-chip-2 { left: 4%; }
 }
+
+/* see-the-system how-it-works tabs have no leading number column —
+   collapse the grid from 4 columns to 3 so the body content can breathe.
+   The homepage HowItWorks still uses the 4-column layout. */
+#sts-how .how-row {
+  grid-template-columns: 40px 1fr 20px;
+}
+@media (max-width: 720px) {
+  #sts-how .how-row {
+    grid-template-columns: 40px 1fr;
+  }
+}
