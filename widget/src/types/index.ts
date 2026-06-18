@@ -95,6 +95,7 @@ export interface ChatMessage {
 export type FlowStepId =
   | 'service'
   | 'service_other'
+  | 'job_description'
   | 'postcode'
   | 'town'
   | 'urgency'
@@ -127,6 +128,7 @@ export interface FlowAnswers {
   phone?: string
   email?: string
   preferred_contact_time?: string
+  job_description?: string
   media_url?: string
   custom_answers: CustomAnswer[]
 }
