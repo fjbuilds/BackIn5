@@ -83,7 +83,6 @@ function Pricing() {
       "Customer name, number, postcode and detailed job information captured",
       "Enquiries sent in real time, notifying you via text and onto the dashboard for the wider team",
       "24/7 coverage. Handles jobs around the clock",
-      "No app, no office staff, no software to learn",
     ],
     featured: false
   },

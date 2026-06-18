@@ -437,7 +437,7 @@ Every enquiry type, handled from start to finish
                   className={"how-row " + (isActive ? "active" : "")}
                   onClick={() => setActiveKey(s.key)}>
                   
-                  <div className="how-row-num">{String(i + 1).padStart(2, "0")}</div>
+                  <div className="how-row-num">{i + 1}</div>
                   <div className="how-row-icon"><s.Icon size={18} /></div>
                   <div className="how-row-body">
                     <div className="how-row-title">{s.title}</div>
@@ -470,7 +470,7 @@ Every enquiry type, handled from start to finish
                 
                   <div className="flow-rail">
                     <div className="flow-circle">
-                      {i === active.steps.length - 1 ? <IconCheck size={16} /> : String(i + 1).padStart(2, "0")}
+                      {i === active.steps.length - 1 ? <IconCheck size={16} /> : i + 1}
                     </div>
                   </div>
                   <div className="flow-text">{step}</div>

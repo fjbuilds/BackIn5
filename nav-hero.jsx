@@ -92,7 +92,7 @@ function PanelCarousel() {
     const id = setInterval(() => setIdx((i) => (i + 1) % HERO_PANELS.length), 3900);
     return () => clearInterval(id);
   }, []);
-  const pad2 = (n) => String(n).padStart(2, "0");
+  // single-digit step numbers to echo BackIn5's "5"
   return (
     <div className="panel-carousel">
       <div className="panel-head">
@@ -101,14 +101,14 @@ function PanelCarousel() {
 </span>
         </div>
         <div className="panel-counter">
-          <span className="now">{pad2(idx + 1)}</span>
+          <span className="now">{idx + 1}</span>
           <span className="sep"> / </span>
-          <span className="total">{pad2(HERO_PANELS.length)}</span>
+          <span className="total">{HERO_PANELS.length}</span>
         </div>
       </div>
       <div className="panel-stage">
         {HERO_PANELS.map((p, i) => <div key={i} className={"panel " + (i === idx ? "active" : i < idx ? "past" : "future")}>
-            <div className="panel-bignum">{pad2(i + 1)}</div>
+            <div className="panel-bignum">{i + 1}</div>
             <div className="panel-title">{p.title}</div>
             <div className="panel-sub">{p.sub}</div>
           </div>
