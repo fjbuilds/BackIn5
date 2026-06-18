@@ -753,6 +753,136 @@ function StsBoard() {
 
 
 // ============================================================
+// SECTION: Monthly Report (analytics preview)
+// ============================================================
+function StsMonthlyReport() {
+  const headRef = useReveal(), cardRef = useReveal(), listRef = useReveal();
+  return (
+    <section className="canvas-soft band" id="sts-report">
+      <div className="container">
+        <div ref={headRef} className="sec-head center sts-reveal">
+          <span className="eyebrow">Monthly Report</span>
+          <h2 className="display">A clear picture of where your jobs come from</h2>
+          <p className="lead">
+            On the 1st of every month we email you a one-page report. No login, no digging through the dashboard. Just the numbers that tell you what's working.
+          </p>
+        </div>
+
+        <div className="sts-report-split">
+          <div ref={cardRef} className="sts-report-preview sts-reveal">
+            <div className="sts-report-head">
+              <div>
+                <div className="sts-report-eyebrow">BackIn5 Monthly Report</div>
+                <div className="sts-report-title">November 2026</div>
+              </div>
+              <div className="sts-report-logo">BackIn<span>5</span></div>
+            </div>
+
+            <div className="sts-report-hero">
+              <div className="sts-report-hero-label">Estimated revenue from won jobs</div>
+              <div className="sts-report-hero-value">£18,420</div>
+              <div className="sts-report-hero-change up">▲ 22% vs October</div>
+            </div>
+
+            <div className="sts-report-kpis">
+              <div className="sts-report-kpi">
+                <div className="sts-report-kpi-value">47</div>
+                <div className="sts-report-kpi-label">Total enquiries</div>
+              </div>
+              <div className="sts-report-kpi">
+                <div className="sts-report-kpi-value">14m</div>
+                <div className="sts-report-kpi-label">Avg response</div>
+              </div>
+              <div className="sts-report-kpi">
+                <div className="sts-report-kpi-value">38%</div>
+                <div className="sts-report-kpi-label">Conversion</div>
+              </div>
+              <div className="sts-report-kpi">
+                <div className="sts-report-kpi-value">£1,030</div>
+                <div className="sts-report-kpi-label">Avg deal</div>
+              </div>
+            </div>
+
+            <div className="sts-report-section-label">Where enquiries came from</div>
+            <div className="sts-report-bars">
+              {[
+                { name: 'Website Widget', pct: 38, count: 18 },
+                { name: 'WhatsApp', pct: 23, count: 11 },
+                { name: 'Missed Call', pct: 17, count: 8 },
+                { name: 'Facebook Lead', pct: 13, count: 6 },
+                { name: 'Email', pct: 9, count: 4 },
+              ].map(s => (
+                <div className="sts-report-bar-row" key={s.name}>
+                  <span className="sts-report-bar-name">{s.name}</span>
+                  <div className="sts-report-bar-track">
+                    <div className="sts-report-bar-fill" style={{ width: s.pct + '%' }} />
+                  </div>
+                  <span className="sts-report-bar-count">{s.count}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="sts-report-section-label">Funnel</div>
+            <div className="sts-report-funnel">
+              <div className="sts-report-funnel-step">
+                <span>Enquiries</span><strong>47</strong>
+              </div>
+              <div className="sts-report-funnel-arrow">→</div>
+              <div className="sts-report-funnel-step">
+                <span>Quoted</span><strong>31</strong>
+              </div>
+              <div className="sts-report-funnel-arrow">→</div>
+              <div className="sts-report-funnel-step">
+                <span>Booked</span><strong>22</strong>
+              </div>
+              <div className="sts-report-funnel-arrow">→</div>
+              <div className="sts-report-funnel-step sts-report-funnel-final">
+                <span>Won</span><strong>18</strong>
+              </div>
+            </div>
+
+            <div className="sts-report-footer">
+              <span>Best converting source: <strong>WhatsApp (55%)</strong></span>
+              <span>Busiest day: <strong>Tuesday</strong></span>
+            </div>
+          </div>
+
+          <div ref={listRef} className="sts-report-explainer sts-reveal sts-reveal-d1">
+            <h3 className="sts-report-explainer-title">What gets tracked</h3>
+            <ul className="sts-report-list">
+              <li>
+                <div className="sts-report-list-h">Channel performance</div>
+                <p>Every enquiry tags its source, so you see exactly where demand is coming from - and which channels are worth doubling down on.</p>
+              </li>
+              <li>
+                <div className="sts-report-list-h">Response speed</div>
+                <p>Time from enquiry landing to first action. The faster you reply, the higher your win rate. We show your average and your slowest.</p>
+              </li>
+              <li>
+                <div className="sts-report-list-h">Conversion funnel</div>
+                <p>How enquiries move through quote → booked → won, with drop-off at each stage so you know where leads are slipping.</p>
+              </li>
+              <li>
+                <div className="sts-report-list-h">Revenue estimate</div>
+                <p>Estimated revenue based on your average deal size, applied to jobs marked as won that month. Set your typical job value once in settings.</p>
+              </li>
+              <li>
+                <div className="sts-report-list-h">Patterns</div>
+                <p>Busiest day of the week, peak hours, top service requested, urgency mix. Useful for staffing and quoting decisions.</p>
+              </li>
+            </ul>
+            <div className="sts-report-note">
+              Sent on the 1st of every month to the email on your account. Nothing to set up.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+// ============================================================
 // SECTION: Full Detail View
 // ============================================================
 function StsEnquiryDetail() {
@@ -1166,6 +1296,7 @@ function StsPage() {
         <StsQuoteAssistant />
         <StsChannels />
         <StsBoard />
+        <StsMonthlyReport />
         <StsEnquiryDetail />
         <StsSetup />
         <StsPackages />
