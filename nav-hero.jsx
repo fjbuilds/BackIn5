@@ -539,7 +539,9 @@ function Hero({ variant }) {
 
   const lead =
   <React.Fragment>
-      Catches the work you're missing. Replies before they walk. Yours to win.
+      <span className="lead-beat">Catches the work you're missing.</span>{' '}
+      <span className="lead-beat">Replies before they walk.</span>{' '}
+      <span className="lead-beat">Yours to win.</span>
     </React.Fragment>;
 
   return (

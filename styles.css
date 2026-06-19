@@ -568,6 +568,12 @@ html { scroll-behavior: smooth; }
   max-width: 52ch;
   margin: 0;
 }
+.lead-beat { display: inline; }
+@media (max-width: 640px) {
+  .lead-beat { display: block; }
+  /* drop the literal space-text-nodes between beats so the line wraps cleanly */
+  .hero-lead { white-space: pre-line; }
+}
 .hero-cta-row {
   display: flex;
   flex-wrap: wrap;
