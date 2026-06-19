@@ -328,6 +328,7 @@ function HeroV1({ headline, lead }) {
   return (
     <div className="hero-split">
       <div>
+        <span className="hero-eyebrow"><span className="pulse" />A system, not an agency</span>
         <h1 className="display-hero" style={{ fontSize: "60px" }}>{headline}</h1>
         <div style={{ height: 28 }} />
         <p className="hero-lead">{lead}</p>
@@ -534,14 +535,13 @@ function HeroBackdrop() {
 function Hero({ variant }) {
   const headline =
   <React.Fragment>
-      Trades Admin,<br />
-      <em style={{ color: "rgb(52, 80, 179)" }}>Handled For You.</em>
+      Missed enquiries are<br />
+      <em style={{ color: "rgb(52, 80, 179)" }}>costing you business.</em>
     </React.Fragment>;
 
   const lead =
   <React.Fragment>
-      24/7 Customer Handling | Automatic Text and Callbacks<br />
-      Website, Social Media and Trade-site Enquiries Handled
+      Catches the work you're missing. Replies before they walk. Yours to win.
     </React.Fragment>;
 
   return (
@@ -560,7 +560,7 @@ function Hero({ variant }) {
         <div className="container trust-row">
           <span className="item">TRUSTED BY INDEPENDENTS AND FIRMS</span>
           <span className="item">BUILT FOR BUSY TRADES</span>
-          <span className="item" style={{ color: "rgb(255, 255, 255)" }}>ENQUIRIES HANDLED 24/7</span>
+          <span className="item" style={{ color: "rgb(255, 255, 255)" }}>NO CALL CENTRE, NO STAFF</span>
           <span className="item">LIVE DASHBOARD INCLUDED</span>
         </div>
       </div>
