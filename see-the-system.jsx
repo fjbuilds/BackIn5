@@ -773,7 +773,7 @@ function StsMonthlyReport() {
             <div className="sts-report-head">
               <div>
                 <div className="sts-report-eyebrow">BackIn5 Monthly Report</div>
-                <div className="sts-report-title">November 2026</div>
+                <div className="sts-report-title">January 2026</div>
               </div>
               <div className="sts-report-logo">BackIn<span>5</span></div>
             </div>
@@ -806,10 +806,10 @@ function StsMonthlyReport() {
             <div className="sts-report-section-label">Where enquiries came from</div>
             <div className="sts-report-bars">
               {[
-                { name: 'Website Widget', pct: 38, count: 18 },
+                { name: 'Website Enquiry', pct: 38, count: 18 },
                 { name: 'WhatsApp', pct: 23, count: 11 },
                 { name: 'Missed Call', pct: 17, count: 8 },
-                { name: 'Facebook Lead', pct: 13, count: 6 },
+                { name: 'Checkatrade', pct: 13, count: 6 },
                 { name: 'Email', pct: 9, count: 4 },
               ].map(s => (
                 <div className="sts-report-bar-row" key={s.name}>
@@ -843,7 +843,7 @@ function StsMonthlyReport() {
 
             <div className="sts-report-footer">
               <span>Best converting source: <strong>WhatsApp (55%)</strong></span>
-              <span>Busiest day: <strong>Tuesday</strong></span>
+              <span>Top service: <strong>Boiler repair (14)</strong></span>
             </div>
           </div>
 
@@ -1296,8 +1296,8 @@ function StsPage() {
         <StsQuoteAssistant />
         <StsChannels />
         <StsBoard />
-        <StsMonthlyReport />
         <StsEnquiryDetail />
+        <StsMonthlyReport />
         <StsSetup />
         <StsPackages />
       </main>

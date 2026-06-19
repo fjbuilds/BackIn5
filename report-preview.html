@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your November Report — BackIn5</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0E1116;
+      --soft: #FAFBFC;
+      --muted: #6B7588;
+      --mute: #8B94A7;
+      --hairline: rgba(15, 23, 42, 0.08);
+      --accent: #2341A8;
+      --accent-soft: rgba(35, 65, 168, 0.07);
+      --green: #1F7A3A;
+      --green-soft: rgba(31, 122, 58, 0.10);
+      --red: #B23F3F;
+      --amber: #C57C00;
+      --font: 'IBM Plex Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: #F1F4F9;
+      font-family: var(--font);
+      color: var(--ink);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .report {
+      max-width: 760px;
+      margin: 32px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 30px 60px rgba(15, 23, 42, 0.08), 0 2px 8px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+    }
+
+    /* HEADER */
+    .r-head {
+      padding: 28px 36px 22px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .r-head-left {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .r-logo {
+      font-size: 18px; font-weight: 700; letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .r-logo span { color: var(--accent); }
+    .r-divider { width: 1px; height: 22px; background: var(--hairline); }
+    .r-firm { font-size: 14px; color: var(--muted); font-weight: 600; }
+    .r-period {
+      font-size: 12px; font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 6px 12px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* GREETING */
+    .r-greet { padding: 30px 36px 6px; }
+    .r-greet h1 {
+      margin: 0 0 6px;
+      font-size: 26px; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .r-greet p {
+      margin: 0;
+      color: var(--muted); font-size: 15px;
+    }
+
+    /* HERO */
+    .r-hero {
+      margin: 22px 36px 12px;
+      padding: 28px 30px;
+      background: linear-gradient(135deg, var(--accent), #3658c8 60%, #5b7be0);
+      border-radius: 14px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .r-hero::after {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(900px 200px at 100% 0%, rgba(255,255,255,0.18), transparent 60%);
+      pointer-events: none;
+    }
+    .r-hero-label {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .r-hero-value {
+      font-size: 52px; font-weight: 700; letter-spacing: -0.025em;
+      line-height: 1.05;
+      margin: 4px 0 8px;
+    }
+    .r-hero-meta {
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+      font-size: 13px; font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .r-hero-change {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 4px 10px; border-radius: 999px;
+      font-weight: 700;
+    }
+
+    /* KPI STRIP */
+    .r-kpis {
+      margin: 18px 36px 8px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .r-kpi {
+      background: var(--soft);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 14px 14px 12px;
+    }
+    .r-kpi-label {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--mute);
+    }
+    .r-kpi-value {
+      font-size: 24px; font-weight: 700; letter-spacing: -0.01em;
+      margin: 4px 0 2px;
+      color: var(--ink);
+    }
+    .r-kpi-sub {
+      font-size: 11.5px; color: var(--muted); font-weight: 600;
+    }
+    .r-kpi-sub.up { color: var(--green); }
+    .r-kpi-sub.down { color: var(--red); }
+
+    /* SECTIONS */
+    .r-section {
+      padding: 28px 36px 4px;
+    }
+    .r-section + .r-section { padding-top: 4px; }
+    .r-section h2 {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--mute);
+      margin: 0 0 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .r-section h2::after {
+      content: ""; flex: 1; height: 1px;
+      background: var(--hairline);
+    }
+
+    /* CHANNELS */
+    .r-channels {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .r-channel {
+      display: grid;
+      grid-template-columns: 150px 1fr 80px;
+      align-items: center; gap: 14px;
+    }
+    .r-channel-name {
+      font-size: 13px; font-weight: 600;
+      color: var(--ink);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .r-channel-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .r-channel-track {
+      height: 10px; background: var(--hairline);
+      border-radius: 999px; overflow: hidden;
+    }
+    .r-channel-fill {
+      height: 100%; border-radius: 999px;
+      transition: width 600ms ease;
+    }
+    .r-channel-num {
+      font-size: 13px; font-weight: 700;
+      color: var(--ink);
+      text-align: right;
+    }
+    .r-channel-num span {
+      font-weight: 500; color: var(--mute);
+      font-size: 12px;
+    }
+
+    /* RESPONSE TIME */
+    .r-response {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .r-resp-card {
+      padding: 16px;
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      background: #fff;
+    }
+    .r-resp-card-label {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--mute);
+    }
+    .r-resp-card-value {
+      font-size: 22px; font-weight: 700; letter-spacing: -0.01em;
+      margin: 6px 0 0;
+    }
+    .r-resp-card-note {
+      font-size: 12px; color: var(--muted);
+      margin-top: 4px;
+    }
+    .r-resp-card.good .r-resp-card-value { color: var(--green); }
+    .r-resp-card.bad .r-resp-card-value { color: var(--amber); }
+
+    /* FUNNEL */
+    .r-funnel {
+      display: flex; align-items: stretch;
+      gap: 6px;
+    }
+    .r-funnel-step {
+      flex: 1; min-width: 0;
+      background: var(--soft);
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      padding: 14px 12px 12px;
+      text-align: center;
+      position: relative;
+    }
+    .r-funnel-step strong {
+      display: block;
+      font-size: 22px; font-weight: 700; letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .r-funnel-step span {
+      display: block;
+      font-size: 10.5px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--mute);
+      margin-top: 2px;
+    }
+    .r-funnel-step em {
+      font-style: normal; display: block;
+      font-size: 11px; color: var(--muted);
+      margin-top: 6px; font-weight: 600;
+    }
+    .r-funnel-step.final {
+      background: var(--accent-soft);
+      border-color: rgba(35, 65, 168, 0.2);
+    }
+    .r-funnel-step.final strong { color: var(--accent); }
+
+    /* PATTERNS */
+    .r-patterns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .r-pattern-card {
+      background: var(--soft);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .r-pattern-card .pl {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--mute);
+    }
+    .r-pattern-card .pv {
+      font-size: 18px; font-weight: 700; letter-spacing: -0.01em;
+      margin-top: 6px;
+    }
+    .r-pattern-card .ps {
+      font-size: 12px; color: var(--muted); margin-top: 4px;
+    }
+
+    /* TOP SERVICES */
+    .r-services {
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .r-service {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 14px;
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      font-size: 13px;
+    }
+    .r-service-name { font-weight: 600; color: var(--ink); }
+    .r-service-count { color: var(--muted); font-weight: 600; }
+
+    /* INSIGHT CALLOUT */
+    .r-insight {
+      margin: 26px 36px 0;
+      padding: 18px 22px;
+      background: var(--green-soft);
+      border: 1px solid rgba(31, 122, 58, 0.18);
+      border-radius: 12px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .r-insight-icon {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 14px;
+    }
+    .r-insight-body {
+      font-size: 13.5px; color: var(--ink); line-height: 1.55;
+    }
+    .r-insight-body strong { color: var(--green); }
+
+    /* CTA */
+    .r-cta {
+      margin: 28px 36px;
+      padding: 22px 24px;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      flex-wrap: wrap;
+    }
+    .r-cta-text { font-size: 14.5px; max-width: 380px; }
+    .r-cta-btn {
+      background: var(--accent); color: #fff;
+      padding: 10px 18px;
+      border-radius: 100px;
+      text-decoration: none;
+      font-weight: 700; font-size: 13.5px;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: background 140ms ease;
+    }
+    .r-cta-btn:hover { background: #1c378f; }
+
+    /* FOOTER */
+    .r-foot {
+      padding: 20px 36px 28px;
+      border-top: 1px solid var(--hairline);
+      color: var(--muted);
+      font-size: 11.5px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+      gap: 10px;
+    }
+    .r-foot a { color: var(--muted); text-decoration: none; }
+    .r-foot a:hover { color: var(--ink); }
+
+    /* PREVIEW NOTICE (only when previewing, not when emailed) */
+    .preview-banner {
+      max-width: 760px;
+      margin: 24px auto 0;
+      padding: 12px 18px;
+      background: #FFF3CD;
+      border: 1px solid #FFE69C;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #664D03;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .preview-banner strong { font-weight: 700; }
+
+    @media (max-width: 640px) {
+      .report { margin: 12px; border-radius: 14px; }
+      .r-head, .r-greet, .r-section, .r-foot { padding-left: 22px; padding-right: 22px; }
+      .r-hero, .r-kpis, .r-insight, .r-cta { margin-left: 22px; margin-right: 22px; }
+      .r-hero { padding: 22px 20px; }
+      .r-hero-value { font-size: 38px; }
+      .r-kpis { grid-template-columns: repeat(2, 1fr); }
+      .r-channel { grid-template-columns: 100px 1fr 60px; gap: 10px; }
+      .r-response, .r-patterns { grid-template-columns: 1fr; }
+      .r-funnel { flex-direction: column; }
+      .r-funnel-step { text-align: left; padding: 12px 14px; }
+      .r-funnel-step strong { display: inline; font-size: 18px; }
+      .r-funnel-step span { display: inline; margin-left: 8px; }
+      .r-cta { flex-direction: column; align-items: flex-start; }
+      .preview-banner { margin: 12px; }
+    }
+
+    @media print {
+      .preview-banner { display: none; }
+      body { background: #fff; }
+      .report { box-shadow: none; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="preview-banner">
+    <strong>Preview only.</strong>
+    <span>This is what your trades will receive on the 1st of every month. Not live yet.</span>
+  </div>
+
+  <div class="report">
+
+    <!-- HEADER -->
+    <div class="r-head">
+      <div class="r-head-left">
+        <div class="r-logo">BackIn<span>5</span></div>
+        <div class="r-divider"></div>
+        <div class="r-firm">Smith Plumbing &amp; Heating Ltd</div>
+      </div>
+      <div class="r-period">January 2026</div>
+    </div>
+
+    <!-- GREETING -->
+    <div class="r-greet">
+      <h1>Hi Mark — here's your month at a glance</h1>
+      <p>47 new enquiries, 18 won jobs and your fastest response time on record. The full breakdown is below.</p>
+    </div>
+
+    <!-- HERO STAT -->
+    <div class="r-hero">
+      <div class="r-hero-label">Estimated revenue from won jobs</div>
+      <div class="r-hero-value">£18,420</div>
+      <div class="r-hero-meta">
+        <span class="r-hero-change">▲ 22% vs October</span>
+        <span>18 jobs at avg £1,023</span>
+      </div>
+    </div>
+
+    <!-- KPI STRIP -->
+    <div class="r-kpis">
+      <div class="r-kpi">
+        <div class="r-kpi-label">Enquiries</div>
+        <div class="r-kpi-value">47</div>
+        <div class="r-kpi-sub up">+9 vs Oct</div>
+      </div>
+      <div class="r-kpi">
+        <div class="r-kpi-label">Avg response</div>
+        <div class="r-kpi-value">14m</div>
+        <div class="r-kpi-sub up">7 mins faster</div>
+      </div>
+      <div class="r-kpi">
+        <div class="r-kpi-label">Conversion</div>
+        <div class="r-kpi-value">38%</div>
+        <div class="r-kpi-sub up">+4 pts</div>
+      </div>
+      <div class="r-kpi">
+        <div class="r-kpi-label">Avg deal</div>
+        <div class="r-kpi-value">£1,023</div>
+        <div class="r-kpi-sub">based on 18 won</div>
+      </div>
+    </div>
+
+    <!-- WHERE ENQUIRIES CAME FROM -->
+    <div class="r-section">
+      <h2>Where enquiries came from</h2>
+      <div class="r-channels">
+        <div class="r-channel">
+          <div class="r-channel-name"><span class="r-channel-dot" style="background:#2341A8"></span>Website Enquiry</div>
+          <div class="r-channel-track"><div class="r-channel-fill" style="width:80%;background:#2341A8"></div></div>
+          <div class="r-channel-num">18 <span>· 38%</span></div>
+        </div>
+        <div class="r-channel">
+          <div class="r-channel-name"><span class="r-channel-dot" style="background:#25B270"></span>WhatsApp</div>
+          <div class="r-channel-track"><div class="r-channel-fill" style="width:49%;background:#25B270"></div></div>
+          <div class="r-channel-num">11 <span>· 23%</span></div>
+        </div>
+        <div class="r-channel">
+          <div class="r-channel-name"><span class="r-channel-dot" style="background:#D4890E"></span>Missed Call</div>
+          <div class="r-channel-track"><div class="r-channel-fill" style="width:36%;background:#D4890E"></div></div>
+          <div class="r-channel-num">8 <span>· 17%</span></div>
+        </div>
+        <div class="r-channel">
+          <div class="r-channel-name"><span class="r-channel-dot" style="background:#5B8DEF"></span>Checkatrade</div>
+          <div class="r-channel-track"><div class="r-channel-fill" style="width:28%;background:#5B8DEF"></div></div>
+          <div class="r-channel-num">6 <span>· 13%</span></div>
+        </div>
+        <div class="r-channel">
+          <div class="r-channel-name"><span class="r-channel-dot" style="background:#A06CFF"></span>Email</div>
+          <div class="r-channel-track"><div class="r-channel-fill" style="width:18%;background:#A06CFF"></div></div>
+          <div class="r-channel-num">4 <span>· 9%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESPONSE TIME -->
+    <div class="r-section">
+      <h2>How fast you responded</h2>
+      <div class="r-response">
+        <div class="r-resp-card good">
+          <div class="r-resp-card-label">Average response</div>
+          <div class="r-resp-card-value">14 min</div>
+          <div class="r-resp-card-note">Down from 21 min in October. Customers replying twice as often when you answer inside 15 min.</div>
+        </div>
+        <div class="r-resp-card bad">
+          <div class="r-resp-card-label">Slowest response</div>
+          <div class="r-resp-card-value">3h 42m</div>
+          <div class="r-resp-card-note">One Friday afternoon WhatsApp enquiry. Customer went elsewhere.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FUNNEL -->
+    <div class="r-section">
+      <h2>From enquiry to won</h2>
+      <div class="r-funnel">
+        <div class="r-funnel-step">
+          <strong>47</strong>
+          <span>Enquiries</span>
+          <em>100%</em>
+        </div>
+        <div class="r-funnel-step">
+          <strong>31</strong>
+          <span>Quoted</span>
+          <em>66%</em>
+        </div>
+        <div class="r-funnel-step">
+          <strong>22</strong>
+          <span>Booked</span>
+          <em>47%</em>
+        </div>
+        <div class="r-funnel-step final">
+          <strong>18</strong>
+          <span>Won</span>
+          <em>38%</em>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSIGHT -->
+    <div class="r-insight">
+      <div class="r-insight-icon">★</div>
+      <div class="r-insight-body">
+        <strong>Best converting channel: WhatsApp.</strong> 55% of WhatsApp enquiries turned into won jobs — almost double your Facebook rate (28%). If you can lean into the WhatsApp channel, your December revenue should follow.
+      </div>
+    </div>
+
+    <!-- TOP SERVICES -->
+    <div class="r-section">
+      <h2>Top services requested</h2>
+      <div class="r-services">
+        <div class="r-service">
+          <span class="r-service-name">Boiler service / repair</span>
+          <span class="r-service-count">14 enquiries · 5 won</span>
+        </div>
+        <div class="r-service">
+          <span class="r-service-name">Bathroom refit quote</span>
+          <span class="r-service-count">11 enquiries · 4 won</span>
+        </div>
+        <div class="r-service">
+          <span class="r-service-name">Emergency callout</span>
+          <span class="r-service-count">9 enquiries · 6 won</span>
+        </div>
+        <div class="r-service">
+          <span class="r-service-name">Kitchen install</span>
+          <span class="r-service-count">7 enquiries · 2 won</span>
+        </div>
+        <div class="r-service">
+          <span class="r-service-name">Other</span>
+          <span class="r-service-count">6 enquiries · 1 won</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PATTERNS -->
+    <div class="r-section">
+      <h2>When demand peaks</h2>
+      <div class="r-patterns">
+        <div class="r-pattern-card">
+          <div class="pl">Repeat customers</div>
+          <div class="pv">4 of 18 wins</div>
+          <div class="ps">22% of this month's won jobs came from people you've worked with before</div>
+        </div>
+        <div class="r-pattern-card">
+          <div class="pl">Peak hours</div>
+          <div class="pv">8 – 10am</div>
+          <div class="ps">26% of enquiries land in this window</div>
+        </div>
+        <div class="r-pattern-card">
+          <div class="pl">Most urgent</div>
+          <div class="pv">38% “ASAP”</div>
+          <div class="ps">Higher than the trade average — your customers need fast replies</div>
+        </div>
+        <div class="r-pattern-card">
+          <div class="pl">Average lead time</div>
+          <div class="pv">9 days</div>
+          <div class="ps">From first enquiry to booked appointment</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="r-cta">
+      <div class="r-cta-text">
+        Want to dig deeper? Every enquiry, photo and message is in your dashboard.
+      </div>
+      <a class="r-cta-btn" href="https://fjbuilds.github.io/backin5-pwa/">
+        Open dashboard →
+      </a>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="r-foot">
+      <span>BackIn5 monthly report · sent on the 1st of every month</span>
+      <span>
+        <a href="https://backin5.org">backin5.org</a>
+        · <a href="#">Unsubscribe</a>
+      </span>
+    </div>
+
+  </div>
+
+</body>
+</html>
