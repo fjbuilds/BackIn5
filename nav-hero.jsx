@@ -328,7 +328,6 @@ function HeroV1({ headline, lead }) {
   return (
     <div className="hero-split">
       <div>
-        <span className="hero-eyebrow"><span className="pulse" />A system, not an agency</span>
         <h1 className="display-hero" style={{ fontSize: "60px" }}>{headline}</h1>
         <div style={{ height: 28 }} />
         <p className="hero-lead">{lead}</p>
@@ -535,13 +534,12 @@ function HeroBackdrop() {
 function Hero({ variant }) {
   const headline =
   <React.Fragment>
-      Missed enquiries are<br />
-      <em style={{ color: "rgb(52, 80, 179)" }}>costing you business.</em>
+      Missed enquiries are costing you <em style={{ color: "rgb(52, 80, 179)" }}>business.</em>
     </React.Fragment>;
 
   const lead =
   <React.Fragment>
-      Catches the work you're missing. Replies before they walk. Yours to win.
+      A system that wins what you'd miss.
     </React.Fragment>;
 
   return (
