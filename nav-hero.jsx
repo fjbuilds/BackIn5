@@ -539,7 +539,7 @@ function Hero({ variant }) {
 
   const lead =
   <React.Fragment>
-      A system that wins what you'd miss.
+      Catches the work you're missing. Replies before they walk. Yours to win.
     </React.Fragment>;
 
   return (
