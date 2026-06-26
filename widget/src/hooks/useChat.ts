@@ -11,6 +11,17 @@ function userMsg(text: string): ChatMessage { return { id: makeId(), role: 'user
 
 const URGENCY_OPTIONS = ['Urgent / emergency', 'As soon as possible', 'This week', 'Flexible']
 
+const FOLLOW_UP_CALLBACK = '📞 Callback'
+const FOLLOW_UP_BOOK = '📅 Book a site visit'
+const FOLLOW_UP_OPTIONS = [FOLLOW_UP_CALLBACK, FOLLOW_UP_BOOK]
+
+const CALLBACK_TIME_OPTIONS = [
+  'Morning (9am–12pm)',
+  'Afternoon (12pm–5pm)',
+  'Evening (5pm–8pm)',
+  'ASAP / Anytime',
+]
+
 export type InputMode =
   | { type: 'text'; placeholder: string; optional?: boolean }
   | { type: 'options'; options: string[] }
@@ -59,6 +70,10 @@ export function useChat(config: BusinessConfig) {
     if (s === 'name')  return { type: 'name_split' }
     if (s === 'phone') return { type: 'text', placeholder: 'e.g. 07700 900000' }
     if (s === 'email') return { type: 'text', placeholder: 'e.g. you@example.com', optional: true }
+    if (s === 'enquiry_intent') return { type: 'options', options: FOLLOW_UP_OPTIONS }
+    if (s === 'preferred_contact_time') return { type: 'options', options: CALLBACK_TIME_OPTIONS }
+    // TODO: real per-trade calendar integration (Google / Outlook). Static slots for now.
+    if (s === 'calendar')       return { type: 'calendar' }
     return { type: 'none' }
   }
 
@@ -94,6 +109,9 @@ export function useChat(config: BusinessConfig) {
     if (s === 'name')  return "What's your name?"
     if (s === 'phone') return 'Best number to reach you on?'
     if (s === 'email') return 'And your email? (optional)'
+    if (s === 'enquiry_intent') return 'How would you like us to follow up?'
+    if (s === 'preferred_contact_time') return 'When suits you best for a call?'
+    if (s === 'calendar')       return 'Pick a time that suits you — these are live available slots.'
     return ''
   }
 
@@ -116,7 +134,8 @@ export function useChat(config: BusinessConfig) {
     if (current === 'urgency')        return 'name'
     if (current === 'name')           return 'phone'
     if (current === 'phone')          return 'email'
-    if (current === 'email')          return 'submitting'
+    if (current === 'email')          return 'enquiry_intent'
+    if (current === 'calendar')       return 'submitting'
     return 'done'
   }
 
@@ -223,6 +242,26 @@ export function useChat(config: BusinessConfig) {
       a.phone = rawValue
     } else if (step === 'email') {
       a.email = rawValue
+    } else if (step === 'enquiry_intent') {
+      if (rawValue === FOLLOW_UP_CALLBACK) {
+        a.enquiry_intent = 'Callback'
+        a.action_tag = 'Call Back'
+        a.booking_requested = false
+        await advanceTo('preferred_contact_time')
+        return
+      }
+      if (rawValue === FOLLOW_UP_BOOK) {
+        a.enquiry_intent = 'Book site visit'
+        a.action_tag = 'Visit Booked'
+        a.booking_type = 'Site visit'
+        a.booking_requested = true
+        await advanceTo('calendar')
+        return
+      }
+    } else if (step === 'preferred_contact_time') {
+      a.preferred_contact_time = rawValue
+      await advanceTo('submitting')
+      return
     }
 
     await advanceTo(nextStep(step))
@@ -242,11 +281,18 @@ export function useChat(config: BusinessConfig) {
     answersRef.current.appointment_datetime = datetime
     answersRef.current.booking_requested = true
     appendMessage(userMsg(`Requested: ${datetime}`))
-    await advanceTo(nextStep(step))
+    await advanceTo('submitting')
   }
 
   async function skipCalendar() {
-    await advanceTo(nextStep(step))
+    // User changed their mind about picking a time — downgrade to "Visit Required"
+    // so the dashboard knows they wanted a visit but didn't commit to a slot.
+    const a = answersRef.current
+    a.appointment_datetime = undefined
+    a.booking_requested = false
+    a.action_tag = 'Visit Required'
+    appendMessage(userMsg('Skip picking a time'))
+    await advanceTo('submitting')
   }
 
   async function choosePhoto(yes: boolean) {
