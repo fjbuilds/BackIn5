@@ -1,11 +1,17 @@
 import type { EnquiryPayload } from '../types'
 import { dashboardSupabase } from './dashboardSupabase'
 
+// IMPORTANT: anon role has INSERT-only on `enquiries`.
+// Do NOT chain `.select(...)` after `.insert(...)` — Supabase will try to read the
+// inserted row back, which requires SELECT permission and will 401 against RLS.
+// Keep this as a pure insert. If you need the new id, generate it client-side
+// (crypto.randomUUID()) and put it on `row.id` before insert.
+
 const INSERT_TIMEOUT_MS = 12_000
 const MAX_ATTEMPTS = 3
 const RETRY_BACKOFF_MS = 800
 
-export async function submitEnquiry(payload: EnquiryPayload): Promise<{ enquiry_id: string }> {
+export async function submitEnquiry(payload: EnquiryPayload): Promise<void> {
   if (!payload.dashboard_trade_id) {
     throw new Error('Submission misconfigured: missing dashboard_trade_id on business')
   }
@@ -42,18 +48,17 @@ export async function submitEnquiry(payload: EnquiryPayload): Promise<{ enquiry_
 
   row.raw_payload = payload
 
-  const insertedId = await insertWithRetry(row)
-  return { enquiry_id: insertedId }
+  await insertWithRetry(row)
 }
 
-async function insertWithRetry(row: Record<string, unknown>): Promise<string> {
+async function insertWithRetry(row: Record<string, unknown>): Promise<void> {
   let lastError: unknown = null
 
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
     try {
-      const id = await insertOnce(row)
+      await insertOnce(row)
       if (attempt > 1) console.info(`[BackIn5] Enquiry submitted on retry ${attempt}`)
-      return id
+      return
     } catch (err) {
       lastError = err
       const isTransient = isTransientError(err)
@@ -67,19 +72,15 @@ async function insertWithRetry(row: Record<string, unknown>): Promise<string> {
   throw lastError instanceof Error ? lastError : new Error('Submission failed')
 }
 
-async function insertOnce(row: Record<string, unknown>): Promise<string> {
+async function insertOnce(row: Record<string, unknown>): Promise<void> {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), INSERT_TIMEOUT_MS)
   try {
-    const { data, error } = await dashboardSupabase
+    const { error } = await dashboardSupabase
       .from('enquiries')
       .insert(row)
-      .select('id')
-      .single()
       .abortSignal(controller.signal)
     if (error) throw error
-    if (!data?.id) throw new Error('Insert returned no id')
-    return String(data.id)
   } finally {
     clearTimeout(timer)
   }
