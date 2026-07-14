@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>BackIn5 — Full Flow Demo</title>
+<style>
+  body {
+    margin: 0;
+    padding: 40px 20px;
+    background: #f1f3f9;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+  }
+  .panel {
+    width: 380px;
+    border-radius: 16px;
+    background: #fafbff;
+    box-shadow:
+      0 8px 40px rgba(35, 65, 168, 0.14),
+      0 2px 8px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(35, 65, 168, 0.06);
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #111827;
+  }
+  .header {
+    background: #2341A8;
+    color: #fff;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-left { display: flex; align-items: center; gap: 10px; }
+  .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 0 2px rgba(74,222,128,0.3);
+  }
+  .title { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+  .close {
+    background: rgba(255,255,255,0.15); border: none; color: #fff;
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+  }
+  .messages {
+    padding: 16px;
+    background:
+      radial-gradient(ellipse at 10% 20%, rgba(35,65,168,0.03) 0%, transparent 60%),
+      #fafbff;
+  }
+  .row { display: flex; margin-bottom: 12px; }
+  .row.left { justify-content: flex-start; }
+  .row.right { justify-content: flex-end; }
+  .bubble {
+    padding: 10px 14px;
+    border-radius: 12px;
+    max-width: 82%;
+    word-break: break-word;
+  }
+  .bot { background: #eef1fb; color: #111827; }
+  .user { background: #2341A8; color: #fff; }
+
+  .custom-wrap { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 12px; }
+  .custom-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: #FAEEDA; color: #854F0B;
+    border: 1px dashed #EF9F27;
+    border-radius: 999px;
+    padding: 2px 9px;
+    font-size: 10.5px; font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+  }
+  .custom-bubble { border-left: 3px solid #EF9F27; }
+
+  .upload-card {
+    background: #fff; border: 1px dashed #c7d0e8; border-radius: 12px;
+    padding: 14px; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .upload-icon {
+    width: 46px; height: 46px; border-radius: 10px;
+    background: #eef1fb; color: #2341A8;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 22px;
+  }
+  .upload-meta { flex: 1; min-width: 0; }
+  .upload-meta-title { font-weight: 600; color: #111827; font-size: 13px; }
+  .upload-meta-sub { font-size: 12px; color: #6b7280; }
+  .upload-btn {
+    padding: 8px 14px; border-radius: 8px; border: none;
+    background: #2341A8; color: #fff;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+  }
+
+  .photo-bubble {
+    background: #2341A8; color: #fff;
+    padding: 8px 8px 10px 8px;
+    border-radius: 12px;
+    max-width: 72%;
+  }
+  .photo-stub {
+    width: 200px; height: 140px; border-radius: 8px;
+    background: linear-gradient(135deg,#dbe3f7 0%, #b6c1e2 60%, #8a9ac8 100%);
+    position: relative; overflow: hidden;
+  }
+  .photo-stub .boiler { position: absolute; left: 18px; top: 14px; width: 54px; height: 108px; background: #f3f5fb; border-radius: 6px; box-shadow: inset 0 0 0 1px #b9c3dd; }
+  .photo-stub .strip { position: absolute; left: 24px; top: 24px; width: 42px; height: 14px; background: #2341A8; border-radius: 3px; }
+  .photo-stub .dial { position: absolute; left: 24px; top: 44px; width: 42px; height: 42px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 2px #c7d0e8; }
+  .photo-stub .led { position: absolute; left: 38px; top: 58px; width: 14px; height: 14px; border-radius: 50%; background: #4ade80; }
+  .photo-stub .pipe { position: absolute; background: #9aa9cd; border-radius: 3px; }
+  .photo-meta { font-size: 11px; color: rgba(255,255,255,0.85); margin-top: 6px; padding: 0 4px; }
+
+  .calendar {
+    background: #fff; border: 1px solid #e8edf8; border-radius: 12px;
+    padding: 14px; margin-bottom: 12px;
+  }
+  .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .cal-nav {
+    background: #fff; border: 1.5px solid #dde3f5; border-radius: 6px;
+    width: 28px; height: 28px; color: #2341A8; cursor: pointer;
+    font-size: 16px; line-height: 1;
+  }
+  .cal-month { font-size: 13px; font-weight: 600; color: #111827; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; margin-bottom: 10px; }
+  .cal-day-label { font-size: 10px; font-weight: 600; color: #8b94a7; text-align: center; padding: 2px 0; letter-spacing: 0.03em; }
+  .cal-day {
+    aspect-ratio: 1; border-radius: 6px;
+    background: #eef1fb; color: #111827;
+    font-size: 11px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cal-day.off { background: transparent; color: #c4cadb; }
+  .cal-day.sel { background: #2341A8; color: #fff; font-weight: 700; }
+  .cal-times-label { margin: 0 0 6px 0; font-size: 12px; font-weight: 600; color: #6b7280; }
+  .cal-slots { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cal-slot {
+    padding: 5px 10px; border-radius: 6px;
+    border: 1.5px solid #dde3f5; background: #fff;
+    font-size: 12px; font-weight: 500; color: #374151; cursor: pointer;
+  }
+  .cal-slot.sel { border-color: #2341A8; background: #2341A8; color: #fff; font-weight: 700; }
+  .cal-confirm {
+    width: 100%; height: 40px; border-radius: 8px; border: none;
+    background: #2341A8; color: #fff;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    margin-top: 8px;
+  }
+
+  .input-row {
+    border-top: 1px solid #e8edf8; background: #fff;
+    padding: 12px 14px;
+    display: flex; gap: 8px; align-items: center;
+  }
+  .input-text {
+    flex: 1; padding: 9px 12px;
+    border: 1.5px solid #dde3f5; border-radius: 8px;
+    font-size: 14px; outline: none; background: #fff; color: #111827;
+    font-family: inherit;
+  }
+  .send {
+    flex-shrink: 0; width: 38px; height: 38px; border-radius: 8px;
+    border: none; background: #2341A8; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 16px;
+  }
+  .branding {
+    text-align: center; font-size: 11px; color: #9ca3af;
+    padding: 6px 0 8px;
+  }
+  .branding strong { color: #6b7280; }
+</style>
+</head>
+<body>
+
+<div class="panel">
+
+  <div class="header">
+    <div class="header-left">
+      <div class="dot"></div>
+      <span class="title">Rougemont Plumbing &amp; Heating</span>
+    </div>
+    <button class="close" aria-label="Close">✕</button>
+  </div>
+
+  <div class="messages">
+
+    <div class="row left"><div class="bubble bot">Hi, thanks for getting in touch with Rougemont Plumbing &amp; Heating. Just a few quick questions so the team has what they need.</div></div>
+
+    <div class="row left"><div class="bubble bot">What do you need help with?</div></div>
+    <div class="row right"><div class="bubble user">Boiler repair</div></div>
+
+    <div class="row left"><div class="bubble bot">Tell us a bit about the job.</div></div>
+    <div class="row right"><div class="bubble user">Hot water cuts out after about 2 mins and the unit makes a clunking sound.</div></div>
+
+    <div class="custom-wrap">
+      <div class="custom-pill">✦ Custom question 1 of 3</div>
+      <div class="bubble bot custom-bubble">Is your property a flat or a house?</div>
+    </div>
+    <div class="row right"><div class="bubble user">House</div></div>
+
+    <div class="custom-wrap">
+      <div class="custom-pill">✦ Custom question 2 of 3</div>
+      <div class="bubble bot custom-bubble">Do you currently have a service plan with us?</div>
+    </div>
+    <div class="row right"><div class="bubble user">No</div></div>
+
+    <div class="custom-wrap">
+      <div class="custom-pill">✦ Custom question 3 of 3</div>
+      <div class="bubble bot custom-bubble">Which of these symptoms are you noticing? (select all that apply)</div>
+    </div>
+    <div class="row right"><div class="bubble user">Loss of pressure, Clunking noise, No hot water</div></div>
+
+    <div class="row left"><div class="bubble bot">Any photos or videos that would help?</div></div>
+
+    <div class="upload-card">
+      <div class="upload-icon">📷</div>
+      <div class="upload-meta">
+        <div class="upload-meta-title">Add a photo or video</div>
+        <div class="upload-meta-sub">JPG, PNG or MP4 &middot; up to 10 MB</div>
+      </div>
+      <button class="upload-btn">Choose</button>
+    </div>
+
+    <div class="row right">
+      <div class="photo-bubble">
+        <div class="photo-stub">
+          <div class="boiler"></div>
+          <div class="strip"></div>
+          <div class="dial"></div>
+          <div class="led"></div>
+          <div class="pipe" style="left:90px; top:34px; width:90px; height:6px;"></div>
+          <div class="pipe" style="left:90px; top:48px; width:70px; height:6px;"></div>
+          <div class="pipe" style="left:90px; top:62px; width:80px; height:6px;"></div>
+        </div>
+        <div class="photo-meta">boiler-front.jpg &middot; 1.4 MB</div>
+      </div>
+    </div>
+
+    <div class="row left"><div class="bubble bot">What's the postcode?</div></div>
+    <div class="row right"><div class="bubble user">EX4 6PX</div></div>
+
+    <div class="row left"><div class="bubble bot">How soon do you need it?</div></div>
+    <div class="row right"><div class="bubble user">As soon as possible</div></div>
+
+    <div class="row left"><div class="bubble bot">What's your name?</div></div>
+    <div class="row right"><div class="bubble user">Sarah Chen</div></div>
+
+    <div class="row left"><div class="bubble bot">Best number to reach you on?</div></div>
+    <div class="row right"><div class="bubble user">07700 900123</div></div>
+
+    <div class="row left"><div class="bubble bot">And your email? (optional)</div></div>
+    <div class="row right"><div class="bubble user">sarah.chen@example.com</div></div>
+
+    <div class="row left"><div class="bubble bot">How would you like us to follow up?</div></div>
+    <div class="row right"><div class="bubble user">Book a site visit</div></div>
+
+    <div class="row left"><div class="bubble bot">Pick a time that suits you — these are live available slots.</div></div>
+
+    <div class="calendar">
+      <div class="cal-header">
+        <button class="cal-nav">‹</button>
+        <span class="cal-month">July 2026</span>
+        <button class="cal-nav">›</button>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-day-label">Mon</div>
+        <div class="cal-day-label">Tue</div>
+        <div class="cal-day-label">Wed</div>
+        <div class="cal-day-label">Thu</div>
+        <div class="cal-day-label">Fri</div>
+        <div class="cal-day-label">Sat</div>
+        <div class="cal-day-label">Sun</div>
+
+        <div></div><div></div>
+        <div class="cal-day off">1</div>
+        <div class="cal-day off">2</div>
+        <div class="cal-day off">3</div>
+        <div class="cal-day off">4</div>
+        <div class="cal-day off">5</div>
+
+        <div class="cal-day">6</div>
+        <div class="cal-day sel">7</div>
+        <div class="cal-day">8</div>
+        <div class="cal-day">9</div>
+        <div class="cal-day">10</div>
+        <div class="cal-day off">11</div>
+        <div class="cal-day off">12</div>
+
+        <div class="cal-day">13</div>
+        <div class="cal-day">14</div>
+        <div class="cal-day">15</div>
+        <div class="cal-day">16</div>
+        <div class="cal-day">17</div>
+        <div class="cal-day off">18</div>
+        <div class="cal-day off">19</div>
+
+        <div class="cal-day">20</div>
+        <div class="cal-day">21</div>
+        <div class="cal-day">22</div>
+        <div class="cal-day">23</div>
+        <div class="cal-day">24</div>
+        <div class="cal-day off">25</div>
+        <div class="cal-day off">26</div>
+
+        <div class="cal-day">27</div>
+        <div class="cal-day">28</div>
+        <div class="cal-day">29</div>
+        <div class="cal-day">30</div>
+        <div class="cal-day">31</div>
+      </div>
+
+      <p class="cal-times-label">Choose a time:</p>
+      <div class="cal-slots">
+        <button class="cal-slot">9:00am</button>
+        <button class="cal-slot sel">10:00am</button>
+        <button class="cal-slot">11:00am</button>
+        <button class="cal-slot">1:00pm</button>
+        <button class="cal-slot">2:00pm</button>
+        <button class="cal-slot">3:00pm</button>
+        <button class="cal-slot">4:00pm</button>
+      </div>
+
+      <button class="cal-confirm">Confirm — 07/07 at 10:00am</button>
+    </div>
+
+    <div class="row right"><div class="bubble user">Requested: 2026-07-07 at 10:00am</div></div>
+
+    <div class="row left"><div class="bubble bot">Thanks Sarah, that's all sent across. The team will be in touch shortly to confirm Tue 7 July at 10:00am.</div></div>
+
+  </div>
+
+  <div class="input-row">
+    <input class="input-text" type="text" placeholder="Type a message..." />
+    <button class="send" aria-label="Send">➤</button>
+  </div>
+
+  <div class="branding">Powered by <strong>BackIn5</strong></div>
+
+</div>
+
+</body>
+</html>

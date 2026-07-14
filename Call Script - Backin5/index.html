@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BackIn5 Call Script</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Source+Serif+4:ital@1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1B1D1F;
+    --card: #24272A;
+    --card-raised: #2C2F32;
+    --border: #383B3E;
+    --text: #EDEBE6;
+    --text-secondary: #9A9D9F;
+    --text-muted: #6E7173;
+    --accent: #E0A458;
+    --accent-text: #2A1D0C;
+    --success: #6FAE8C;
+    --success-bg: #1E2E27;
+    --success-border: #3A5C4A;
+    --danger: #D97B62;
+    --danger-bg: #302019;
+    --danger-border: #5C3B2C;
+    --warn-bg: #33291A;
+    --warn-border: #5A472A;
+    --warn-text: #E0B364;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 24px 20px 80px; }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 18px; letter-spacing: -0.01em;
+  }
+  .nav-controls { display: flex; gap: 8px; }
+  .icon-btn {
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--text-secondary); border-radius: 8px;
+    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 15px;
+  }
+  .icon-btn:hover { background: var(--card-raised); color: var(--text); }
+  .icon-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .filter-box {
+    background: var(--card); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px;
+  }
+  .filter-label {
+    font-size: 12px; font-weight: 600; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 8px;
+  }
+  .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+  .filter-item { font-size: 13px; color: var(--text); }
+  .obj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 4px; }
+  @media (min-width: 480px) { .obj-grid { grid-template-columns: repeat(4, 1fr); } }
+  .obj-chip {
+    background: var(--card); border: 1px solid var(--border); color: var(--text-secondary);
+    font-family: inherit; font-size: 13px; font-weight: 500;
+    padding: 10px 8px; border-radius: 9px; cursor: pointer; text-align: center;
+    min-height: 40px; display: flex; align-items: center; justify-content: center;
+  }
+  .obj-chip:hover { background: var(--card-raised); color: var(--text); }
+  .obj-chip.active { background: var(--warn-bg); border-color: var(--warn-border); color: var(--warn-text); }
+  .obj-display { display: none; background: var(--warn-bg); border-radius: 12px; padding: 14px 16px; margin: 10px 0 16px; }
+  .obj-display.open { display: block; }
+  .script-line {
+    background: var(--card); border-radius: 12px; padding: 16px 18px; margin-bottom: 10px;
+  }
+  .script-text {
+    font-family: 'Source Serif 4', serif; font-style: italic;
+    font-size: 16px; line-height: 1.65; color: var(--text); margin: 0;
+  }
+  .script-note { color: var(--text-muted); font-style: normal; font-size: 14px; }
+  .eyebrow {
+    font-size: 12px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.04em; margin: 0 0 8px;
+  }
+  .eyebrow.neutral { color: var(--text-muted); }
+  .eyebrow.success { color: var(--success); }
+  .eyebrow.danger { color: var(--danger); }
+  .prompt { font-size: 14px; color: var(--text-secondary); margin: 4px 0 10px; }
+  .btn-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 4px; }
+  @media (min-width: 480px) { .btn-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); } }
+  button.choice {
+    background: var(--card); border: 1px solid var(--border); color: var(--text);
+    font-family: inherit; font-size: 14px; font-weight: 500;
+    padding: 12px 14px; border-radius: 10px; cursor: pointer;
+    text-align: center; min-height: 44px; display: flex; align-items: center; justify-content: center;
+  }
+  button.choice:hover { background: var(--card-raised); border-color: var(--text-muted); }
+  button.choice.good { border-color: var(--success-border); color: var(--success); }
+  button.choice.good:hover { background: var(--success-bg); }
+  button.choice.bad { border-color: var(--danger-border); color: var(--danger); }
+  button.choice.bad:hover { background: var(--danger-bg); }
+  .reset-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--accent); color: var(--accent-text); border: none;
+    font-family: inherit; font-weight: 600; font-size: 14px;
+    padding: 12px 18px; border-radius: 10px; cursor: pointer; margin-top: 8px;
+  }
+  .reset-btn:hover { opacity: 0.9; }
+  .exit-box { background: var(--danger-bg); border-radius: 12px; padding: 16px 18px; margin-bottom: 10px; }
+  .step { display: none; }
+  .step.active { display: block; }
+  .progress {
+    display: flex; gap: 4px; margin-bottom: 20px;
+  }
+  .progress-dot { height: 3px; flex: 1; background: var(--border); border-radius: 2px; }
+  .progress-dot.done { background: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="title">BackIn5 call script</div>
+    <div class="nav-controls">
+      <button class="icon-btn" id="backBtn" onclick="goBack()" title="Back" aria-label="Go back">&#8592;</button>
+      <button class="icon-btn" onclick="resetFlow()" title="Reset" aria-label="Reset to start">&#8635;</button>
+    </div>
+  </div>
+
+  <div class="progress" id="progress"></div>
+
+  <div class="filter-box">
+    <p class="filter-label">Pre-call filter, dial only if 2 of 3 true</p>
+    <div class="filter-grid">
+      <div class="filter-item">07 mobile as main contact</div>
+      <div class="filter-item">Solo or near-solo operator</div>
+      <div class="filter-item">Urgent job type</div>
+    </div>
+  </div>
+
+  <p class="filter-label" style="margin: 4px 0 8px;">Objections, tap to pull up the response</p>
+  <div class="obj-grid" id="objGrid"></div>
+  <div class="obj-display" id="objDisplay"></div>
+
+  <!-- STEP 1: OPENER -->
+  <div class="step active" data-step="1">
+    <p class="eyebrow neutral">Opener</p>
+    <div class="script-line">
+      <p class="script-text">"[Name], it's Owen from BackIn5. Reason I'm calling is, when I speak to [trade] firms doing emergency work, it's nearly always the same three things costing them money. I'm assuming at least one of these rings true for you, missed calls while you're on the tools, Checkatrade and directory leads going to whoever responds first, or half a day lost to someone just fishing for quotes. Which one's the real one for you?"</p>
+    </div>
+    <p class="prompt">Which pain did they pick?</p>
+    <div class="btn-grid">
+      <button class="choice" onclick="choosePain('missed')">Missed calls</button>
+      <button class="choice" onclick="choosePain('checkatrade')">Checkatrade leads</button>
+      <button class="choice" onclick="choosePain('timewaster')">Time wasters</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: QUANTIFY, ONE FLOWING CARD -->
+  <div class="step" data-step="2">
+    <p class="eyebrow neutral">Say this in sequence</p>
+    <div class="script-line" id="freqLine"></div>
+    <div class="script-line" id="costHandle"></div>
+    <div class="script-line">
+      <p class="script-text">"So that's X a week. Over a month that's &pound;X. Over the year, &pound;X you've handed to someone else." <span class="script-note">Pause. Don't fill it.</span></p>
+    </div>
+    <div class="script-line">
+      <p class="script-text">"So just to put that back to you, in a year of you being flat out busy, that's still [&pound;X] walking out the door to whoever picked up the phone faster, or a lead you paid for going nowhere. Is that a position you're alright with, or does that need sorting?"</p>
+    </div>
+    <p class="prompt">What did they say?</p>
+    <div class="btn-grid">
+      <button class="choice good" onclick="goTo(3)">Needs sorting</button>
+      <button class="choice" onclick="goTo('iffy')">Sounds thin</button>
+    </div>
+  </div>
+
+  <!-- STEP IFFY, A LINE TO SAY, NOT A NOTE -->
+  <div class="step" data-step="iffy">
+    <p class="eyebrow neutral">Say this</p>
+    <div class="script-line">
+      <p class="script-text">"Sounds like it's not too bad then? Or does it get worse when you're properly slammed?"</p>
+    </div>
+    <p class="prompt">What did they say?</p>
+    <div class="btn-grid">
+      <button class="choice good" onclick="goTo(2)">That opened it up</button>
+      <button class="choice bad" onclick="goTo('exit')">Still nothing there</button>
+    </div>
+  </div>
+
+  <!-- STEP EXIT -->
+  <div class="step" data-step="exit">
+    <p class="eyebrow danger">Say this, then end the call</p>
+    <div class="exit-box">
+      <p class="script-text">"Fair enough, sounds like it's not really biting for you at the moment. No harm, I'll leave you to it, appreciate you taking the call."</p>
+    </div>
+    <button class="reset-btn" onclick="resetFlow()">&#8635; Next call</button>
+  </div>
+
+  <!-- STEP 3: SOLUTION + PRE-CLOSE, ONE FLOWING CARD -->
+  <div class="step" data-step="3">
+    <p class="eyebrow neutral">Say this in sequence</p>
+    <div class="script-line">
+      <p class="script-text">"This is exactly what BackIn5 sorts. Every enquiry, whatever comes in, wherever it's from, lands in one place, and gets an instant reply and follow-up even when you can't get to the phone. Think of it like having someone permanently answering for you, without hiring anyone."</p>
+    </div>
+    <div class="script-line">
+      <p class="script-text">"This closes exactly the gap we talked about. If it works like I've just described, would you actually want that running in your business?" <span class="script-note">Stop talking. Let them answer.</span></p>
+    </div>
+    <div class="script-line">
+      <p class="eyebrow neutral" style="margin-bottom:6px;">If they hesitate, want to see it first</p>
+      <p class="script-text">"Fair, and if on seeing it, it's exactly what we've talked about, would you move forward?"</p>
+    </div>
+    <p class="prompt">What did they say?</p>
+    <div class="btn-grid">
+      <button class="choice good" onclick="goTo('close')">Yes, moving forward</button>
+      <button class="choice bad" onclick="goTo('exit2')">No, not now</button>
+    </div>
+  </div>
+
+  <!-- STEP EXIT 2 (pre-close no) -->
+  <div class="step" data-step="exit2">
+    <p class="eyebrow danger">Say this, then end the call</p>
+    <div class="exit-box">
+      <p class="script-text">"Fair enough, sounds like it's not the right fit or the right time. No harm, appreciate you talking it through, I'll leave it there."</p>
+    </div>
+    <button class="reset-btn" onclick="resetFlow()">&#8635; Next call</button>
+  </div>
+
+  <!-- STEP CLOSE -->
+  <div class="step" data-step="close">
+    <p class="eyebrow neutral">Say this</p>
+    <div class="script-line">
+      <p class="script-text">"Good, then it's worth 3 minutes on WhatsApp video so you can see it live, not just hear me describe it. If you like it, I'll set you up on a 7 day trial. Morning or afternoon tomorrow?"</p>
+    </div>
+    <div class="script-line">
+      <p class="eyebrow neutral" style="margin-bottom:6px;">If hesitation on timing</p>
+      <p class="script-text">"Worst case, you take a look and see how to solve it. Best case, we eliminate that issue and you make more money. Morning or afternoon?"</p>
+    </div>
+    <button class="reset-btn" onclick="resetFlow()">&#8635; Next call</button>
+  </div>
+
+</div>
+
+<script>
+  const painLines = {
+    missed: {
+      freq: "\u201cI\u2019d guess that\u2019s at least a couple of missed calls a week when you\u2019re properly busy, fair or worse than that?\u201d",
+      cost: "\u201cFor an emergency call-out like that, I\u2019m assuming you\u2019re looking at \u00a3150 to \u00a3300 depending on the job, that about right?\u201d"
+    },
+    checkatrade: {
+      freq: "\u201cI\u2019m assuming you\u2019re on one of the higher Checkatrade packages, closer to \u00a32k a month than the basic \u00a3300, that about right?\u201d",
+      cost: "\u201cAnd out of the leads that brings in, how many a week would you say go nowhere, either you weren\u2019t first to respond or they were never serious?\u201d"
+    },
+    timewaster: {
+      freq: "\u201cI\u2019d guess you\u2019re getting at least one or two of those a week, quotes that just fizzle out, fair or worse?\u201d",
+      cost: "\u201cWhen one of those doesn\u2019t turn into work, how long does that eat up start to finish? And what\u2019s an hour of your time worth?\u201d"
+    }
+  };
+
+  const objections = [
+    {
+      id: 'notInterested', label: 'Not interested',
+      html: '<p class="script-note" style="margin-bottom:6px;">Handle A</p>'
+        + '<p class="script-text">"Of course you\'re not interested, most people in your position have been burnt by similar offerings that promise the world but provide nothing. What we do is different." <span class="script-note">Then:</span> "Can I ask, is that a no to the idea, or a no to hearing more right now?"</p>'
+        + '<p class="script-note" style="margin:10px 0 6px;">Handle B</p>'
+        + '<p class="script-text">"No worries at all. Mind if I ask, is it something you\'ve looked into before, or just generally not interested?"</p>'
+    },
+    {
+      id: 'alreadySorted', label: 'Already sorted',
+      html: '<p class="script-note" style="margin-bottom:6px;">Handle A</p>'
+        + '<p class="script-text">"Good, glad you\'ve got something in place. Out of interest, how does it handle things when you\'re not around to check it, evenings, weekends?"</p>'
+        + '<p class="script-note" style="margin:10px 0 6px;">Handle B</p>'
+        + '<p class="script-text">"Fair enough. Out of curiosity, what do you use, and has it ever missed one?"</p>'
+        + '<p class="script-note" style="margin:10px 0 6px;">If they deflect on both, that\'s your answer, don\'t push a third question</p>'
+        + '<p class="script-text">"No worries, sounds like it\'s got you covered. I\'ll leave it there, appreciate you taking the call."</p>'
+        + '<p class="script-note" style="margin-top:8px;">Log as positional, revisit in a few months rather than pushing now.</p>'
+    },
+    {
+      id: 'notBusy', label: 'Not busy enough',
+      html: '<p class="script-note" style="margin-bottom:6px;">Handle A</p>'
+        + '<p class="script-text">"Makes sense, if you\'re not getting enough in the door for it to bite, no point forcing it. Is that pretty consistent, or does it pick up certain times of year?"</p>'
+        + '<p class="script-note" style="margin:10px 0 6px;">Handle B</p>'
+        + '<p class="script-text">"No problem, sounds like it\'s not urgent right now. Worth me checking back in when things pick up, or is it just not a priority generally?"</p>'
+    },
+    {
+      id: 'alwaysRespond', label: 'I always respond',
+      html: '<p class="script-note" style="margin-bottom:6px;">Handle A</p>'
+        + '<p class="script-text">"Good to hear, sounds like you\'re on it. Is that even when you\'re mid-job, driving, or with a customer, or does it wait till you\'re free?"</p>'
+        + '<p class="script-note" style="margin:10px 0 6px;">Handle B</p>'
+        + '<p class="script-text">"That\'s good discipline. Out of interest, has there ever been a time it slipped, even once?"</p>'
+        + '<p class="script-note" style="margin:10px 0 6px;">If they\'re firm on both, that\'s your answer, don\'t push a third question</p>'
+        + '<p class="script-text">"Fair enough, sounds like you\'ve got it covered. I\'ll leave it there."</p>'
+        + '<p class="script-note" style="margin-top:8px;">Log as positional, revisit in a few months rather than pushing now.</p>'
+    },
+    {
+      id: 'sendInfo', label: 'Send me info',
+      html: '<p class="script-text">"Sending you info at this stage, before I know your situation, will either be generic and pointless, or everything about everything, which falls down your inbox. Even if you read it, you won\'t be any further forward, it\'s not specific to you. What our clients have found useful instead is a 15 minute non-committing conversation so we understand your situation, risk appetite, and goals, then we send something actually relevant. Doesn\'t 15 minutes sound better than wasting everyone\'s time?"</p>'
+        + '<p class="script-note" style="margin-top:8px;">If still not bought in:</p>'
+        + '<p class="script-text" style="margin-top:6px;">"What specifically do you want to see?"</p>'
+    },
+    {
+      id: 'whatsThis', label: "What's this about",
+      html: '<p class="script-text">"Fair question, straight answer. I help [trade] firms stop losing jobs to missed calls, bad leads, and time wasters. Takes two minutes to find out if it\'s even relevant to you, if it\'s not, I\'ll say so and let you get on."</p>'
+        + '<p class="script-note" style="margin-top:8px;">If they push for more before answering anything:</p>'
+        + '<p class="script-text" style="margin-top:6px;">"Before I go any further, is that something you\'ve heard of before?"</p>'
+        + '<p class="script-note" style="margin-top:8px;">Then bridge straight to booking, don\'t keep explaining on the phone:</p>'
+        + '<p class="script-text" style="margin-top:6px;">"In order to find out how it works, we jump on a 10 to 15 minute WhatsApp video call."</p>'
+    },
+    {
+      id: 'salesCall', label: 'Sales call?',
+      html: '<p class="script-text">"No, little different, more of an intro call, does [x] ring a bell?"</p>'
+    },
+    {
+      id: 'teases', label: 'Preempted objections',
+      html: '<p class="script-note" style="margin-bottom:6px;">Pre-empt "not interested" before the close</p>'
+        + '<p class="script-text">"This isn\'t a hard sell, if it\'s not for you, I\'ll say so myself."</p>'
+        + '<p class="script-note" style="margin:10px 0 6px;">Pre-empt "already sorted" and "not busy enough" in the opener</p>'
+        + '<p class="script-text">"Now, some of the people I speak to already have something in place, or don\'t get enough enquiries for it to be an issue, that\'s completely fine, I\'ll ask a couple quick questions to see if this is even relevant to you."</p>'
+    }
+  ];
+
+  let activeObj = null;
+  let history = [1];
+
+  function renderObjGrid() {
+    const grid = document.getElementById('objGrid');
+    grid.innerHTML = '';
+    objections.forEach(function(o) {
+      const btn = document.createElement('button');
+      btn.className = 'obj-chip' + (activeObj === o.id ? ' active' : '');
+      btn.textContent = o.label;
+      btn.onclick = function() { showObj(o.id); };
+      grid.appendChild(btn);
+    });
+  }
+
+  function showObj(id) {
+    const display = document.getElementById('objDisplay');
+    if (activeObj === id) {
+      activeObj = null;
+      display.classList.remove('open');
+      display.innerHTML = '';
+    } else {
+      activeObj = id;
+      const obj = objections.find(function(o) { return o.id === id; });
+      display.innerHTML = obj.html;
+      display.classList.add('open');
+    }
+    renderObjGrid();
+  }
+  let painChoice = null;
+  const stepOrder = [1, 2, 3, 4];
+  const progressMap = { 1: 1, 2: 2, iffy: 2, exit: 2, 3: 3, exit2: 3, close: 4 };
+
+  function renderProgress() {
+    const el = document.getElementById('progress');
+    el.innerHTML = '';
+    const current = history[history.length - 1];
+    const mapped = progressMap[current] || 1;
+    stepOrder.forEach(function(s) {
+      const dot = document.createElement('div');
+      dot.className = 'progress-dot' + (s <= mapped ? ' done' : '');
+      el.appendChild(dot);
+    });
+  }
+
+  function showStep(step) {
+    document.querySelectorAll('.step').forEach(function(el) { el.classList.remove('active'); });
+    document.querySelector('.step[data-step="' + step + '"]').classList.add('active');
+    document.getElementById('backBtn').disabled = history.length <= 1;
+    renderProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goTo(step) {
+    history.push(step);
+    showStep(step);
+  }
+
+  function goBack() {
+    if (history.length <= 1) return;
+    history.pop();
+    const prev = history[history.length - 1];
+    showStep(prev);
+  }
+
+  function choosePain(pain) {
+    painChoice = pain;
+    const lines = painLines[pain];
+    document.getElementById('freqLine').innerHTML = '<p class="script-text">' + lines.freq + '</p>';
+    document.getElementById('costHandle').innerHTML = '<p class="script-text">' + lines.cost + '</p>';
+    goTo(2);
+  }
+
+  function resetFlow() {
+    history = [1];
+    painChoice = null;
+    activeObj = null;
+    document.getElementById('objDisplay').classList.remove('open');
+    document.getElementById('objDisplay').innerHTML = '';
+    renderObjGrid();
+    showStep(1);
+  }
+
+  renderObjGrid();
+  renderProgress();
+</script>
+</body>
+</html>
